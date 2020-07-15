@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<meta charset="utf-8" />
+
+<title
+	th:text="'Campaña de: ' + ${campagna.proveedor.nombreProveedor}"></title>
+
+<!-- CSS Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+<body>
+	<div th:replace="/plantillaNavs::navAdmin"></div>
+	<div class="row mt-2">
+		<div class="col-12 mt-2">
+			<div class="col-12 mt-2">
+				<h5 th:text="'Nueva Campaña de ' + ${campagna.proveedor.nombreProveedor}"></h5>
+			</div>
+			<div class="col-12 mt-2 border-top border-dark">
+				<form class="form mt-2" th:action="@{/campagnaNuevaProveedor}"
+					th:object="${campagna}" method="POST">
+					<div class="form-group row">
+						<div class="col-1">
+							<label for="idCampagna">Id</label> <input readonly type="text"
+								th:field="*{idCampagna}" class="form-control " id="idCampagna" />
+						</div>
+						<div class="col-2">
+							<label for="proveedorCampagna">Proveedor</label> <select
+								th:field="*{proveedor.idProveedor}"
+								class="form-control" id="selectEstados">
+								<option th:each="proveedor:${proveedores}"
+									th:text="${proveedor.nombreProveedor}"
+									th:value="${proveedor.idProveedor}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label for="nombreCampagna">Nombre</label> <input type="text"
+								th:field="*{nombreCampagna}" class="form-control"
+								id="nombreCampagna" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label for="dInicioCampagna">Inicio</label> <input type="date"
+								th:field="*{dInicioCampagna}" class="form-control "
+								id="dInicioCampagna" />
+						</div>
+						<div class="col-2">
+							<label for="dFinCampagna">Fin</label> <input type="date"
+								th:field="*{dFinCampagna}" class="form-control"
+								id="dFinCampagna" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label for="estadoCampagna">Estado</label> <select
+								th:field="*{estadoCampagna.idEstadoCampagna}"
+								class="form-control" id="selectEstados">
+								<option th:each="estado:${estados}"
+									th:text="${estado.nombreEstadoCampagna}"
+									th:value="${estado.idEstadoCampagna}"></option>
+							</select>
+						</div>
+
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<input type="submit" value="Guardar" class="btn btn-info" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

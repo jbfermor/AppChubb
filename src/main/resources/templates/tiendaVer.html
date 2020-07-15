@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<meta charset="utf-8" />
+
+<title>Tiendas</title>
+
+<!-- CSS Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div th:replace="../static/plantillas/plantillasWeb::navAdmin"></div>
+	<div class="container mt-3">
+		<div class="row">
+			<div class="col-12 mt-2">
+				<a th:href="@{/tiendaConsulta}" class="btn btn-success mr-2">Volver
+					a Tiendas</a>
+			</div>
+			<div class="col-12 mt-2">
+				<h5 th:text="${tienda.nombreTienda}" class="text"></h5>
+			</div>
+			<div class="col-12 mt-2">
+				<h4 th:text="${'Datos de la tienda'}" class="text mt-2"></h4>
+			</div>
+			<div class="col-12 mt-2">
+				<table class="table table-striped table-sm">
+					<tr class="bg-dark text-light">
+						<th th:text="'Id'" colspan="1"></th>
+						<th th:text="'Nombre'" colspan="4"></th>
+						<th th:text="'Proveedor'" colspan="2"></th>
+						<th th:text="'Zona'" colspan="2"></th>
+						<th th:text="'Franquicia'" colspan="3"></th>
+					</tr>
+					<tr>
+						<td th:text="${tienda.idTienda}" colspan="1"></td>
+						<td th:text="${tienda.nombreTienda}" colspan="4"></td>
+						<td th:text="${tienda.franquicia.proveedor.nombreProveedor}"
+							colspan="2"></td>
+						<td th:text="${tienda.zona.nombreZona}" colspan="2"></td>
+						<td th:text="${tienda.franquicia.nombreFranquicia}" colspan="3"></td>
+					</tr>
+					<tr class="bg-secondary text-light">
+						<th th:text="'Código'" colspan="1"></th>
+						<th th:text="'Dirección'" colspan="4"></th>
+						<th th:text="'CP'" colspan="1"></th>
+						<th th:text="'Localidad'" colspan="4"></th>
+						<th th:text="'Provincia'" colspan="2"></th>
+					</tr>
+					<tr>
+						<td th:text="${tienda.codigoTienda}" colspan="1"></td>
+						<td th:text="${tienda.direccionTienda}" colspan="4"></td>
+						<td th:text="${tienda.cpTienda}" colspan="1"></td>
+						<td th:text="${tienda.localidadTienda}" colspan="4"></td>
+						<td th:text="${tienda.provinciaTienda}" colspan="2"></td>
+					</tr>
+					<tr class="bg-secondary text-light">
+						<th th:text="'Teléfono'" colspan="1"></th>
+						<th th:text="'Mail'" colspan="3"></th>
+					</tr>
+					<tr>
+						<td th:text="${tienda.telTienda}" colspan="1"></td>
+						<td th:text="${tienda.mailTienda}" colspan="3"></td>
+					</tr>
+				</table>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-12 mt-2">
+				<h4 th:text="${'Visitas'}" class="text mt-2"></h4>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-12 mt-2">
+				<h4 th:text="${'Comerciales formados'}" class="text mt-2"></h4>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

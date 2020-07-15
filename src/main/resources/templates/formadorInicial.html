@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<meta charset="utf-8" />
+
+<title>Formador Nuevo</title>
+
+<!-- CSS Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div th:replace="/plantillaNavs::navAdmin"></div>
+	<div class="container">
+	<div class="row mt-2">
+		<div class="col-12 mt-2 ml-3">
+			<form class="form" th:action="@{/formadorNuevo}"
+				th:object="${formador}" method="POST">
+				<input type="hidden" th:field="*{rol.idRol}" th:id="idRol">
+				<input type="hidden" th:field="*{idFormador}" th:id="idFormador">
+				<div class="form-group row">
+					<div class="col-2">
+						<label for="nifFormador">NIF</label> <input type="text"
+							th:field="*{nifFormador}" class="form-control " id="nifFormador" />
+					</div>
+					<div class="col-3">
+						<label for="passFormador">Password</label> <input type="text"
+							th:field="*{passFormador}" class="form-control" id="passFormador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-3">
+						<label for="nombreFormador">Nombre</label> <input type="text"
+							th:field="*{nombreFormador}" class="form-control "
+							id="nombreFormador" />
+					</div>
+					<div class="col-3">
+						<label for="ap1Formador">Apellido 1</label> <input type="text"
+							th:field="*{ap1Formador}" class="form-control " id="ap1Formador" />
+					</div>
+					<div class="col-3">
+						<label for="ap2Formador">Apellido 2</label> <input type="text"
+							th:field="*{ap2Formador}" class="form-control " id="ap2Formador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-5">
+						<label for="direccionFormador">Direccion</label> <input
+							type="text" th:field="*{direccionFormador}" class="form-control "
+							id="direccionFormador" />
+					</div>
+					<div class="col-2">
+						<label for="cpFormador">CP</label> <input type="text"
+							th:field="*{cpFormador}" class="form-control" id="cpFormador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-4">
+						<label for="localidadFormador">Localidad</label> <input
+							type="text" th:field="*{localidadFormador}" class="form-control "
+							id="localidadFormador" />
+					</div>
+					<div class="col-2">
+						<label for="provinciaFormador">Provincia</label> <input
+							type="text" th:field="*{provinciaFormador}" class="form-control "
+							id="provinciaFormador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-2">
+						<label for="tel1Formador">Tel. Chubb</label> <input type="text"
+							th:field="*{tel1Formador}" class="form-control "
+							id="tel1Formador" />
+					</div>
+					<div class="col-2">
+						<label for="tel2Formador">Tel. Personal</label> <input type="text"
+							th:field="*{tel2Formador}" class="form-control "
+							id="tel1Formador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-4">
+						<label for="mail1Formador">Mail Chubb</label> <input type="text"
+							th:field="*{mail1Formador}" class="form-control "
+							id="mail1Formador" />
+					</div>
+					<div class="col-4">
+						<label for="mail2Formador">Mail Personal</label> <input
+							type="text" th:field="*{mail2Formador}" class="form-control "
+							id="mail2Formador" />
+					</div>
+				</div>
+				<div class="form-group row">
+					<div class="col-6">
+						<label for="cuentaBancariaFormador">Cuenta Bancaria</label> <input
+							type="text" th:field="*{cuentaBancariaFormador}"
+							class="form-control " id="cuentaBancariaFormador" />
+					</div>
+				</div>
+
+				<div class="form-group row">
+					<div class="col-2">
+						<input type="submit" value="Guardar" class="btn btn-info" />
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</body>
+
+</html>

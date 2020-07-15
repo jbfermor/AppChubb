@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<meta charset="utf-8" />
+
+<title th:text="'Viendo el formador ' + ${formador.nombreFormador}">Formadores</title>
+
+<!-- CSS Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div th:replace="plantillaNavs::navAdmin"></div>
+	<div class="container mt-3">
+		<div class="row mt-2">
+			<div clas="col-12">
+				<h3 th:text="${formador.nombreFormador}"></h3>
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-12 mt-2">
+				<div th:if="${#lists.isEmpty(proveedoresId)}"
+					th:text="${'No hay asignado ningún proveedor'}"
+					class="alert alert-danger"></div>
+				<div th:if="${#lists.isEmpty(zonasId)}"
+					th:text="${'No hay asignada ninguna zona'}"
+					class="alert alert-danger"></div>
+
+			</div>
+		</div>
+		<div class="row mt-2">
+			<div class="col-4 mt-2">
+				<a th:href="@{/index}" class="btn btn-success">Volver a Inicio</a>
+			</div>
+		</div>
+
+		<div class="row border-top border-dark mt-2">
+			<div class="col-3">
+				<h5 class="mt-2">Datos del formador</h5>
+			</div>
+			<div class="col-3 align-items-bottom">
+				<button class=" btn btn-secondary" id="botonMostrarFormador"
+					onclick="javascript:mostrar();">Mostrar</button>
+				<button class="btn btn-secondary" id="botonOcultarFormador"
+					onclick="ocultar();" style="display: none">Ocultar</button>
+			</div>
+		</div>
+
+		<div class="row mt-2" id="datosFormador" style="display: none">
+			<div class="col-12 mt-2" th:replace="formadorNuevo::editaFormador"></div>
+
+			<div class="col-12 mt-2">
+				<a class="btn btn-danger rounded"
+					th:href="@{/formadorEliminar/} + ${formador.idFormador}"}>Eliminar
+					Formador definitivamente</a>
+			</div>
+		</div>
+
+		<div class="col-12 border-top border-dark mt-2">
+
+			<ul class="nav nav-tabs mt-2" id="formadorTab" role="tablist">
+
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="proveedoresFormador-tab" data-toggle="tab"
+					href="#proveedoresFormador" role="tab"
+					aria-controls="proveedoresFormador" aria-selected="false">Proveedores</a></li>
+
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="zonasFormador-tab" data-toggle="tab" href="#zonasFormador"
+					role="tab" aria-controls="zonasFormador" aria-selected="false">Zonas</a></li>
+
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="formacionesFormador-tab" data-toggle="tab"
+					href="#formacionesFormador" role="tab"
+					aria-controls="formacionesFormador" aria-selected="false">Formaciones</a></li>
+
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="visitasFormador-tab" data-toggle="tab" href="#visitasFormador"
+					role="tab" aria-controls="visitasFormador" aria-selected="false">Visitas</a></li>
+
+				<li class="nav-item" role="presentation"><a class="nav-link"
+					id="comercialesFormador-tab" data-toggle="tab"
+					href="#comercialesFormador" role="tab"
+					aria-controls="comercialesFormador" aria-selected="false">Comerciales</a></li>
+
+			</ul>
+
+
+			<div class="tab-content" id="formadorTabContent">
+
+				<!-- TAB-PROVEEDORES -->
+				<div class="tab-pane fade show active" id="proveedoresFormador"
+					role="tabpanel" aria-labelledby="proveedoresFormador-tab">
+
+					<div class="row mt-2">
+						<div class="col-4 mt-2">
+							<form
+								th:action="@{/formadorVer/} + ${formador.idFormador}"
+								th:object="${proveedor}" th:method="POST">
+
+								<select id="proveedorFormador" class="form-control"
+									th:field="*{idProveedor}">
+									<option th:each="proveedor:${proveedores}"
+										th:text="${proveedor.nombreProveedor}"
+										th:value="${proveedor.idProveedor}"></option>
+								</select>
+						</div>
+
+						<div class="col-4 mt-2">
+							<input type="submit" class="btn btn-success" value="Asignar">
+						</div>
+						</form>
+					</div>
+
+					<div class="row mt-2">
+						<div class="col-6 mt-2">
+							<table class="table table-striped table-sm">
+								<thead class="thead-dark">
+									<tr>
+										<th>Id</th>
+										<th>Nombre</th>
+									</tr>
+								</thead>
+								<tbody class="tbody-light align-items-center">
+									<tr th:each="proveedor : ${proveedoresId}">
+										<td th:text="${proveedor.idProveedor}"></td>
+										<td th:text="${proveedor.nombreProveedor}"></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<!-- TAB-ZONAS -->
+				<div class="tab-pane fade" id="zonasFormador" role="tabpanel"
+					aria-labelledby="zonasFormador-tab">
+					<div class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/zonaNuevaFormador/} + ${idFormador}"
+									class="btn btn-success">Añadir Zona</a>
+							</div>
+							<div class="col-6 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Formador</th>
+											<th colspan="2">Acciones</th>
+										</tr>
+									</thead>
+									<tbody class="tbody-light align-items-center">
+										<tr th:each="zona : ${listaZonasId}">
+											<td th:text="${zona.idZona}"></td>
+											<td th:text="${zona.nombreZona}"></td>
+											<td th:text="${zona.formador.nombreFormador}"></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/zonaNuevaFormador/} + ${zona.idZona} + ${'/'} + ${formador.idFormador}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminarZonaFormador/} + ${zona.idZona}">Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="col-12"></div>
+						</div>
+					</div>
+				</div>
+
+				<!-- TAB-CAMPAÑAS -->
+				<div class="tab-pane fade" id="campagnaFormador" role="tabpanel"
+					aria-labelledby="campagnaFormador-tab">
+
+					<div class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/campagnaNuevaFormador/} + ${idFormador}"
+									class="btn btn-success">Añadir Campaña</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Formador</th>
+											<th>Inicio</th>
+											<th>Fin</th>
+											<th>Estado</th>
+											<th colspan="4">Acciones</th>
+										</tr>
+									</thead>
+									<tbody class="tbody-light align-items-center">
+										<tr th:each="campagna : ${campagnasId}">
+											<td th:text="${campagna.idCampagna}"></td>
+											<td th:text="${campagna.nombreCampagna}"></td>
+											<td th:text="${campagna.formador.nombreFormador}"></td>
+											<td
+												th:text="${#dates.format(campagna.dInicioCampagna, 'dd/MM/yyyy')}"></td>
+											<td
+												th:text="${#dates.format(campagna.dFinCampagna, 'dd/MM/yyyy')}"></td>
+											<td th:text="${campagna.estadoCampagna.nombreEstadoCampagna}">
+											<td></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/campagnaEditaFormador/} + ${campagna.idCampagna} + '/' +  ${formador.idFormador}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminarCampagnaFormador/} + ${campagna.idCampagna}">Eliminar</a></td>
+											<td th:text="${titulo}"></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- TAB-FRANQUICIAS -->
+				<div class="tab-pane fade" id="franquiciaFormador" role="tabpanel"
+					aria-labelledby="franquiciaFormador-tab">
+
+					<div class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/franquiciaNuevaFormador/} + ${idFormador}"
+									class="btn btn-success">Añadir Franquicia</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Formador</th>
+											<th colspan="3">Acciones</th>
+										</tr>
+									</thead>
+									<tbody class="tbody-light align-items-center">
+										<tr th:each="franquicia : ${franquiciasId}">
+											<td th:text="${franquicia.idFranquicia}"></td>
+											<td th:text="${franquicia.nombreFranquicia}"></td>
+											<td th:text="${franquicia.formador.nombreFormador}"></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/franquiciaEditaFormador/} + ${franquicia.idFranquicia} + '/' + ${idFormador}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminarFranquiciaFormador/} + ${franquicia.idFranquicia}"}>Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+				<!-- TAB-TIENDAS -->
+				<div class="tab-pane fade" id="tiendaFormador" role="tabpanel"
+					aria-labelledby="tiendaFormador-tab">
+
+					<div class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/tiendaNuevaFormador/} + ${idFormador}"
+									class="btn btn-success">Añadir Tienda</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th th:text="'Id'"></th>
+											<th th:text="'Nombre'"></th>
+											<th th:text="'Formador'"></th>
+											<th th:text="'Zona'"></th>
+											<th th:text="'Franquicia'"></th>
+											<th th:text="'Acciones'" colspan="3" class="text-center"></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr th:each="tienda : ${tiendasId}">
+											<td th:text="${tienda.idTienda}"></td>
+											<td th:text="${tienda.nombreTienda}"></td>
+											<td th:text="${tienda.franquicia.formador.nombreFormador}"></td>
+											<td th:text="${tienda.zona.nombreZona}"></td>
+											<td th:text="${tienda.franquicia.nombreFranquicia}"></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/tiendaEditaFormador/} + ${tienda.idTienda} + '/' + ${formador.idFormador}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminarTiendaFormador/} + ${tienda.idTienda}">Eliminar</a></td>
+											<td><a class="nav-link badge badge-info"
+												th:href="@{/tiendaVer/} + ${tienda.idTienda}">Ver</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<!-- TAB-FORMADORES -->
+				<div class="tab-pane fade" id="formadorFormador" role="tabpanel"
+					aria-labelledby="formadorFormador-tab">
+
+					<div th:fragment="formadorConsulta" class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/formadorNuevo}" class="btn btn-success">Añadir
+									Formador</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th>Nif</th>
+											<th>Nombre</th>
+											<th>Apellido</th>
+											<th>Teléfono</th>
+											<th>Mail</th>
+											<th colspan="2">Acciones</th>
+										</tr>
+									</thead>
+									<tbody class="tbody-light align-items-center">
+										<tr th:each="formador : ${formadoresId}">
+											<td th:text="${formador.nifFormador}"></td>
+											<td th:text="${formador.nombreFormador}"></td>
+											<td th:text="${formador.ap1Formador}"></td>
+											<td th:text="${formador.tel1Formador}"></td>
+											<td th:text="${formador.mail1Formador}"></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/formadorNuevo/} + ${formador.nifFormador}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminaFormador/} + ${formador.nifFormador}">Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+
+
+				<!-- TAB-FORMACIONES -->
+				<div class="tab-pane fade" id="formacionFormador" role="tabpanel"
+					aria-labelledby="formacionFormador-tab">
+
+					<div th:fragment="formacionConsulta" class="container mt-3">
+						<div class="row">
+							<div class="col-12">
+								<a th:href="@{/formacionNueva}" class="btn btn-success">Añadir
+									Formación</a>
+							</div>
+							<div class="col-12 mt-2">
+								<table class="table table-striped table-sm">
+									<thead class="thead-dark">
+										<tr>
+											<th>Id</th>
+											<th>Nombre</th>
+											<th>Campaña</th>
+											<th colspan="2">Acciones</th>
+										</tr>
+									</thead>
+									<tbody class="tbody-light align-items-center">
+										<tr th:each="formacion : ${formacionesId}">
+											<td th:text="${formacion.idFormacion}"></td>
+											<td th:text="${formacion.nombreFormacion}"></td>
+											<td th:text="${formacion.campagna.nombreCampagna}"></td>
+											<td><a class="nav-link badge badge-warning"
+												th:href="@{/formacionNueva/} + ${formacion.idFormacion}"
+												th:if="${formacion.idFormacion}">Editar</a></td>
+											<td><a class="nav-link badge badge-danger"
+												th:href="@{/eliminaFormacion/} + ${formacion.idFormacion}"
+												th:if="${formacion.idFormacion}">Eliminar</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+
+		<script>
+			function mostrar() {
+				document.getElementById('botonMostrarFormador').style.display = 'none';
+				document.getElementById('botonOcultarFormador').style.display = 'block';
+				document.getElementById('datosFormador').style.display = 'block';
+			}
+			function ocultar() {
+				document.getElementById('botonMostrarFormador').style.display = 'block';
+				document.getElementById('botonOcultarFormador').style.display = 'none';
+				document.getElementById('datosFormador').style.display = 'none';
+			}
+		</script>
+</body>
+
+</html>

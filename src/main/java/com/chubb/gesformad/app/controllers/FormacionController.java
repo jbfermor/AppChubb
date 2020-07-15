@@ -35,31 +35,6 @@ public class FormacionController {
 		return "/formacionNueva";
 	}
 	
-	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String nuevaFormacion (@PathVariable("idProveedor") Long idProveedor, Model model) {
-		Proveedor proveedor = null;
-		if (idProveedor > 0) {
-			proveedorService.findOneProveedor(idProveedor);
-		}
-		else {
-			return "redirect:/proveedorVer/" + idProveedor;
-		}
-		Formacion formacion = new Formacion();
-		
-		List <Campagna> listaCampagna = proveedorService.findAllCampagnas();
-		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
-		
-		for (Campagna i : listaCampagna) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
-				listaCampagnasId.add(i);
-			}
-		}
-		model.addAttribute("proveedor", proveedor);
-		model.addAttribute("campagnas", listaCampagnasId);
-		model.addAttribute("formacion", formacion);
-		return "/formacionNueva";
-	}
-	
 	@PostMapping("/formacionNueva")
 	public String creaFormacion (Formacion formacion, Model model) {
 		proveedorService.saveFormacion(formacion);
@@ -83,6 +58,40 @@ public class FormacionController {
 	public String deleteFormacion (@PathVariable("idFormacion") Long idFormacion, Model model) {
 		proveedorService.deleteFormacion(idFormacion);
 		return "redirect:/formacionConsulta";
+	}
+	
+	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
+	public String nuevaFormacion (@PathVariable("idProveedor") Long idProveedor, Model model) {
+		
+		List <Campagna> listaCampagna = proveedorService.findAllCampagnas();
+		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
+		
+		for (Campagna i : listaCampagna) {
+			if (i.getProveedor().getIdProveedor() == idProveedor) {
+				listaCampagnasId.add(i);
+			}
+		}
+		
+		Formacion formacion = new Formacion();
+		
+		model.addAttribute("campagnas", listaCampagnasId);
+		model.addAttribute("formacion", formacion);
+		return "/formacionNueva";
+	}
+	
+	@PostMapping("/formacionNuevaProveedor/{idProveedor}")
+	public String creaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Formacion formacion, Model model) {
+		Proveedor proveedor = null;
+		if (idProveedor > 0) {
+			proveedor = proveedorService.findOneProveedor(idProveedor);
+		}
+		else {
+			return "redirect:/proveedorVer/" + idProveedor;
+		}
+		formacion.setProveedor(proveedor);
+		proveedorService.saveFormacion(formacion);
+		model.addAttribute("formacion", formacion);
+		return "redirect:/proveedorVer/" + idProveedor;
 	}
 	
 }

@@ -35,8 +35,8 @@ public class Formacion implements Serializable {
 	
 	//FOREIGN
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "id_proveedor", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "id_proveedor", nullable = true)
 	private Proveedor proveedor;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)

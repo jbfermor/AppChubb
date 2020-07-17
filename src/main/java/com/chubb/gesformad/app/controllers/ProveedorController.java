@@ -190,8 +190,14 @@ public class ProveedorController {
 			 }
 			 Long id = formador.getIdFormador();
 			 Formador formadorListo = proveedorService.findOneFormador(id);
+			 if (formadorListo.getProveedores().contains(proveedor) != true) {
 			 formadorListo.getProveedores().add(proveedor);
 			 proveedorService.saveFormador(formadorListo);
+			 model.addAttribute("proveedorExiste", 0);
+			 }
+			 else {
+				 model.addAttribute("proveedorExiste", "¡Ya está asignado a este Proveedor!");
+			 }
 			return "redirect:/proveedorVer/" + idProveedor;
 		}
 		
@@ -199,7 +205,6 @@ public class ProveedorController {
 		public String eliminarProveedor(@PathVariable("idProveedor")Long idProveedor, @PathVariable("idFormador")Long idFormador, Model model) {
 			Proveedor proveedor = proveedorService.findOneProveedor(idProveedor);
 			Formador formador = proveedorService.findOneFormador(idFormador);
-			Long idX;
 			Proveedor provX = null;
 		
 			for (Proveedor i : formador.getProveedores()) {

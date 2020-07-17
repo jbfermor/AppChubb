@@ -32,8 +32,9 @@
 	<div class="row">
 			<div class="col-12" th:text="'Nueva Formación para ' + ${proveedor.nombreProveedor}"></div>
 			<div class="col-12">
-				<form class="form" th:action="@{/formacionNuevaProveedor}"
+				<form class="form" th:action="@{/formacionNueva}"
 					th:object="${formacion}" method="POST">
+					<input type="hidden" th:value="${proveedor.idProveedor}">
 					<div class="form-group row">
 						<div class="col-1">
 							<label for="idFormacion">Id</label>

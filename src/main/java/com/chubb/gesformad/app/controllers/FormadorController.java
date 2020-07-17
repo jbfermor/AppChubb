@@ -212,11 +212,29 @@ public class FormadorController {
 			}
 				Long id = proveedor.getIdProveedor();
 				Proveedor proveedorListo = formadorService.findOneProveedor(id);
-				formador.getProveedores().add(proveedorListo);
-				formadorService.saveFormador(formador);
-	
+				if (formador.getProveedores().contains(proveedorListo) == false) {
+					formador.getProveedores().add(proveedorListo);
+					formadorService.saveFormador(formador);
+				}
 		model.addAttribute("formador", formador);
 		return "redirect:/formadorVer/" + idFormador;
+	}
+	
+	//ELIMINAR PROVEEDOR DE LA LISTA EN FORMADORES
+	@GetMapping("/formadorEliminarProveedor/{idFormador}/{idProveedor}")
+	public String eliminarProveedor(@PathVariable("idFormador") Long idFormador, @PathVariable("idProveedor") Long idProveedor, Model model) {
+		Proveedor proveedor = formadorService.findOneProveedor(idProveedor);
+		Formador formador = formadorService.findOneFormador(idFormador);
+		Proveedor provX = null;
+		for (Proveedor i : formador.getProveedores()) {
+			if (proveedor.getIdProveedor() == i.getIdProveedor()){
+				provX = i;
+			}
+		}
+		
+		formador.getProveedores().remove(provX);
+		formadorService.saveFormador(formador);
+		return "redirect:/formadorVer/" + idFormador;			
 	}
 	
 

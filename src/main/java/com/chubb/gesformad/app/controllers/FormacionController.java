@@ -37,9 +37,10 @@ public class FormacionController {
 	
 	@PostMapping("/formacionNueva")
 	public String creaFormacion (Formacion formacion, Model model) {
+
 		proveedorService.saveFormacion(formacion);
 		model.addAttribute("formacion", formacion);
-	return "redirect:/formacionConsulta";
+		return "redirect:/formacionConsulta";
 	}
 	
 	@GetMapping("/formacionNueva/{idFormacion}")
@@ -88,6 +89,40 @@ public class FormacionController {
 		model.addAttribute("campagnas", listaCampagnasId);
 		model.addAttribute("formacion", formacion);
 		return "/formacionNuevaProveedor";
+	}
+	
+	@PostMapping("/formacionNuevaProveedor/{idProveedor}")
+	public String creaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Formacion formacion, Model model) {
+		Proveedor proveedor = null;
+		if (idProveedor > 0) {
+			proveedor = proveedorService.findOneProveedor(idProveedor);
+		}
+		else {
+			return "redirect:/proveedorVer/" + idProveedor;
+		}
+		formacion.setProveedor(proveedor);
+		proveedorService.saveFormacion(formacion);
+		model.addAttribute("formacion", formacion);
+		return "redirect:/proveedorVer/" + idProveedor;
+	}
+	
+	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
+	public String nuevaFormacion (@PathVariable("idProveedor") Long idProveedor, Model model) {
+		
+		List <Campagna> listaCampagna = proveedorService.findAllCampagnas();
+		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
+		
+		for (Campagna i : listaCampagna) {
+			if (i.getProveedor().getIdProveedor() == idProveedor) {
+				listaCampagnasId.add(i);
+			}
+		}
+		
+		Formacion formacion = new Formacion();
+		
+		model.addAttribute("campagnas", listaCampagnasId);
+		model.addAttribute("formacion", formacion);
+		return "/formacionNueva";
 	}
 	
 	@PostMapping("/formacionNuevaProveedor/{idProveedor}")

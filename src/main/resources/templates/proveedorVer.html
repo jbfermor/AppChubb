@@ -357,10 +357,10 @@
 											<td th:text="${formacion.nombreFormacion}"></td>
 											<td th:text="${formacion.campagna.nombreCampagna}"></td>
 											<td><a class="nav-link badge badge-warning"
-												th:href="@{/formacionNueva/} + ${formacion.idFormacion}"
+												th:href="@{/formacionNuevaProveedor/} + ${formacion.idFormacion} + '/' + ${proveedor.idProveedor}"
 												th:if="${formacion.idFormacion}">Editar</a></td>
 											<td><a class="nav-link badge badge-danger"
-												th:href="@{/eliminaFormacion/} + ${formacion.idFormacion}"
+												th:href="@{/eliminaFormacion/} + ${formacion.idFormacion} + '/' + ${proveedor.idProveedor}"
 												th:if="${formacion.idFormacion}">Eliminar</a></td>
 										</tr>
 									</tbody>

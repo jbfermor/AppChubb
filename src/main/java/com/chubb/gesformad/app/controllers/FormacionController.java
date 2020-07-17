@@ -64,7 +64,7 @@ public class FormacionController {
 	
 	//DESDE PROVEEDOR
 	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String nuevaFormacion (@PathVariable("idProveedor") Long idProveedor, Model model) {
+	public String nuevaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Model model) {
 		
 		Proveedor proveedor = null;
 		if (idProveedor > 0) {
@@ -106,37 +106,32 @@ public class FormacionController {
 		return "redirect:/proveedorVer/" + idProveedor;
 	}
 	
-	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String nuevaFormacion (@PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/formacionNuevaProveedor/{idFormacion}/{idProveedor}")
+	public String editaFormacionProveedor (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idProveedor") Long idProveedor, Model model) {
 		
-		List <Campagna> listaCampagna = proveedorService.findAllCampagnas();
-		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
-		
-		for (Campagna i : listaCampagna) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
-				listaCampagnasId.add(i);
+		Formacion formacion = null;
+			if (idFormacion > 0) {
+				formacion = proveedorService.findOneFormacion(idFormacion);
 			}
-		}
-		
-		Formacion formacion = new Formacion();
-		
-		model.addAttribute("campagnas", listaCampagnasId);
+			else {return "redirect:/proveedorVer/" + idProveedor;}
+			
+		Proveedor proveedor = null;
+			if (idProveedor > 0) {
+				proveedor = proveedorService.findOneProveedor(idProveedor);
+			}
+			else {
+				return "redirect:/proveedorVer/" + idProveedor;
+			}
+			
+		model.addAttribute("proveedor", proveedor);
+		model.addAttribute("campagnas", proveedorService.findAllCampagnas());	
 		model.addAttribute("formacion", formacion);
-		return "/formacionNueva";
+		return "/formacionNuevaProveedor";
 	}
 	
-	@PostMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String creaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Formacion formacion, Model model) {
-		Proveedor proveedor = null;
-		if (idProveedor > 0) {
-			proveedor = proveedorService.findOneProveedor(idProveedor);
-		}
-		else {
-			return "redirect:/proveedorVer/" + idProveedor;
-		}
-		formacion.setProveedor(proveedor);
-		proveedorService.saveFormacion(formacion);
-		model.addAttribute("formacion", formacion);
+	@GetMapping ("/eliminaFormacion/{idFormacion}/{idProveedor}")
+	public String deleteFormacion (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idProveedor") Long idProveedor, Model model) {
+		proveedorService.deleteFormacion(idFormacion);
 		return "redirect:/proveedorVer/" + idProveedor;
 	}
 	

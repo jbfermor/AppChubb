@@ -44,15 +44,15 @@
 			<div class="container">
 		<div class="row mt-4 mb-4 border border-dark">
 			<div class="col-12 mt-2 text-center">
-				<h3>Proveedores</h3>
+				<h3>Clientees</h3>
 			</div>
 			<div class="col-12 mt-2">
-				<a th:href="@{/proveedorNuevo}" class="btn btn-success">Añadir
-					Proveedor</a>
+				<a th:href="@{/clienteNuevo}" class="btn btn-success">Añadir
+					Cliente</a>
 			</div>
-			<div th:each="proveedor:${proveedores}" class="col-3 mt-2">
-				<a th:href="@{/proveedorVer/} + ${proveedor.idProveedor}"
-					th:text="${proveedor.nombreProveedor}"
+			<div th:each="cliente:${clientees}" class="col-3 mt-2">
+				<a th:href="@{/clienteVer/} + ${cliente.idCliente}"
+					th:text="${cliente.nombreCliente}"
 					class="btn btn-info rounded text-center mx-auto d-block mb-4"></a>
 			</div>
 		</div>

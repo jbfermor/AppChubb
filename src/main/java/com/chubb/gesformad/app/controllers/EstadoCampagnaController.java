@@ -8,17 +8,17 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.EstadoCampagna;
-import com.chubb.gesformad.app.models.services.IProveedorService;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class EstadoCampagnaController {
 
 		@Autowired
-		private IProveedorService proveedorService;
+		private IClienteService clienteService;
 		
 		@GetMapping ("/estadoCampagnaConsulta")
 		public String estadoCampagnaConsulta (Model model) {
-			model.addAttribute("estadosCampagnas",proveedorService.findAllEstados());
+			model.addAttribute("estadosCampagnas",clienteService.findAllEstados());
 			return "estadoCampagnaConsulta";
 		}
 		
@@ -31,7 +31,7 @@ public class EstadoCampagnaController {
 		
 		@PostMapping ("/estadoCampagnaNuevo")
 		public String creaEstadoCampagna (EstadoCampagna estadoCampagna, Model model) {
-			proveedorService.saveEstado(estadoCampagna);
+			clienteService.saveEstado(estadoCampagna);
 			model.addAttribute("estadoCampagna", estadoCampagna);
 			return "redirect:/estadoCampagnaConsulta";		
 		}
@@ -41,7 +41,7 @@ public class EstadoCampagnaController {
 			
 			EstadoCampagna estadoCampagna = null;
 			if (idEstadoCampagna > 0) {
-				estadoCampagna = proveedorService.findOneEstadoCampagna(idEstadoCampagna);
+				estadoCampagna = clienteService.findOneEstadoCampagna(idEstadoCampagna);
 			}
 			else {
 				return "redirect:/estadoCampagnaConsulta";	
@@ -52,7 +52,7 @@ public class EstadoCampagnaController {
 		
 		@GetMapping("/eliminarEstadoCampagna/{idEstadoCampagna}")
 		public String eliminarCampagna(@PathVariable("idEstadoCampagna")Long idEstadoCampagna, Model model) {
-			proveedorService.deleteEstadoCampagna(idEstadoCampagna);
+			clienteService.deleteEstadoCampagna(idEstadoCampagna);
 			return "redirect:/estadoCampagnaConsulta";			
 		}
 	

@@ -49,12 +49,12 @@
 								th:field="*{idCampagna}" class="form-control " id="idCampagna" />
 						</div>
 						<div class="col-2">
-							<label for="proveedorCampagna">Proveedor</label>
-							 <select th:field="*{proveedor.idProveedor}" class="form-control" id="selectProveedores">
-								<option th:each="proveedor:${proveedores}"
-									th:text="${proveedor.nombreProveedor}"
-									th:value="${proveedor.idProveedor}" 
-									th:selected="${proveedor.idProveedor == campagna.proveedor.idProveedor}"></option>
+							<label for="clienteCampagna">Cliente</label>
+							 <select th:field="*{cliente.idCliente}" class="form-control" id="selectClientees">
+								<option th:each="cliente:${clientees}"
+									th:text="${cliente.nombreCliente}"
+									th:value="${cliente.idCliente}" 
+									th:selected="${cliente.idCliente == campagna.cliente.idCliente}"></option>
 							</select>
 						</div>
 					</div>

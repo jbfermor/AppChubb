@@ -5,7 +5,7 @@ import java.util.List;
 import com.chubb.gesformad.app.models.entity.Comercial;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.entity.Zona;
 
@@ -22,11 +22,11 @@ public interface IFormadorService {
 	
 	//PROVEEDORES
 	
-	public List <Proveedor> findAllProveedores();
+	public List <Cliente> findAllClientees();
 	
-	public Proveedor findOneProveedor(Long idProveedor);
+	public Cliente findOneCliente(Long idCliente);
 	
-	public void saveProveedor(Proveedor proveedor);
+	public void saveCliente(Cliente cliente);
 	
 	
 	//ZONAS

@@ -41,7 +41,7 @@
 						<tr>
 							<th>Id</th>
 							<th>Nombre</th>
-							<th>Proveedor</th>
+							<th>Cliente</th>
 							<th>Inicio</th>
 							<th>Fin</th>
 							<th>Estado</th>
@@ -52,7 +52,7 @@
 						<tr th:each="campagna : ${campagnas}">
 							<td th:text="${campagna.idCampagna}"></td>
 							<td th:text="${campagna.nombreCampagna}"></td>
-							<td th:text="${campagna.proveedor.nombreProveedor}"></td>
+							<td th:text="${campagna.cliente.nombreCliente}"></td>
 							<td th:text="${#dates.format(campagna.dInicioCampagna, 'dd/MM/yyyy')}"></td>
 							<td th:text="${#dates.format(campagna.dFinCampagna, 'dd/MM/yyyy')}"></td>
 							<td th:text="${campagna.estadoCampagna.nombreEstadoCampagna}">

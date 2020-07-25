@@ -30,11 +30,11 @@
 <body>
 	<div th:replace="/plantillaNavs::navAdmin"></div>
 	<div class="row">
-			<div class="col-12" th:text="'Nueva Formación para ' + ${proveedor.nombreProveedor}"></div>
+			<div class="col-12" th:text="'Nueva Formación para ' + ${cliente.nombreCliente}"></div>
 			<div class="col-12">
-				<form class="form" th:action="@{/formacionNuevaProveedor/} + ${proveedor.idProveedor}"
+				<form class="form" th:action="@{/formacionNuevaCliente/} + ${cliente.idCliente}"
 					th:object="${formacion}" method="POST">
-					<input type="hidden" th:value="${proveedor.idProveedor}">
+					<input type="hidden" th:value="${cliente.idCliente}">
 					<div class="form-group row">
 						<div class="col-1">
 							<label for="idFormacion">Id</label>

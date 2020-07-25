@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.chubb.gesformad.app.models.entity.Formador;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.services.IFormadorService;
 
@@ -20,7 +20,7 @@ public class IndexController {
 		
 	@GetMapping({"/index", "", "/"})
 	public String index (Model model) {
-		List <Proveedor> proveedores = formadorService.findAllProveedores();
+		List <Cliente> clientees = formadorService.findAllClientees();
 		List <Formador> formadores = formadorService.findAllFormadores();
 		List <Rol> roles = formadorService.findAllRoles();
 			if (roles.isEmpty()){
@@ -32,16 +32,16 @@ public class IndexController {
 			
 		int segInicio = 0;
 		
-		if (proveedores.size() > 0 && formadores.isEmpty()) {
+		if (clientees.size() > 0 && formadores.isEmpty()) {
 			segInicio = 1;
 		}
 		
-		if (proveedores.size() > 0 && formadores.size() > 0) {
+		if (clientees.size() > 0 && formadores.size() > 0) {
 			segInicio = 2;
 		}
 
 		model.addAttribute("segInicio", segInicio);
-		model.addAttribute("proveedores", proveedores);
+		model.addAttribute("clientees", clientees);
 		model.addAttribute("formadores", formadores);
 		return "index";
 	}

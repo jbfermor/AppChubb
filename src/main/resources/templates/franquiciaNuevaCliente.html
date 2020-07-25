@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title th:text="'Nueva Franquicia desde el Proveedor: ' + ${franquicia.proveedor.nombreProveedor}"></title>
+<title th:text="'Nueva Franquicia desde el Cliente: ' + ${franquicia.cliente.nombreCliente}"></title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -38,10 +38,10 @@
 	<div class="row mt-2">
 		<div class="col-12 mt-2">
 			<div class="col-12 mt-2">
-				<h5 th:text="'Nueva franquicia de ' + ${franquicia.proveedor.nombreProveedor} "></h5>
+				<h5 th:text="'Nueva franquicia de ' + ${franquicia.cliente.nombreCliente} "></h5>
 			</div>
 			<div class="col-12 mt-2 border-top border-dark">
-				<form class="form mt-2" th:action="@{/franquiciaNuevaProveedor}"
+				<form class="form mt-2" th:action="@{/franquiciaNuevaCliente}"
 					th:object="${franquicia}" method="POST">
 					<div class="form-group row">
 						<div class="col-1">
@@ -49,12 +49,12 @@
 							<input readonly type="text" th:field="*{idFranquicia}" class="form-control " id="idFranquicia" />
 						</div>
 						<div class="col-2">
-							<label for="proveedorFranquicia">Proveedor</label> <select
-								th:field="*{proveedor.idProveedor}"
+							<label for="clienteFranquicia">Cliente</label> <select
+								th:field="*{cliente.idCliente}"
 								class="form-control" id="selectFranquicias">
-								<option th:each="proveedor:${proveedores}"
-									th:text="${proveedor.nombreProveedor}"
-									th:value="${proveedor.idProveedor}"></option>
+								<option th:each="cliente:${clientees}"
+									th:text="${cliente.nombreCliente}"
+									th:value="${cliente.idCliente}"></option>
 							</select>
 						</div>
 					</div>

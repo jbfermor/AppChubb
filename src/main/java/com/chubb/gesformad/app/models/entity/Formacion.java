@@ -36,8 +36,8 @@ public class Formacion implements Serializable {
 	//FOREIGN
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = true)
-	@JoinColumn(name = "id_proveedor", nullable = true)
-	private Proveedor proveedor;
+	@JoinColumn(name = "id_cliente", nullable = true)
+	private Cliente cliente;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "id_campagna", nullable = false)
@@ -105,12 +105,12 @@ public class Formacion implements Serializable {
 		this.formadores = formadores;
 	}
 
-	public Proveedor getProveedor() {
-		return proveedor;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 

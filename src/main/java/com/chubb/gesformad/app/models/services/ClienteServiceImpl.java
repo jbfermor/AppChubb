@@ -11,7 +11,7 @@ import com.chubb.gesformad.app.models.dao.IEstadoCampagnaDao;
 import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
 import com.chubb.gesformad.app.models.dao.IFranquiciaDao;
-import com.chubb.gesformad.app.models.dao.IProveedorDao;
+import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.ITiendaDao;
 import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Campagna;
@@ -19,15 +19,15 @@ import com.chubb.gesformad.app.models.entity.EstadoCampagna;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Zona;
 
 @Service
-public class ProveedorServiceImpl implements IProveedorService {
+public class ClienteServiceImpl implements IClienteService {
 
 	@Autowired
-	private IProveedorDao proveedorDao;
+	private IClienteDao clienteDao;
 	
 	@Autowired
 	private IZonaDao zonaDao;
@@ -52,26 +52,26 @@ public class ProveedorServiceImpl implements IProveedorService {
 	
 	@Override
 	@Transactional
-	public List<Proveedor> findAllProveedores() {
-		return (List<Proveedor>) proveedorDao.findAll();
+	public List<Cliente> findAllClientees() {
+		return (List<Cliente>) clienteDao.findAll();
 	}
 
 	@Override
 	@Transactional
-	public void saveProveedor(Proveedor proveedor) {
-		proveedorDao.save(proveedor);
+	public void saveCliente(Cliente cliente) {
+		clienteDao.save(cliente);
 	}
 
 	@Override
 	@Transactional
-	public void deleteProveedor(Long idProveedor) {
-		proveedorDao.deleteById(idProveedor);
+	public void deleteCliente(Long idCliente) {
+		clienteDao.deleteById(idCliente);
 	}
 
 	@Override
 	@Transactional
-	public Proveedor findOneProveedor(Long idProveedor) {
-		return proveedorDao.findById(idProveedor).orElse(null);
+	public Cliente findOneCliente(Long idCliente) {
+		return clienteDao.findById(idCliente).orElse(null);
 	}
 	
 	//ZONAS

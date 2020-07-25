@@ -69,8 +69,8 @@ public class Tienda implements Serializable{
 	private Franquicia franquicia;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "id_proveedor", nullable = false)
-	private Proveedor proveedor;
+	@JoinColumn(name = "id_cliente", nullable = false)
+	private Cliente cliente;
 	
 	@ManyToMany(mappedBy = "tiendaComercial")
 	private List <Comercial> comercialTienda;
@@ -234,13 +234,13 @@ public class Tienda implements Serializable{
 	}
 
 
-	public Proveedor getProveedor() {
-		return proveedor;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 	

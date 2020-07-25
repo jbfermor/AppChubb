@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Formacion;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Campagna;
-import com.chubb.gesformad.app.models.services.IProveedorService;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class FormacionController {
 	
 	@Autowired
-	private IProveedorService proveedorService;
+	private IClienteService clienteService;
 	
 	@GetMapping("/formacionConsulta")
 	public String consultaFormacion(Model model) {
-		model.addAttribute("formaciones", proveedorService.findAllFormaciones());
+		model.addAttribute("formaciones", clienteService.findAllFormaciones());
 		return "/formacionConsulta";
 	}
 	
 	@GetMapping("/formacionNueva")
 	public String nuevaFormacion (Model model) {
 		Formacion formacion = new Formacion();
-		model.addAttribute("campagnas", proveedorService.findAllCampagnas());
+		model.addAttribute("campagnas", clienteService.findAllCampagnas());
 		model.addAttribute("formacion", formacion);
 		return "/formacionNueva";
 	}
@@ -38,7 +38,7 @@ public class FormacionController {
 	@PostMapping("/formacionNueva")
 	public String creaFormacion (Formacion formacion, Model model) {
 
-		proveedorService.saveFormacion(formacion);
+		clienteService.saveFormacion(formacion);
 		model.addAttribute("formacion", formacion);
 		return "redirect:/formacionConsulta";
 	}
@@ -47,92 +47,92 @@ public class FormacionController {
 	public String editaFormacion (@PathVariable("idFormacion") Long idFormacion, Model model) {
 		Formacion formacion = null;
 			if (idFormacion > 0) {
-				formacion = proveedorService.findOneFormacion(idFormacion);
+				formacion = clienteService.findOneFormacion(idFormacion);
 			}
 			else {return "redirect:/formacionConsulta";}
-		model.addAttribute("campagnas", proveedorService.findAllCampagnas());	
+		model.addAttribute("campagnas", clienteService.findAllCampagnas());	
 		model.addAttribute("formacion", formacion);
 		return "/formacionNueva";
 	}
 	
 	@GetMapping ("/eliminaFormacion/{idFormacion}")
 	public String deleteFormacion (@PathVariable("idFormacion") Long idFormacion, Model model) {
-		proveedorService.deleteFormacion(idFormacion);
+		clienteService.deleteFormacion(idFormacion);
 		return "redirect:/formacionConsulta";
 	}
 	
 	
 	//DESDE PROVEEDOR
-	@GetMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String nuevaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/formacionNuevaCliente/{idCliente}")
+	public String nuevaFormacionCliente (@PathVariable("idCliente") Long idCliente, Model model) {
 		
-		Proveedor proveedor = null;
-		if (idProveedor > 0) {
-			proveedor = proveedorService.findOneProveedor(idProveedor);
+		Cliente cliente = null;
+		if (idCliente > 0) {
+			cliente = clienteService.findOneCliente(idCliente);
 		}
 		else {
-			return "redirect:/proveedorVer/" + idProveedor;
+			return "redirect:/clienteVer/" + idCliente;
 		}
 		
-		List <Campagna> listaCampagna = proveedorService.findAllCampagnas();
+		List <Campagna> listaCampagna = clienteService.findAllCampagnas();
 		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
 		
 		for (Campagna i : listaCampagna) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
+			if (i.getCliente().getIdCliente() == idCliente) {
 				listaCampagnasId.add(i);
 			}
 		}
 		
 		Formacion formacion = new Formacion();
 		
-		model.addAttribute("proveedor", proveedor);
+		model.addAttribute("cliente", cliente);
 		model.addAttribute("campagnas", listaCampagnasId);
 		model.addAttribute("formacion", formacion);
-		return "/formacionNuevaProveedor";
+		return "/formacionNuevaCliente";
 	}
 	
-	@PostMapping("/formacionNuevaProveedor/{idProveedor}")
-	public String creaFormacionProveedor (@PathVariable("idProveedor") Long idProveedor, Formacion formacion, Model model) {
-		Proveedor proveedor = null;
-		if (idProveedor > 0) {
-			proveedor = proveedorService.findOneProveedor(idProveedor);
+	@PostMapping("/formacionNuevaCliente/{idCliente}")
+	public String creaFormacionCliente (@PathVariable("idCliente") Long idCliente, Formacion formacion, Model model) {
+		Cliente cliente = null;
+		if (idCliente > 0) {
+			cliente = clienteService.findOneCliente(idCliente);
 		}
 		else {
-			return "redirect:/proveedorVer/" + idProveedor;
+			return "redirect:/clienteVer/" + idCliente;
 		}
-		formacion.setProveedor(proveedor);
-		proveedorService.saveFormacion(formacion);
+		formacion.setCliente(cliente);
+		clienteService.saveFormacion(formacion);
 		model.addAttribute("formacion", formacion);
-		return "redirect:/proveedorVer/" + idProveedor;
+		return "redirect:/clienteVer/" + idCliente;
 	}
 	
-	@GetMapping("/formacionNuevaProveedor/{idFormacion}/{idProveedor}")
-	public String editaFormacionProveedor (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/formacionNuevaCliente/{idFormacion}/{idCliente}")
+	public String editaFormacionCliente (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idCliente") Long idCliente, Model model) {
 		
 		Formacion formacion = null;
 			if (idFormacion > 0) {
-				formacion = proveedorService.findOneFormacion(idFormacion);
+				formacion = clienteService.findOneFormacion(idFormacion);
 			}
-			else {return "redirect:/proveedorVer/" + idProveedor;}
+			else {return "redirect:/clienteVer/" + idCliente;}
 			
-		Proveedor proveedor = null;
-			if (idProveedor > 0) {
-				proveedor = proveedorService.findOneProveedor(idProveedor);
+		Cliente cliente = null;
+			if (idCliente > 0) {
+				cliente = clienteService.findOneCliente(idCliente);
 			}
 			else {
-				return "redirect:/proveedorVer/" + idProveedor;
+				return "redirect:/clienteVer/" + idCliente;
 			}
 			
-		model.addAttribute("proveedor", proveedor);
-		model.addAttribute("campagnas", proveedorService.findAllCampagnas());	
+		model.addAttribute("cliente", cliente);
+		model.addAttribute("campagnas", clienteService.findAllCampagnas());	
 		model.addAttribute("formacion", formacion);
-		return "/formacionNuevaProveedor";
+		return "/formacionNuevaCliente";
 	}
 	
-	@GetMapping ("/eliminaFormacion/{idFormacion}/{idProveedor}")
-	public String deleteFormacion (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idProveedor") Long idProveedor, Model model) {
-		proveedorService.deleteFormacion(idFormacion);
-		return "redirect:/proveedorVer/" + idProveedor;
+	@GetMapping ("/eliminaFormacion/{idFormacion}/{idCliente}")
+	public String deleteFormacion (@PathVariable("idFormacion") Long idFormacion, @PathVariable("idCliente") Long idCliente, Model model) {
+		clienteService.deleteFormacion(idFormacion);
+		return "redirect:/clienteVer/" + idCliente;
 	}
 	
 }

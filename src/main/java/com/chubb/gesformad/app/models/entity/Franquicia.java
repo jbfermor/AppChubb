@@ -29,8 +29,8 @@ public class Franquicia {
 	//FOREIGN
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="id_proveedor", nullable = false)
-	private Proveedor proveedor;
+	@JoinColumn(name="id_cliente", nullable = false)
+	private Cliente cliente;
 	
 	@OneToMany(mappedBy = "franquicia", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Tienda> tiendas;
@@ -61,12 +61,12 @@ public class Franquicia {
 		this.nombreFranquicia = nombreFranquicia;
 	}
 
-	public Proveedor getProveedor() {
-		return proveedor;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 	
 }

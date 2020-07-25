@@ -41,7 +41,7 @@
 						<tr>
 							<th>Id</th>
 							<th>Nombre</th>
-							<th>Proveedor</th>
+							<th>Cliente</th>
 							<th colspan="3">Acciones</th>
 						</tr>
 					</thead>
@@ -49,7 +49,7 @@
 						<tr th:each="franquicia : ${franquicias}">
 							<td th:text="${franquicia.idFranquicia}"></td>
 							<td th:text="${franquicia.nombreFranquicia}"></td>
-							<td th:text="${franquicia.proveedor.nombreProveedor}"></td>
+							<td th:text="${franquicia.cliente.nombreCliente}"></td>
 							<td><a class="nav-link badge badge-warning"
 								th:href="@{/franquiciaNueva/} + ${franquicia.idFranquicia}">Editar</a></td>
 							<td><a class="nav-link badge badge-danger"

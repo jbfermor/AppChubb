@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title>Proveedor Nuevo</title>
+<title>Clientees</title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -28,30 +28,32 @@
 </head>
 
 <body>
-	<div th:replace="/plantillaNavs::navAdminGuia"></div>
-	<div class="row">
-		<div class="col-12">
-			<div class="col-12"></div>
-			<div class="col-12">
-				<form class="form" th:action="@{/proveedorInicial}" th:object="${proveedor}" method="POST">
-					<div class="form-group row">
-					<div class="col-1">
-							<label for="idProveedor">Id</label>	
-							<input readonly type="text" th:field="*{idProveedor}"  class="form-control " id="idProveedor"/>	
-						</div>		
-						<div class="col-2">
-							<label for="nombreProveedor">Nombre</label>	
-							<input type="text" th:field="*{nombreProveedor}" class="form-control" id="nombreProveedor"/>	
-						</div>			
-					</div>
-					<div class="form-group row">
-						<div class="col-2">
-							<input type="submit" value="Guardar" class="btn btn-info"/>
-						</div>
-					</div>
-				</form>
+	<div th:replace="/plantillaNavs::navAdmin"></div>
+	<div th:fragment="clienteConsulta" class="container mt-3">
+		<div class="row mt-2">
+
+			<div class="col-6 mt-2">
+				<table class="table table-striped table-sm">
+					<thead class="thead-dark">
+						<tr>
+							<th>Id</th>
+							<th>Nombre</th>
+							<th>Acciones</th>
+						</tr>
+					</thead>
+					<tbody class="tbody-light align-items-center">
+						<tr th:each="cliente : ${clientees}">
+							<td th:text="${cliente.idCliente}"></td>
+							<td th:text="${cliente.nombreCliente}"></td>
+							<td><a th:href = "@{/clienteVer/} + ${cliente.idCliente}"
+							class = "badge badge-info">Ver</a></td>
+						</tr>
+					</tbody>
+				</table>
 			</div>
+			<div class="col-12"></div>
 		</div>
+
 	</div>
 </body>
 

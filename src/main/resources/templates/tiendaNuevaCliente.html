@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title th:text = "'Tienda Nueva de ' + ${tienda.proveedor.nombreProveedor}"></title>
+<title th:text = "'Tienda Nueva de ' + ${tienda.cliente.nombreCliente}"></title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -32,10 +32,10 @@
 	<div class="row">
 		<div class="col-12 mt-2">
 			<div class="col-12 mt-2" >
-				<h4 th:text = "'Tienda Nueva de ' + ${tienda.proveedor.nombreProveedor}"></h4>
+				<h4 th:text = "'Tienda Nueva de ' + ${tienda.cliente.nombreCliente}"></h4>
 			</div>
 			<div class="col-12">
-				<form class="form" th:action="@{/tiendaNuevaProveedor}" th:object="${tienda}"
+				<form class="form" th:action="@{/tiendaNuevaCliente}" th:object="${tienda}"
 					method="POST">
 					<div class="form-group row">
 						<div class="col-1">
@@ -110,7 +110,7 @@
 						</div>
 					</div>
 					<div class="form-group row">
-						<div><input type="hidden" th:field ="*{proveedor.idProveedor}"></div>
+						<div><input type="hidden" th:field ="*{cliente.idCliente}"></div>
 						<div class="col-2">
 							<input type="submit" value="Guardar" class="btn btn-info" />
 						</div>

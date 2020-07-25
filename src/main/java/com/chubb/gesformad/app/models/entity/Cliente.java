@@ -15,8 +15,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="proveedor")
-public class Proveedor implements Serializable {
+@Table(name="cliente")
+public class Cliente implements Serializable {
 	
 	/**
 	 * 
@@ -25,40 +25,40 @@ public class Proveedor implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="id_proveedor")
-	private Long idProveedor;
+	@Column(name="id_cliente")
+	private Long idCliente;
 	
-	@Column(name = "nombre_proveedor")
-	private String nombreProveedor;
+	@Column(name = "nombre_cliente")
+	private String nombreCliente;
 	
 	//FOREIGN KEY
-	@OneToMany (mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Campagna> campagnas;
 	
-	@OneToMany (mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Franquicia> franquicias;
 	
-	@OneToMany (mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Zona> zonas;
 	
-	@OneToMany (mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Tienda> tiendas;
 	
-	@OneToMany (mappedBy = "proveedor", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Formacion> formaciones;
 	
-	@ManyToMany (mappedBy = "proveedores")
+	@ManyToMany (mappedBy = "clientees")
 	private List <Formador> formadores;
 	
 	//CONSTRUCTORES
 	
-	public Proveedor() {}
+	public Cliente() {}
 	
-	public Proveedor(Long idProveedor, String nombreProveedor, List<Campagna> campagnas, List<Franquicia> franquicias,
+	public Cliente(Long idCliente, String nombreCliente, List<Campagna> campagnas, List<Franquicia> franquicias,
 			List<Zona> zonas, List<Tienda> tiendas, List<Formacion> formaciones, List<Formador> formadores) {
 
-		this.idProveedor = idProveedor;
-		this.nombreProveedor = nombreProveedor;
+		this.idCliente = idCliente;
+		this.nombreCliente = nombreCliente;
 		this.campagnas = campagnas;
 		this.franquicias = franquicias;
 		this.zonas = zonas;
@@ -68,26 +68,26 @@ public class Proveedor implements Serializable {
 	}
 
 
-	public Proveedor(Long idProveedor, String nombreProveedor) {
-		this.idProveedor = idProveedor;
-		this.nombreProveedor = nombreProveedor;
+	public Cliente(Long idCliente, String nombreCliente) {
+		this.idCliente = idCliente;
+		this.nombreCliente = nombreCliente;
 	}
 
 	//SETTER Y GETTERS
-	public Long getIdProveedor() {
-		return idProveedor;
+	public Long getIdCliente() {
+		return idCliente;
 	}
 
-	public void setIdProveedor(Long idProveedor) {
-		this.idProveedor = idProveedor;
+	public void setIdCliente(Long idCliente) {
+		this.idCliente = idCliente;
 	}
 
-	public String getNombreProveedor() {
-		return nombreProveedor;
+	public String getNombreCliente() {
+		return nombreCliente;
 	}
 
-	public void setNombreProveedor(String nombreProveedor) {
-		this.nombreProveedor = nombreProveedor;
+	public void setNombreCliente(String nombreCliente) {
+		this.nombreCliente = nombreCliente;
 	}
 
 	public List<Campagna> getCampagnas() {

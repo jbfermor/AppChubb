@@ -37,8 +37,8 @@
 		</div>
 		<div class="row mt-2">
 			<div class="col-12 mt-2">
-				<div th:if="${#lists.isEmpty(proveedoresId)}"
-					th:text="${'No hay asignado ningún proveedor'}"
+				<div th:if="${#lists.isEmpty(clienteesId)}"
+					th:text="${'No hay asignado ningún cliente'}"
 					class="alert alert-danger"></div>
 				<div th:if="${#lists.isEmpty(zonasId)}"
 					th:text="${'No hay asignada ninguna zona'}"
@@ -79,9 +79,9 @@
 			<ul class="nav nav-tabs mt-2" id="formadorTab" role="tablist">
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="proveedoresFormador-tab" data-toggle="tab"
-					href="#proveedoresFormador" role="tab"
-					aria-controls="proveedoresFormador" aria-selected="false">Proveedores</a></li>
+					id="clienteesFormador-tab" data-toggle="tab"
+					href="#clienteesFormador" role="tab"
+					aria-controls="clienteesFormador" aria-selected="false">Clientees</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
 					id="zonasFormador-tab" data-toggle="tab" href="#zonasFormador"
@@ -107,18 +107,18 @@
 			<div class="tab-content" id="formadorTabContent">
 
 				<!-- TAB-PROVEEDORES -->
-				<div class="tab-pane fade show active" id="proveedoresFormador"
-					role="tabpanel" aria-labelledby="proveedoresFormador-tab">
+				<div class="tab-pane fade show active" id="clienteesFormador"
+					role="tabpanel" aria-labelledby="clienteesFormador-tab">
 					<form th:action="@{/formadorVer/} + ${formador.idFormador}"
-						th:object="${proveedor}" th:method="POST">
+						th:object="${cliente}" th:method="POST">
 						<div class="form-row mt-2">
 
 							<div class="col-4 mt-2">
-								<select id="proveedorFormador" class="form-control"
-									th:field="*{idProveedor}">
-									<option th:each="proveedor:${proveedores}"
-										th:text="${proveedor.nombreProveedor}"
-										th:value="${proveedor.idProveedor}"></option>
+								<select id="clienteFormador" class="form-control"
+									th:field="*{idCliente}">
+									<option th:each="cliente:${clientees}"
+										th:text="${cliente.nombreCliente}"
+										th:value="${cliente.idCliente}"></option>
 								</select>
 							</div>
 
@@ -138,10 +138,10 @@
 									</tr>
 								</thead>
 								<tbody class="tbody-light align-items-center">
-									<tr th:each="proveedor : ${proveedoresId}">
-										<td th:text="${proveedor.nombreProveedor}"></td>
+									<tr th:each="cliente : ${clienteesId}">
+										<td th:text="${cliente.nombreCliente}"></td>
 										<td><a class="badge badge-danger"
-											th:href="@{/formadorEliminarProveedor/} + ${idFormador} + '/' + ${proveedor.idProveedor}"
+											th:href="@{/formadorEliminarCliente/} + ${idFormador} + '/' + ${cliente.idCliente}"
 											th:text="'Eliminar'"></a></td>
 									</tr>
 								</tbody>

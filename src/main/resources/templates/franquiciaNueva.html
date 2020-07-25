@@ -47,12 +47,12 @@
 								id="nombreFranquicia" />
 						</div>
 						<div class="col-2">
-							<label for="proveedorFranquicia">Proveedor</label> <select
-								th:field="*{proveedor.idProveedor}" class="form-control">
+							<label for="clienteFranquicia">Cliente</label> <select
+								th:field="*{cliente.idCliente}" class="form-control">
 								<option th:value="''" th:text="Select"></option>
-								<option th:each="proveedor:${proveedores}"
-									th:text="${proveedor.nombreProveedor}"
-									th:value="${proveedor.idProveedor}">
+								<option th:each="cliente:${clientees}"
+									th:text="${cliente.nombreCliente}"
+									th:value="${cliente.idCliente}">
 								</option>
 							</select>
 						</div>

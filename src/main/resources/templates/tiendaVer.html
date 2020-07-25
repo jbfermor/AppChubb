@@ -46,14 +46,14 @@
 					<tr class="bg-dark text-light">
 						<th th:text="'Id'" colspan="1"></th>
 						<th th:text="'Nombre'" colspan="4"></th>
-						<th th:text="'Proveedor'" colspan="2"></th>
+						<th th:text="'Cliente'" colspan="2"></th>
 						<th th:text="'Zona'" colspan="2"></th>
 						<th th:text="'Franquicia'" colspan="3"></th>
 					</tr>
 					<tr>
 						<td th:text="${tienda.idTienda}" colspan="1"></td>
 						<td th:text="${tienda.nombreTienda}" colspan="4"></td>
-						<td th:text="${tienda.franquicia.proveedor.nombreProveedor}"
+						<td th:text="${tienda.franquicia.cliente.nombreCliente}"
 							colspan="2"></td>
 						<td th:text="${tienda.zona.nombreZona}" colspan="2"></td>
 						<td th:text="${tienda.franquicia.nombreFranquicia}" colspan="3"></td>

@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title>Proveedor Nuevo</title>
+<title th:text="'Nueva Zona desde el Cliente: ' + ${zona.cliente.nombreCliente}"></title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -28,32 +28,42 @@
 </head>
 
 <body>
-	<div th:replace="../static/plantillas/plantillasWeb::navAdmin"></div>
-	<div class="row">
-		<div class="col-12">
-			<div class="col-12"></div>
-			<div class="col-12">
-				<form class="form" th:action="@{/proveedorNuevo}" th:object="${proveedor}" method="POST">
-					<div class="form-group row">
-					<div class="col-1">
-							<label for="idProveedor">Id</label>	
-							<input readonly type="text" th:field="*{idProveedor}"  class="form-control " id="idProveedor"/>	
-						</div>		
-						<div class="col-2">
-							<label for="nombreProveedor">Nombre</label>	
-							<input type="text" th:field="*{nombreProveedor}" class="form-control" id="nombreProveedor"/>	
-						</div>			
-					</div>
-					<div class="form-group row">
-						<div class="col-2">
-							<input type="submit" value="Guardar" class="btn btn-info"/>
-						</div>
-						<div class="col-2" th:text="${titulo}"></div>
-					</div>
-				</form>
+	<div th:replace="plantillaNavs::navAdmin"></div>
+	<div class="row mt-2">
+		<div class="col-12 mt-2">
+			<div class="col-12 mt-2">
+				<h5 th:text="'Nueva zona de ' + ${zona.cliente.nombreCliente} "></h5>
 			</div>
+			<div class="col-12 mt-2 border-top border-dark">
+				<form class="form mt-2" th:action="@{/zonaNuevaCliente}"
+					th:object="${zona}" method="POST">
+					<div class="form-group row">
+						<div class="col-1">
+							<label for="idFranquicia">Id</label>
+							<input readonly type="text" th:field="*{idZona}" class="form-control " id="idZona" />
+						</div>
+						<div class="col-2">
+							<input type="hidden" th:field="*{cliente.idCliente}"id="clienteZona" />
+						</div>
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<label for="nombreZona">Nombre</label> <input type="text"
+								th:field="*{nombreZona}" class="form-control"
+								id="nombreZona" />
+						</div>
+					</div>
+			</div>
+			<div class="form-group row">
+				<div class="col-2">
+					<input type="submit" value="Guardar" class="btn btn-info" />
+				</div>
+			</div>
+			</form>
 		</div>
 	</div>
+	</div>
+
 </body>
 
 </html>

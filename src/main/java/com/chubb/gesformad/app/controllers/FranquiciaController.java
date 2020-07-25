@@ -8,43 +8,43 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Franquicia;
-import com.chubb.gesformad.app.models.entity.Proveedor;
-import com.chubb.gesformad.app.models.services.IProveedorService;
+import com.chubb.gesformad.app.models.entity.Cliente;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class FranquiciaController {
 
 	@Autowired
-	private IProveedorService proveedorService;
+	private IClienteService clienteService;
 
 	@GetMapping("/franquiciaConsulta")
 	public String franquiciaConsulta(Model model) {
-		model.addAttribute("franquicias", proveedorService.findAllFranquicias());
-		Proveedor proveedor = new Proveedor((long) 1, "Orange");
-		proveedorService.saveProveedor(proveedor);
+		model.addAttribute("franquicias", clienteService.findAllFranquicias());
+		Cliente cliente = new Cliente((long) 1, "Orange");
+		clienteService.saveCliente(cliente);
 		return "franquiciaConsulta";
 	}
 
 	@GetMapping("/franquiciaNueva")
 	public String franquiciaNueva(Model model) {
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
+		model.addAttribute("clientees", clienteService.findAllClientees());
 		Franquicia franquicia = new Franquicia();
 		model.addAttribute("franquicia", franquicia);
 		return "/franquiciaNueva";
 	}
 	
 	@PostMapping ("/franquiciaNueva") public String franquiciaCrea (Franquicia franquicia, Model model) {
-		proveedorService.saveFranquicia(franquicia);
+		clienteService.saveFranquicia(franquicia);
 		model.addAttribute("franquicia", franquicia); 
 		return "redirect:/franquiciaConsulta"; 
 	 }
 	
 	@GetMapping("/franquiciaNueva/{idFranquicia}")
 	public String franquiciaEdita (@PathVariable("idFranquicia") Long idFranquicia, Model model) {
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
+		model.addAttribute("clientees", clienteService.findAllClientees());
 		Franquicia franquicia = null;
 		if (idFranquicia > 0) {
-			franquicia = proveedorService.findOneFranquicia(idFranquicia); 
+			franquicia = clienteService.findOneFranquicia(idFranquicia); 
 			}
 		else { 
 			return "redirect:/franquiciaConsulta"; 
@@ -56,66 +56,66 @@ public class FranquiciaController {
 	@GetMapping("/eliminarFranquicia/{idFranquicia}")
 	public String franquiciaElimina(@PathVariable("idFranquicia") Long idFranquicia, Model model)
 	{
-	 proveedorService.deleteFranquicia(idFranquicia);
+	 clienteService.deleteFranquicia(idFranquicia);
 	 return "redirect:/franquiciaConsulta"; 
 	 }
 	
 	
 	//PROVEEDOR
 	
-	@GetMapping("/franquiciaNuevaProveedor/{idProveedor}")
-	public String franquiciaNuevaProveedor(@PathVariable(value = "idProveedor") Long idProveedor, Model model) {
-		Proveedor proveedor = proveedorService.findOneProveedor(idProveedor);
-			if (proveedor == null) {
-				return "redirect:/proveedorVer/" + idProveedor;
+	@GetMapping("/franquiciaNuevaCliente/{idCliente}")
+	public String franquiciaNuevaCliente(@PathVariable(value = "idCliente") Long idCliente, Model model) {
+		Cliente cliente = clienteService.findOneCliente(idCliente);
+			if (cliente == null) {
+				return "redirect:/clienteVer/" + idCliente;
 			}
 		Franquicia franquicia = new Franquicia();
-		franquicia.setProveedor(proveedor);
+		franquicia.setCliente(cliente);
 		model.addAttribute("franquicia", franquicia);
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
-		return "/franquiciaNuevaProveedor";
+		model.addAttribute("clientees", clienteService.findAllClientees());
+		return "/franquiciaNuevaCliente";
 	}
 
 
-	@PostMapping ("/franquiciaNuevaProveedor") public String franquiciaCreaEnProveedor (Franquicia franquicia, Model model) {
-		proveedorService.saveFranquicia(franquicia);
+	@PostMapping ("/franquiciaNuevaCliente") public String franquiciaCreaEnCliente (Franquicia franquicia, Model model) {
+		clienteService.saveFranquicia(franquicia);
 		model.addAttribute("franquicia", franquicia); 
-		long idProveedor = franquicia.getProveedor().getIdProveedor();
-		return "redirect:/proveedorVer/" + idProveedor; 
+		long idCliente = franquicia.getCliente().getIdCliente();
+		return "redirect:/clienteVer/" + idCliente; 
 	 }
 	
-	@GetMapping("/franquiciaEditaProveedor/{idFranquicia}/{idProveedor}")
-	public String franquiciaProveedorEditar (@PathVariable("idFranquicia") Long idFranquicia, @PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/franquiciaEditaCliente/{idFranquicia}/{idCliente}")
+	public String franquiciaClienteEditar (@PathVariable("idFranquicia") Long idFranquicia, @PathVariable("idCliente") Long idCliente, Model model) {
 			
-			Proveedor proveedor = null;
+			Cliente cliente = null;
 			
-			if (idProveedor > 0 ) {
-				proveedor = proveedorService.findOneProveedor(idProveedor);
+			if (idCliente > 0 ) {
+				cliente = clienteService.findOneCliente(idCliente);
 			}
 			else {
-				return "redirect:/verProveedor/{idProveedor}";
+				return "redirect:/verCliente/{idCliente}";
 			}
 			
 			Franquicia franquicia = null;
 			
 			if (idFranquicia > 0) {
-				franquicia = proveedorService.findOneFranquicia(idFranquicia);
-				franquicia.setProveedor(proveedor);
+				franquicia = clienteService.findOneFranquicia(idFranquicia);
+				franquicia.setCliente(cliente);
 			}
 			else { 
-				return "redirect:/verProveedor/{idProveedor}";
+				return "redirect:/verCliente/{idCliente}";
 				}
-			model.addAttribute("proveedores", proveedorService.findAllProveedores());
+			model.addAttribute("clientees", clienteService.findAllClientees());
 			model.addAttribute("franquicia", franquicia);
-			return "/franquiciaNuevaProveedor";	
+			return "/franquiciaNuevaCliente";	
 		}
 	
-	@GetMapping("/eliminarFranquiciaProveedor/{idFranquicia}")
-	public String franquiciaProveedorEliminar (@PathVariable("idFranquicia") Long idFranquicia, Model model) {
-		Franquicia franquicia = proveedorService.findOneFranquicia(idFranquicia);
-		long id = franquicia.getProveedor().getIdProveedor();
-		proveedorService.deleteFranquicia(idFranquicia);
-		return "redirect:/proveedorVer/" + id;
+	@GetMapping("/eliminarFranquiciaCliente/{idFranquicia}")
+	public String franquiciaClienteEliminar (@PathVariable("idFranquicia") Long idFranquicia, Model model) {
+		Franquicia franquicia = clienteService.findOneFranquicia(idFranquicia);
+		long id = franquicia.getCliente().getIdCliente();
+		clienteService.deleteFranquicia(idFranquicia);
+		return "redirect:/clienteVer/" + id;
 	}
 	
 

@@ -11,47 +11,47 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Zona;
-import com.chubb.gesformad.app.models.services.IProveedorService;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class ZonaController {
 	
 	@Autowired
-	private IProveedorService proveedorService;
+	private IClienteService clienteService;
 
 	@GetMapping("/zonaConsulta")
 	public String zonaConsulta (Model model) {
-		model.addAttribute("listazonas", proveedorService.findAllZonas());
+		model.addAttribute("listazonas", clienteService.findAllZonas());
 		return "/zonaConsulta";
 	}
 	
-	@GetMapping("/zonaConsulta/{idProveedor}")
-	public String zonaConsultaProveedor(@PathVariable(value = "idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/zonaConsulta/{idCliente}")
+	public String zonaConsultaCliente(@PathVariable(value = "idCliente") Long idCliente, Model model) {
 		
-		List <Zona> listaZonas =  proveedorService.findAllZonas();
-		List <Zona> listaZonaProveedor = new ArrayList<Zona>();
+		List <Zona> listaZonas =  clienteService.findAllZonas();
+		List <Zona> listaZonaCliente = new ArrayList<Zona>();
 			for(Zona i : listaZonas) {
-				if (idProveedor == i.getProveedor().getIdProveedor()) {
-					listaZonaProveedor.add(i);
+				if (idCliente == i.getCliente().getIdCliente()) {
+					listaZonaCliente.add(i);
 				}
 			}
-		model.addAttribute("listaZonaProveedor", listaZonaProveedor);
-		return "/proveedorVer";
+		model.addAttribute("listaZonaCliente", listaZonaCliente);
+		return "/clienteVer";
 	}
 	
 	@GetMapping("/zonaNueva")
 	public String zonaNueva (Model model) {
 		Zona zona = new Zona();
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
+		model.addAttribute("clientees", clienteService.findAllClientees());
 		model.addAttribute("zona", zona);
 		return "/zonaNueva";
 	}
 	
 	@PostMapping("/zonaNueva")
 	public String zonaCrear (Zona zona, Model model) {
-		proveedorService.saveZona(zona);
+		clienteService.saveZona(zona);
 		model.addAttribute("zona", zona);
 		return "redirect:/zonaConsulta";
 	}
@@ -62,7 +62,7 @@ public class ZonaController {
 		Zona zona = null;
 		
 		if (idZona > 0) {
-			zona = proveedorService.findOneZona(idZona);
+			zona = clienteService.findOneZona(idZona);
 		}
 		else { 
 			return "redirect:/zonaConsulta";
@@ -75,67 +75,67 @@ public class ZonaController {
 
 	@GetMapping("/eliminarZona/{idZona}")
 	public String zonaEliminar (@PathVariable("idZona") Long idZona, Model model) {
-		proveedorService.deleteZona(idZona);
+		clienteService.deleteZona(idZona);
 		return "redirect:/zonaConsulta";
 	}
 	
 	
 	//PROVEEDOR
-	@GetMapping("/zonaNuevaProveedor/{idProveedor}")
-	public String zonaNuevaProveedor(@PathVariable(value = "idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/zonaNuevaCliente/{idCliente}")
+	public String zonaNuevaCliente(@PathVariable(value = "idCliente") Long idCliente, Model model) {
 		
-		Proveedor proveedor = proveedorService.findOneProveedor(idProveedor);
-		model.addAttribute("zonas", proveedorService.findAllZonas());
-			if (proveedor == null) {
-				return "redirect:/proveedorVer/{idProveedor}";
+		Cliente cliente = clienteService.findOneCliente(idCliente);
+		model.addAttribute("zonas", clienteService.findAllZonas());
+			if (cliente == null) {
+				return "redirect:/clienteVer/{idCliente}";
 			}
 		Zona zona = new Zona();
-		zona.setProveedor(proveedor);
+		zona.setCliente(cliente);
 		model.addAttribute("zona", zona);
-		model.addAttribute("titulo", proveedor.getNombreProveedor());
-		return "/zonaNuevaProveedor";
+		model.addAttribute("titulo", cliente.getNombreCliente());
+		return "/zonaNuevaCliente";
 	}
 
-	@PostMapping ("/zonaNuevaProveedor")
-	public String zonaCreaEnProveedor (Zona zona, Model model) {
-		proveedorService.saveZona(zona);
+	@PostMapping ("/zonaNuevaCliente")
+	public String zonaCreaEnCliente (Zona zona, Model model) {
+		clienteService.saveZona(zona);
 		model.addAttribute("zona", zona); 	
-		long id = zona.getProveedor().getIdProveedor();
-		return "redirect:/proveedorVer/" + id;
+		long id = zona.getCliente().getIdCliente();
+		return "redirect:/clienteVer/" + id;
 	 }
 	
-	@GetMapping("/zonaNuevaProveedor/{idZona}/{idProveedor}")
-	public String zonaProveedorEditar (@PathVariable("idZona") Long idZona, @PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/zonaNuevaCliente/{idZona}/{idCliente}")
+	public String zonaClienteEditar (@PathVariable("idZona") Long idZona, @PathVariable("idCliente") Long idCliente, Model model) {
 		
-		Proveedor proveedor = null;
+		Cliente cliente = null;
 		
-		if (idProveedor > 0 ) {
-			proveedor = proveedorService.findOneProveedor(idProveedor);
+		if (idCliente > 0 ) {
+			cliente = clienteService.findOneCliente(idCliente);
 		}
 		else {
-			return "redirect:/proveedorVer/{idProveedor}";
+			return "redirect:/clienteVer/{idCliente}";
 		}
 		
 		Zona zona = null;
 		
 		if (idZona > 0) {
-			zona = proveedorService.findOneZona(idZona);
-			zona.setProveedor(proveedor);
+			zona = clienteService.findOneZona(idZona);
+			zona.setCliente(cliente);
 		}
 		else { 
-			return "redirect:/proveedorVer/{idProveedor}";
+			return "redirect:/clienteVer/{idCliente}";
 			}
 		
 		model.addAttribute("zona", zona);
-		return "/zonaNuevaProveedor";	
+		return "/zonaNuevaCliente";	
 	}
 	
-	@GetMapping("/eliminarZonaProveedor/{idZona}")
-	public String zonaProveedorEliminar (@PathVariable("idZona") Long idZona, Model model) {
-		Zona zona = proveedorService.findOneZona(idZona);
-		long id = zona.getProveedor().getIdProveedor();
-		proveedorService.deleteZona(idZona);
-		return "redirect:/proveedorVer/" + id;
+	@GetMapping("/eliminarZonaCliente/{idZona}")
+	public String zonaClienteEliminar (@PathVariable("idZona") Long idZona, Model model) {
+		Zona zona = clienteService.findOneZona(idZona);
+		long id = zona.getCliente().getIdCliente();
+		clienteService.deleteZona(idZona);
+		return "redirect:/clienteVer/" + id;
 	}
 	
 	

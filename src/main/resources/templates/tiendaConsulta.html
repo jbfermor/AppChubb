@@ -32,7 +32,7 @@
 	<div th:fragment="tiendaConsulta" class="container mt-3">
 		<div class="row">
 		<div class="col-12 mt-2">
-			<div class="alert alert-success">Para crear una tienda, hazlo desde su Proveedor o su Franquicia</div>
+			<div class="alert alert-success">Para crear una tienda, hazlo desde su Cliente o su Franquicia</div>
 		</div>
 			<div class="col-12 mt-2">
 				<table class="table table-striped table-sm">
@@ -40,7 +40,7 @@
 						<tr>
 							<th th:text="'Id'"></th>
 							<th th:text="'Nombre'"></th>
-							<th th:text="'Proveedor'"></th>
+							<th th:text="'Cliente'"></th>
 							<th th:text="'Zona'"></th>
 							<th th:text="'Franquicia'"></th>
 							<th th:text="'Acciones'" colspan="3" class="text-center"></th>
@@ -50,11 +50,11 @@
 						<tr th:each="tienda : ${tiendas}">
 							<td th:text="${tienda.idTienda}"></td>
 							<td th:text="${tienda.nombreTienda}"></td>
-							<td th:text="${tienda.franquicia.proveedor.nombreProveedor}"></td>
+							<td th:text="${tienda.franquicia.cliente.nombreCliente}"></td>
 							<td th:text="${tienda.zona.nombreZona}"></td>
 							<td th:text="${tienda.franquicia.nombreFranquicia}"></td>
 							<td><a class="nav-link badge badge-warning"
-								th:href="@{/tiendaEditaProveedor/} + ${tienda.idTienda} + '/' + ${tienda.franquicia.proveedor.idProveedor}">Editar</a></td>
+								th:href="@{/tiendaEditaCliente/} + ${tienda.idTienda} + '/' + ${tienda.franquicia.cliente.idCliente}">Editar</a></td>
 							<td><a class="nav-link badge badge-danger"
 								th:href="@{/eliminarTienda/} + ${tienda.idTienda}">Eliminar</a></td>
 							<td><a class="nav-link badge badge-info"

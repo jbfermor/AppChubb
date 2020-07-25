@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title>Proveedores</title>
+<title>Cliente Nuevo</title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -28,32 +28,30 @@
 </head>
 
 <body>
-	<div th:replace="/plantillaNavs::navAdmin"></div>
-	<div th:fragment="proveedorConsulta" class="container mt-3">
-		<div class="row mt-2">
-
-			<div class="col-6 mt-2">
-				<table class="table table-striped table-sm">
-					<thead class="thead-dark">
-						<tr>
-							<th>Id</th>
-							<th>Nombre</th>
-							<th>Acciones</th>
-						</tr>
-					</thead>
-					<tbody class="tbody-light align-items-center">
-						<tr th:each="proveedor : ${proveedores}">
-							<td th:text="${proveedor.idProveedor}"></td>
-							<td th:text="${proveedor.nombreProveedor}"></td>
-							<td><a th:href = "@{/proveedorVer/} + ${proveedor.idProveedor}"
-							class = "badge badge-info">Ver</a></td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
+	<div th:replace="/plantillaNavs::navAdminGuia"></div>
+	<div class="row">
+		<div class="col-12">
 			<div class="col-12"></div>
+			<div class="col-12">
+				<form class="form" th:action="@{/clienteInicial}" th:object="${cliente}" method="POST">
+					<div class="form-group row">
+					<div class="col-1">
+							<label for="idCliente">Id</label>	
+							<input readonly type="text" th:field="*{idCliente}"  class="form-control " id="idCliente"/>	
+						</div>		
+						<div class="col-2">
+							<label for="nombreCliente">Nombre</label>	
+							<input type="text" th:field="*{nombreCliente}" class="form-control" id="nombreCliente"/>	
+						</div>			
+					</div>
+					<div class="form-group row">
+						<div class="col-2">
+							<input type="submit" value="Guardar" class="btn btn-info"/>
+						</div>
+					</div>
+				</form>
+			</div>
 		</div>
-
 	</div>
 </body>
 

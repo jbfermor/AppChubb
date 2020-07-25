@@ -48,8 +48,8 @@ public class Campagna implements Serializable {
 	//FOREIGN
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name="id_proveedor", nullable = false)
-	private Proveedor proveedor;
+	@JoinColumn(name="id_cliente", nullable = false)
+	private Cliente cliente;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="id_estado_campagna", nullable = false)
@@ -103,12 +103,12 @@ public class Campagna implements Serializable {
 		this.dFinCampagna = dFinCampagna;
 	}
 
-	public Proveedor getProveedor() {
-		return proveedor;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	}
 
 	public EstadoCampagna getEstadoCampagna() {

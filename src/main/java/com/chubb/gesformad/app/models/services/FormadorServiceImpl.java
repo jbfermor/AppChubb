@@ -9,13 +9,13 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chubb.gesformad.app.models.dao.IComercialDao;
 import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
-import com.chubb.gesformad.app.models.dao.IProveedorDao;
+import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.IRolDao;
 import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Comercial;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.entity.Zona;
 
@@ -35,7 +35,7 @@ public class FormadorServiceImpl implements IFormadorService {
 	IRolDao rolDao;
 	
 	@Autowired
-	IProveedorDao proveedorDao;
+	IClienteDao clienteDao;
 	
 	@Autowired
 	IZonaDao zonaDao;
@@ -70,20 +70,20 @@ public class FormadorServiceImpl implements IFormadorService {
 	
 	@Override
 	@Transactional
-	public List<Proveedor> findAllProveedores() {
-		return (List<Proveedor>) proveedorDao.findAll();
+	public List<Cliente> findAllClientees() {
+		return (List<Cliente>) clienteDao.findAll();
 	}
 	
 	@Override
 	@Transactional
-	public Proveedor findOneProveedor(Long idProveedor) {
-		return proveedorDao.findById(idProveedor).orElse(null);
+	public Cliente findOneCliente(Long idCliente) {
+		return clienteDao.findById(idCliente).orElse(null);
 	}
 	
 	@Override
 	@Transactional
-	public void saveProveedor(Proveedor proveedor) {
-		proveedorDao.save(proveedor);
+	public void saveCliente(Cliente cliente) {
+		clienteDao.save(cliente);
 	}
 	
 	//ZONAS

@@ -14,7 +14,7 @@ import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
-import com.chubb.gesformad.app.models.entity.Proveedor;
+import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -28,9 +28,9 @@ public class FormadorController {
 		
 	@GetMapping("/formadorConsulta")
 	public String formadorConsulta (Model model) {
-		List <Proveedor> proveedores = formadorService.findAllProveedores();
+		List <Cliente> clientees = formadorService.findAllClientees();
 		List <Formador> formadores = formadorService.findAllFormadores();
-		model.addAttribute("proveedores", proveedores);
+		model.addAttribute("clientees", clientees);
 		model.addAttribute("formadores", formadores);
 		return "/formadorConsulta";
 	}
@@ -103,30 +103,30 @@ public class FormadorController {
 		
 		//ASIGNACIONES
 		
-		Proveedor proveedor = new Proveedor();
+		Cliente cliente = new Cliente();
 		Zona zona = new Zona();
 
 
 		
 		//LISTA DE PROVEEDORES
-		List <Proveedor> listaProveedores = formadorService.findAllProveedores();
-		List <Proveedor> listaProveedoresId = new ArrayList<Proveedor>();
-		for (Proveedor i:listaProveedores) {
+		List <Cliente> listaClientees = formadorService.findAllClientees();
+		List <Cliente> listaClienteesId = new ArrayList<Cliente>();
+		for (Cliente i:listaClientees) {
 			for (Formador j: i.getFormadores()) {
 				if (j.getIdFormador() == idFormador) {
-					listaProveedoresId.add(i);
+					listaClienteesId.add(i);
 				}
 			}
 		}
-		model.addAttribute("proveedores", listaProveedores);
-		model.addAttribute("proveedoresId", listaProveedoresId);
+		model.addAttribute("clientees", listaClientees);
+		model.addAttribute("clienteesId", listaClienteesId);
 		
 		
 		//LISTA DE ZONAS
 		List <Zona> listaZonasId = new ArrayList <Zona>();
 		List <Zona> listaZonasProv = new ArrayList <Zona>();
 		
-		for (Proveedor i : listaProveedoresId) {
+		for (Cliente i : listaClienteesId) {
 			listaZonasProv = i.getZonas();
 			for (Zona j : listaZonasProv) {
 				listaZonasId.add(j);
@@ -137,51 +137,51 @@ public class FormadorController {
 		model.addAttribute("zonasId", listaZonasId);
 		/*
 		//LISTA DE CAMPAÑAS
-		List <Campagna> listaCampagnas = proveedorService.findAllCampagnas();
+		List <Campagna> listaCampagnas = clienteService.findAllCampagnas();
 		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
 		for (Campagna i:listaCampagnas) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
+			if (i.getCliente().getIdCliente() == idCliente) {
 				listaCampagnasId.add(i);
 			}
 		}
 		model.addAttribute("campagnasId", listaCampagnasId);
 		
 		//LISTA DE FRANQUICIAS
-		List <Franquicia> listaFranquicias = proveedorService.findAllFranquicias();
+		List <Franquicia> listaFranquicias = clienteService.findAllFranquicias();
 		List <Franquicia> listaFranquiciasId = new ArrayList<Franquicia>();
 		for (Franquicia i:listaFranquicias) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
+			if (i.getCliente().getIdCliente() == idCliente) {
 				listaFranquiciasId.add(i);
 			}
 		}
 		model.addAttribute("franquiciasId", listaFranquiciasId);
 		
 		//LISTA DE TIENDAS
-		List <Tienda> listaTiendas = proveedorService.findAllTiendas();
+		List <Tienda> listaTiendas = clienteService.findAllTiendas();
 		List <Tienda> listaTiendasId = new ArrayList<Tienda>();
 		for (Tienda i:listaTiendas) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
+			if (i.getCliente().getIdCliente() == idCliente) {
 				listaTiendasId.add(i);
 			}
 		}
 		model.addAttribute("tiendasId", listaTiendasId);
 		
 		//LISTA DE FORMADORES
-		List <Formador> listaFormadores = proveedorService.findAllFormadores();
+		List <Formador> listaFormadores = clienteService.findAllFormadores();
 		List <Formador> listaFormadoresId = new ArrayList<Formador>();
 		for (Formador i:listaFormadores) {
-			for (Proveedor j:i.getProveedores())
-				if (j.getIdProveedor() == idProveedor) {
+			for (Cliente j:i.getClientees())
+				if (j.getIdCliente() == idCliente) {
 					listaFormadoresId.add(i);
 			}
 		}
 		model.addAttribute("formadoresId", listaFormadoresId);
 		
 		//LISTA DE FORMACIONES
-		List <Formacion> listaFormaciones = proveedorService.findAllFormaciones();
+		List <Formacion> listaFormaciones = clienteService.findAllFormaciones();
 		List <Formacion> listaFormacionesId = new ArrayList<Formacion>();
 		for (Formacion i:listaFormaciones) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
+			if (i.getCliente().getIdCliente() == idCliente) {
 				listaFormacionesId.add(i);
 			}
 		}
@@ -199,7 +199,7 @@ public class FormadorController {
 		}
 		
 		
-		model.addAttribute("proveedor", proveedor);
+		model.addAttribute("cliente", cliente);
 		model.addAttribute("zona", zona);
 		model.addAttribute("formador", formador);
 		
@@ -208,7 +208,7 @@ public class FormadorController {
 	}
 
 	@PostMapping("/formadorVer/{idFormador}")
-	public String formadorGuardaAsignacionProveedor (@PathVariable("idFormador") Long idFormador, Proveedor proveedor, Model model) {		
+	public String formadorGuardaAsignacionCliente (@PathVariable("idFormador") Long idFormador, Cliente cliente, Model model) {		
 		Formador formador = null;
 		
 			if (idFormador != null) {
@@ -217,10 +217,10 @@ public class FormadorController {
 			else{
 				return "redirect:/index";
 			}
-				Long id = proveedor.getIdProveedor();
-				Proveedor proveedorListo = formadorService.findOneProveedor(id);
-				if (formador.getProveedores().contains(proveedorListo) == false) {
-					formador.getProveedores().add(proveedorListo);
+				Long id = cliente.getIdCliente();
+				Cliente clienteListo = formadorService.findOneCliente(id);
+				if (formador.getClientees().contains(clienteListo) == false) {
+					formador.getClientees().add(clienteListo);
 					formadorService.saveFormador(formador);
 				}
 		model.addAttribute("formador", formador);
@@ -228,18 +228,18 @@ public class FormadorController {
 	}
 	
 	//ELIMINAR PROVEEDOR DE LA LISTA EN FORMADORES
-	@GetMapping("/formadorEliminarProveedor/{idFormador}/{idProveedor}")
-	public String eliminarProveedor(@PathVariable("idFormador") Long idFormador, @PathVariable("idProveedor") Long idProveedor, Model model) {
-		Proveedor proveedor = formadorService.findOneProveedor(idProveedor);
+	@GetMapping("/formadorEliminarCliente/{idFormador}/{idCliente}")
+	public String eliminarCliente(@PathVariable("idFormador") Long idFormador, @PathVariable("idCliente") Long idCliente, Model model) {
+		Cliente cliente = formadorService.findOneCliente(idCliente);
 		Formador formador = formadorService.findOneFormador(idFormador);
-		Proveedor provX = null;
-		for (Proveedor i : formador.getProveedores()) {
-			if (proveedor.getIdProveedor() == i.getIdProveedor()){
+		Cliente provX = null;
+		for (Cliente i : formador.getClientees()) {
+			if (cliente.getIdCliente() == i.getIdCliente()){
 				provX = i;
 			}
 		}
 		
-		formador.getProveedores().remove(provX);
+		formador.getClientees().remove(provX);
 		formadorService.saveFormador(formador);
 		return "redirect:/formadorVer/" + idFormador;			
 	}

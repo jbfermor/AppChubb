@@ -9,50 +9,50 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.EstadoCampagna;
-import com.chubb.gesformad.app.models.entity.Proveedor;
-import com.chubb.gesformad.app.models.services.IProveedorService;
+import com.chubb.gesformad.app.models.entity.Cliente;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class CampagnaController {
 
 	@Autowired
-	private IProveedorService proveedorService;
+	private IClienteService clienteService;
 
 	@GetMapping("/campagnaConsulta")
 	public String campagnaConsulta(Model model) {
 		//ELIMINAR EN VERSION FINAL	
-		Proveedor proveedor = new Proveedor((long) 1, "Orange");
+		Cliente cliente = new Cliente((long) 1, "Orange");
 		EstadoCampagna estadoUno = new EstadoCampagna((long) 1, "Activo");
-		proveedorService.saveProveedor(proveedor);
-		proveedorService.saveEstado(estadoUno);
+		clienteService.saveCliente(cliente);
+		clienteService.saveEstado(estadoUno);
 		//ELIMINAR EN VERSION FINAL
 		
-		model.addAttribute("campagnas", proveedorService.findAllCampagnas());
+		model.addAttribute("campagnas", clienteService.findAllCampagnas());
 		return "/campagnaConsulta";
 	}
 
 	@GetMapping("/campagnaNueva")
 	public String campagnaNueva(Model model) {
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
-		model.addAttribute("estados", proveedorService.findAllEstados());
+		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("estados", clienteService.findAllEstados());
 		Campagna campagna = new Campagna();
 		model.addAttribute("campagna", campagna);
 		return "/campagnaNueva";
 	}
 	
 	@PostMapping ("/campagnaNueva") public String campagnaCrea (Campagna campagna, Model model) {
-		proveedorService.saveCampagna(campagna);
+		clienteService.saveCampagna(campagna);
 		model.addAttribute("campagna", campagna); 
 		return "redirect:/campagnaConsulta"; 
 	 }
 	
 	@GetMapping("/campagnaNueva/{idCampagna}")
 	public String CampagnaEdita (@PathVariable("idCampagna") Long idCampagna, Model model) {
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
-		model.addAttribute("estados", proveedorService.findAllEstados());
+		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("estados", clienteService.findAllEstados());
 		Campagna campagna = null;
 		if (idCampagna > 0) {
-			campagna = proveedorService.findOneCampagna(idCampagna); 
+			campagna = clienteService.findOneCampagna(idCampagna); 
 			}
 		else { 
 			return "redirect:/campagnaConsulta"; 
@@ -65,66 +65,66 @@ public class CampagnaController {
 	
 	@GetMapping("/eliminarCampagna/{idCampagna}")
 	public String campagnaElimina(@PathVariable("idCampagna") Long idCampagna, Model model){
-	 proveedorService.deleteCampagna(idCampagna);
+	 clienteService.deleteCampagna(idCampagna);
 	 return "redirect:/campagnaConsulta"; 
 	 }
 	
 	//PROVEEDOR
-	@GetMapping("/campagnaNuevaProveedor/{idProveedor}")
-	public String campagnaNuevaProveedor(@PathVariable(value = "idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/campagnaNuevaCliente/{idCliente}")
+	public String campagnaNuevaCliente(@PathVariable(value = "idCliente") Long idCliente, Model model) {
 		
-		Proveedor proveedor = proveedorService.findOneProveedor(idProveedor);
-			if (proveedor == null) {
-				return "redirect:/proveedorVer/" + idProveedor;
+		Cliente cliente = clienteService.findOneCliente(idCliente);
+			if (cliente == null) {
+				return "redirect:/clienteVer/" + idCliente;
 			}
 		Campagna campagna = new Campagna();
-		campagna.setProveedor(proveedor);
+		campagna.setCliente(cliente);
 		model.addAttribute("campagna", campagna);
-		model.addAttribute("proveedores", proveedorService.findAllProveedores());
-		model.addAttribute("estados", proveedorService.findAllEstados());
-		return "/campagnaNuevaProveedor";
+		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("estados", clienteService.findAllEstados());
+		return "/campagnaNuevaCliente";
 	}
 
-	@PostMapping ("/campagnaNuevaProveedor") public String campagnaCreaEnProveedor (Campagna campagna, Model model) {
-		proveedorService.saveCampagna(campagna);
+	@PostMapping ("/campagnaNuevaCliente") public String campagnaCreaEnCliente (Campagna campagna, Model model) {
+		clienteService.saveCampagna(campagna);
 		model.addAttribute("campagna", campagna); 
-		long id = campagna.getProveedor().getIdProveedor();
-		return "redirect:/proveedorVer/" + id;
+		long id = campagna.getCliente().getIdCliente();
+		return "redirect:/clienteVer/" + id;
 	 }
 		
-	@GetMapping("/campagnaEditaProveedor/{idCampagna}/{idProveedor}")
-	public String campagnaProveedorEditar (@PathVariable("idCampagna") Long idCampagna, @PathVariable("idProveedor") Long idProveedor, Model model) {
+	@GetMapping("/campagnaEditaCliente/{idCampagna}/{idCliente}")
+	public String campagnaClienteEditar (@PathVariable("idCampagna") Long idCampagna, @PathVariable("idCliente") Long idCliente, Model model) {
 			
-			Proveedor proveedor = null;
+			Cliente cliente = null;
 			
-			if (idProveedor > 0 ) {
-				proveedor = proveedorService.findOneProveedor(idProveedor);
+			if (idCliente > 0 ) {
+				cliente = clienteService.findOneCliente(idCliente);
 			}
 			else {
-				return "redirect:/verProveedor/{idProveedor}";
+				return "redirect:/verCliente/{idCliente}";
 			}
 			
 			Campagna campagna = null;
 			
 			if (idCampagna > 0) {
-				campagna = proveedorService.findOneCampagna(idCampagna);
-				campagna.setProveedor(proveedor);
+				campagna = clienteService.findOneCampagna(idCampagna);
+				campagna.setCliente(cliente);
 			}
 			else { 
-				return "redirect:/verProveedor/{idProveedor}";
+				return "redirect:/verCliente/{idCliente}";
 				}
-			model.addAttribute("proveedores", proveedorService.findAllProveedores());
-			model.addAttribute("estados", proveedorService.findAllEstados());
+			model.addAttribute("clientees", clienteService.findAllClientees());
+			model.addAttribute("estados", clienteService.findAllEstados());
 			model.addAttribute("campagna", campagna);
-			return "/campagnaNuevaProveedor";	
+			return "/campagnaNuevaCliente";	
 		}
 	
-	@GetMapping("/eliminarCampagnaProveedor/{idCampagna}")
-	public String campagnaProveedorEliminar (@PathVariable("idCampagna") Long idCampagna, Model model) {
-		Campagna campagna = proveedorService.findOneCampagna(idCampagna);
-		long id = campagna.getProveedor().getIdProveedor();
-		proveedorService.deleteCampagna(idCampagna);
-		return "redirect:/proveedorVer/" + id;
+	@GetMapping("/eliminarCampagnaCliente/{idCampagna}")
+	public String campagnaClienteEliminar (@PathVariable("idCampagna") Long idCampagna, Model model) {
+		Campagna campagna = clienteService.findOneCampagna(idCampagna);
+		long id = campagna.getCliente().getIdCliente();
+		clienteService.deleteCampagna(idCampagna);
+		return "redirect:/clienteVer/" + id;
 	}
 
 }

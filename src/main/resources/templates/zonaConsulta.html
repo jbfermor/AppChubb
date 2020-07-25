@@ -40,7 +40,7 @@
 						<tr>
 							<th>Id</th>
 							<th>Nombre</th>
-							<th>Proveedor</th>
+							<th>Cliente</th>
 							<th colspan="2">Acciones</th>
 						</tr>
 					</thead>
@@ -48,7 +48,7 @@
 						<tr th:each="zona : ${listazonas}">
 							<td th:text="${zona.idZona}"></td>
 							<td th:text="${zona.nombreZona}"></td>
-							<td th:text="${zona.proveedor.nombreProveedor}"></td>
+							<td th:text="${zona.cliente.nombreCliente}"></td>
 							<td><a class="nav-link badge badge-warning" th:href="@{/zonaNueva/} + ${zona.idZona}">Editar</a></td>
 							<td><a class="nav-link badge badge-danger" th:href="@{/eliminarZona/} + ${zona.idZona}"}>Eliminar</a></td>
 						</tr>

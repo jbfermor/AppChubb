@@ -32,8 +32,8 @@ public class Zona implements Serializable {
 	//FOREIGN
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "id_proveedor")
-	private Proveedor proveedor;
+	@JoinColumn(name = "id_cliente")
+	private Cliente cliente;
 	
 	@ManyToMany (mappedBy = "zonas")
 	private List <Formador> formadores;
@@ -64,12 +64,12 @@ public class Zona implements Serializable {
 		this.nombreZona = nombreZona;
 	}
 		
-	public Proveedor getProveedor() {
-		return proveedor;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setProveedor(Proveedor proveedor) {
-		this.proveedor = proveedor;
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
 	
 	}
 

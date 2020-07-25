@@ -101,9 +101,10 @@ public class FormadorController {
 	@GetMapping("/formadorVer/{idFormador}")
 	public String verFormador (@PathVariable("idFormador") Long idFormador, Model model) {
 		
-		//ASIGNAR PROVEEDORES
+		//ASIGNACIONES
 		
 		Proveedor proveedor = new Proveedor();
+		Zona zona = new Zona();
 
 
 		
@@ -122,15 +123,18 @@ public class FormadorController {
 		
 		
 		//LISTA DE ZONAS
-		List <Zona> zonasDesdeProveedor = new ArrayList <Zona>();
+		List <Zona> listaZonasId = new ArrayList <Zona>();
+		List <Zona> listaZonasProv = new ArrayList <Zona>();
+		
 		for (Proveedor i : listaProveedoresId) {
-			List <Zona> zonaProv = i.getZonas();	
-			for (Zona j : zonaProv) {
-				zonasDesdeProveedor.add(j);
+			listaZonasProv = i.getZonas();
+			for (Zona j : listaZonasProv) {
+				listaZonasId.add(j);
 			}
 		}
 		
-		model.addAttribute("zonasId", listaProveedoresId);
+		
+		model.addAttribute("zonasId", listaZonasId);
 		/*
 		//LISTA DE CAMPAÑAS
 		List <Campagna> listaCampagnas = proveedorService.findAllCampagnas();
@@ -194,7 +198,9 @@ public class FormadorController {
 			return "redirect:/formadorVer/" + idFormador;	
 		}
 		
+		
 		model.addAttribute("proveedor", proveedor);
+		model.addAttribute("zona", zona);
 		model.addAttribute("formador", formador);
 		
 		return "/formadorVer";

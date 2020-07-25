@@ -11,11 +11,13 @@ import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
 import com.chubb.gesformad.app.models.dao.IProveedorDao;
 import com.chubb.gesformad.app.models.dao.IRolDao;
+import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Comercial;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Proveedor;
 import com.chubb.gesformad.app.models.entity.Rol;
+import com.chubb.gesformad.app.models.entity.Zona;
 
 @Service
 public class FormadorServiceImpl implements IFormadorService {
@@ -34,6 +36,9 @@ public class FormadorServiceImpl implements IFormadorService {
 	
 	@Autowired
 	IProveedorDao proveedorDao;
+	
+	@Autowired
+	IZonaDao zonaDao;
 
 	@Override
 	@Transactional
@@ -80,6 +85,27 @@ public class FormadorServiceImpl implements IFormadorService {
 	public void saveProveedor(Proveedor proveedor) {
 		proveedorDao.save(proveedor);
 	}
+	
+	//ZONAS
+	
+	@Override
+	@Transactional
+	public List<Zona> findAllZonas() {
+		return (List<Zona>) zonaDao.findAll();
+	}
+	
+	@Override
+	@Transactional
+	public Zona findOneZona(Long idZona) {
+		return zonaDao.findById(idZona).orElse(null);
+	}
+	
+	@Override
+	@Transactional
+	public void saveZona(Zona zona) {
+		zonaDao.save(zona);
+	}
+	
 	
 	 // FORMACIONES
 	

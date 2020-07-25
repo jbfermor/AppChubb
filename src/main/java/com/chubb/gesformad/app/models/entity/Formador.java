@@ -78,9 +78,6 @@ public class Formador implements Serializable {
 	@OneToMany(mappedBy = "formador" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	private List <Visita> visitas;
 	
-	@OneToMany (mappedBy = "formadores", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List <Zona> zonas;
-	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_rol")
 	Rol rol;
@@ -97,6 +94,13 @@ public class Formador implements Serializable {
 			joinColumns = @JoinColumn(name = "id_formador"),
 			inverseJoinColumns = @JoinColumn(name = "id_proveedor"))
 	private List <Proveedor> proveedores;
+	
+	@ManyToMany (fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			name = "formadores_zonas",
+			joinColumns = @JoinColumn(name = "id_formador"),
+			inverseJoinColumns = @JoinColumn(name = "id_zona"))
+	private List <Zona> zonas;
 	
 	
 	//CONSTRUCTORES
@@ -313,16 +317,6 @@ public class Formador implements Serializable {
 	}
 
 
-	public List<Zona> getZonas() {
-		return zonas;
-	}
-
-
-	public void setZonas(List<Zona> zonas) {
-		this.zonas = zonas;
-	}
-
-
 	public Rol getRol() {
 		return rol;
 	}
@@ -340,6 +334,14 @@ public class Formador implements Serializable {
 
 	public void setProveedores(List<Proveedor> proveedores) {
 		this.proveedores = proveedores;
+	}
+
+	public List<Zona> getZonas() {
+		return zonas;
+	}
+
+	public void setZonas(List<Zona> zonas) {
+		this.zonas = zonas;
 	}
 	
 	

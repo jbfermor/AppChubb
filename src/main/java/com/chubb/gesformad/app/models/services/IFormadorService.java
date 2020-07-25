@@ -7,6 +7,7 @@ import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Proveedor;
 import com.chubb.gesformad.app.models.entity.Rol;
+import com.chubb.gesformad.app.models.entity.Zona;
 
 public interface IFormadorService {
 	
@@ -18,6 +19,7 @@ public interface IFormadorService {
 	
 	public Formador findOneFormador (Long idFormador);
 	
+	
 	//PROVEEDORES
 	
 	public List <Proveedor> findAllProveedores();
@@ -25,6 +27,15 @@ public interface IFormadorService {
 	public Proveedor findOneProveedor(Long idProveedor);
 	
 	public void saveProveedor(Proveedor proveedor);
+	
+	
+	//ZONAS
+	
+	public List<Zona> findAllZonas();
+	
+	public Zona findOneZona(Long idZona);
+	
+	public void saveZona(Zona zona);
 	
 	
 	//FORMACIONES
@@ -39,6 +50,7 @@ public interface IFormadorService {
 	public List <Comercial> findAllComerciales();
 
 	public Formacion findOneComercial(Long idComercial);
+	
 	
 	//ROLES
 	

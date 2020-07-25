@@ -33,7 +33,7 @@ public class ClienteController {
 		}
 		
 		//PRIMEROS PASOS CON LA APLICACION
-		@GetMapping ("/clienteInicial")
+		@GetMapping ("clienteInicial")
 		public String clienteInicialNuevo (Model model) {
 			Cliente cliente = new Cliente();
 			model.addAttribute("cliente", cliente);

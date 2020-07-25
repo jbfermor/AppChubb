@@ -28,7 +28,7 @@ public class CampagnaController {
 		//ELIMINAR EN VERSION FINAL
 		
 		model.addAttribute("campagnas", clienteService.findAllCampagnas());
-		return "/campagnaConsulta";
+		return "campagnaConsulta";
 	}
 
 	@GetMapping("/campagnaNueva")
@@ -37,7 +37,7 @@ public class CampagnaController {
 		model.addAttribute("estados", clienteService.findAllEstados());
 		Campagna campagna = new Campagna();
 		model.addAttribute("campagna", campagna);
-		return "/campagnaNueva";
+		return "campagnaNueva";
 	}
 	
 	@PostMapping ("/campagnaNueva") public String campagnaCrea (Campagna campagna, Model model) {
@@ -58,7 +58,7 @@ public class CampagnaController {
 			return "redirect:/campagnaConsulta"; 
 			}
 		model.addAttribute("campagna", campagna);
-		return "/campagnaNueva"; 
+		return "campagnaNueva"; 
 		}
 	
 
@@ -82,7 +82,7 @@ public class CampagnaController {
 		model.addAttribute("campagna", campagna);
 		model.addAttribute("clientees", clienteService.findAllClientees());
 		model.addAttribute("estados", clienteService.findAllEstados());
-		return "/campagnaNuevaCliente";
+		return "campagnaNuevaCliente";
 	}
 
 	@PostMapping ("/campagnaNuevaCliente") public String campagnaCreaEnCliente (Campagna campagna, Model model) {
@@ -116,7 +116,7 @@ public class CampagnaController {
 			model.addAttribute("clientees", clienteService.findAllClientees());
 			model.addAttribute("estados", clienteService.findAllEstados());
 			model.addAttribute("campagna", campagna);
-			return "/campagnaNuevaCliente";	
+			return "campagnaNuevaCliente";	
 		}
 	
 	@GetMapping("/eliminarCampagnaCliente/{idCampagna}")

@@ -18,7 +18,7 @@ public class IndexController {
 	@Autowired
 	IFormadorService formadorService;
 		
-	@GetMapping({"/index", "", "/"})
+	@GetMapping({"/index", ""})
 	public String index (Model model) {
 		List <Proveedor> proveedores = formadorService.findAllProveedores();
 		List <Formador> formadores = formadorService.findAllFormadores();

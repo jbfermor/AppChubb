@@ -10,7 +10,7 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.chubb.gesformad.app</groupId>
-	<artifactId>AppChubb</artifactId>
+	<artifactId>AppChubbRelease</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AppChubb</name>
 	<description>Aplicación de gestión de formadores</description>
@@ -24,8 +24,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
-		  <!-- In-Memory database used for local development & testing -->
+        
+    <!--DEPNDENCIAS HEROKU-->
+
+    <!-- In-Memory database used for local development & testing -->
     <dependency>
         <groupId>com.h2database</groupId>
         <artifactId>h2</artifactId>
@@ -44,7 +46,9 @@
         <artifactId>postgresql</artifactId>
         <version>42.2.2</version>
     </dependency>
-		
+        
+<!--DEPNDENCIAS HEROKU-->
+        
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>

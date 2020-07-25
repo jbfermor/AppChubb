@@ -1,6 +1,7 @@
 package com.chubb.gesformad.app.models.entity;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
@@ -33,9 +35,8 @@ public class Zona implements Serializable {
 	@JoinColumn(name = "id_proveedor")
 	private Proveedor proveedor;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "nif_formador")
-	private Formador formadores;
+	@ManyToMany (mappedBy = "zonas")
+	private List <Formador> formadores;
 	
 	//Constructores
 	public Zona() {}
@@ -69,15 +70,14 @@ public class Zona implements Serializable {
 
 	public void setProveedor(Proveedor proveedor) {
 		this.proveedor = proveedor;
-		
-		
+	
 	}
 
-	public Formador getFormadores() {
+	public List<Formador> getFormadores() {
 		return formadores;
 	}
 
-	public void setFormadores(Formador formadores) {
+	public void setFormadores(List<Formador> formadores) {
 		this.formadores = formadores;
 	}
 

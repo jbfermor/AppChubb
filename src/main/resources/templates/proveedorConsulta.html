@@ -38,12 +38,15 @@
 						<tr>
 							<th>Id</th>
 							<th>Nombre</th>
+							<th>Acciones</th>
 						</tr>
 					</thead>
 					<tbody class="tbody-light align-items-center">
 						<tr th:each="proveedor : ${proveedores}">
 							<td th:text="${proveedor.idProveedor}"></td>
 							<td th:text="${proveedor.nombreProveedor}"></td>
+							<td><a th:href = "@{/proveedorVer/} + ${proveedor.idProveedor}"
+							class = "badge badge-info">Ver</a></td>
 						</tr>
 					</tbody>
 				</table>

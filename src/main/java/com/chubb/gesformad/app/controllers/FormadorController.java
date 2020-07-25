@@ -120,17 +120,18 @@ public class FormadorController {
 		model.addAttribute("proveedores", listaProveedores);
 		model.addAttribute("proveedoresId", listaProveedoresId);
 		
-		/*
+		
 		//LISTA DE ZONAS
-		List <Zona> listaZonas = formadorService.;
-		List <Zona> listaZonasId = new ArrayList<Zona>();
-		for (Zona i:listaZonas) {
-			if (i.getProveedor().getIdProveedor() == idProveedor) {
-				listaZonasId.add(i);
+		List <Zona> zonasDesdeProveedor = new ArrayList <Zona>();
+		for (Proveedor i : listaProveedoresId) {
+			List <Zona> zonaProv = i.getZonas();	
+			for (Zona j : zonaProv) {
+				zonasDesdeProveedor.add(j);
 			}
 		}
-		model.addAttribute("zonasId", listaZonasId);
 		
+		model.addAttribute("zonasId", listaProveedoresId);
+		/*
 		//LISTA DE CAMPAÑAS
 		List <Campagna> listaCampagnas = proveedorService.findAllCampagnas();
 		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();

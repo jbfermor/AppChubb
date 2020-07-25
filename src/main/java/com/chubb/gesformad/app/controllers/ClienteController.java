@@ -40,7 +40,7 @@ public class ClienteController {
 			return "clienteInicial";
 		}
 		
-		@PostMapping ("/clienteInicial")
+		@PostMapping ("clienteInicial")
 		public String creaClienteInicial (Cliente cliente, Model model) {
 			clienteService.saveCliente(cliente);
 			model.addAttribute("cliente", cliente);

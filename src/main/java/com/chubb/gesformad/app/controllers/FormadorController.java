@@ -28,9 +28,9 @@ public class FormadorController {
 		
 	@GetMapping("/formadorConsulta")
 	public String formadorConsulta (Model model) {
-		List <Cliente> clientees = formadorService.findAllClientees();
+		List <Cliente> clientes = formadorService.findAllClientes();
 		List <Formador> formadores = formadorService.findAllFormadores();
-		model.addAttribute("clientees", clientees);
+		model.addAttribute("clientes", clientes);
 		model.addAttribute("formadores", formadores);
 		return "/formadorConsulta";
 	}
@@ -109,24 +109,24 @@ public class FormadorController {
 
 		
 		//LISTA DE PROVEEDORES
-		List <Cliente> listaClientees = formadorService.findAllClientees();
-		List <Cliente> listaClienteesId = new ArrayList<Cliente>();
-		for (Cliente i:listaClientees) {
+		List <Cliente> listaClientes = formadorService.findAllClientes();
+		List <Cliente> listaClientesId = new ArrayList<Cliente>();
+		for (Cliente i:listaClientes) {
 			for (Formador j: i.getFormadores()) {
 				if (j.getIdFormador() == idFormador) {
-					listaClienteesId.add(i);
+					listaClientesId.add(i);
 				}
 			}
 		}
-		model.addAttribute("clientees", listaClientees);
-		model.addAttribute("clienteesId", listaClienteesId);
+		model.addAttribute("clientes", listaClientes);
+		model.addAttribute("clientesId", listaClientesId);
 		
 		
 		//LISTA DE ZONAS
 		List <Zona> listaZonasId = new ArrayList <Zona>();
 		List <Zona> listaZonasProv = new ArrayList <Zona>();
 		
-		for (Cliente i : listaClienteesId) {
+		for (Cliente i : listaClientesId) {
 			listaZonasProv = i.getZonas();
 			for (Zona j : listaZonasProv) {
 				listaZonasId.add(j);
@@ -170,7 +170,7 @@ public class FormadorController {
 		List <Formador> listaFormadores = clienteService.findAllFormadores();
 		List <Formador> listaFormadoresId = new ArrayList<Formador>();
 		for (Formador i:listaFormadores) {
-			for (Cliente j:i.getClientees())
+			for (Cliente j:i.getClientes())
 				if (j.getIdCliente() == idCliente) {
 					listaFormadoresId.add(i);
 			}
@@ -219,8 +219,8 @@ public class FormadorController {
 			}
 				Long id = cliente.getIdCliente();
 				Cliente clienteListo = formadorService.findOneCliente(id);
-				if (formador.getClientees().contains(clienteListo) == false) {
-					formador.getClientees().add(clienteListo);
+				if (formador.getClientes().contains(clienteListo) == false) {
+					formador.getClientes().add(clienteListo);
 					formadorService.saveFormador(formador);
 				}
 		model.addAttribute("formador", formador);
@@ -233,13 +233,13 @@ public class FormadorController {
 		Cliente cliente = formadorService.findOneCliente(idCliente);
 		Formador formador = formadorService.findOneFormador(idFormador);
 		Cliente provX = null;
-		for (Cliente i : formador.getClientees()) {
+		for (Cliente i : formador.getClientes()) {
 			if (cliente.getIdCliente() == i.getIdCliente()){
 				provX = i;
 			}
 		}
 		
-		formador.getClientees().remove(provX);
+		formador.getClientes().remove(provX);
 		formadorService.saveFormador(formador);
 		return "redirect:/formadorVer/" + idFormador;			
 	}

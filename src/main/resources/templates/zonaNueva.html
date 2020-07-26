@@ -45,8 +45,8 @@
 						</div>	
 						<div class="col-4">
 							<label for="clienteZona">Cliente</label>
-							 <select th:field="*{cliente.idCliente}" class="form-control" id="selectClientees">
-								<option th:each="cliente:${clientees}"
+							 <select th:field="*{cliente.idCliente}" class="form-control" id="selectClientes">
+								<option th:each="cliente:${clientes}"
 									th:text="${cliente.nombreCliente}"
 									th:value="${cliente.idCliente}" 
 									th:selected="${cliente.idCliente == zona.cliente.idCliente}"></option>

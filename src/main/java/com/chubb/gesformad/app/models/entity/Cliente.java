@@ -47,7 +47,7 @@ public class Cliente implements Serializable {
 	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Formacion> formaciones;
 	
-	@ManyToMany (mappedBy = "clientees")
+	@ManyToMany (mappedBy = "clientes")
 	private List <Formador> formadores;
 	
 	//CONSTRUCTORES

@@ -22,7 +22,7 @@ public interface IFormadorService {
 	
 	//PROVEEDORES
 	
-	public List <Cliente> findAllClientees();
+	public List <Cliente> findAllClientes();
 	
 	public Cliente findOneCliente(Long idCliente);
 	

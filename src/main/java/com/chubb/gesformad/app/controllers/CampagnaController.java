@@ -20,20 +20,13 @@ public class CampagnaController {
 
 	@GetMapping("/campagnaConsulta")
 	public String campagnaConsulta(Model model) {
-		//ELIMINAR EN VERSION FINAL	
-		Cliente cliente = new Cliente((long) 1, "Orange");
-		EstadoCampagna estadoUno = new EstadoCampagna((long) 1, "Activo");
-		clienteService.saveCliente(cliente);
-		clienteService.saveEstado(estadoUno);
-		//ELIMINAR EN VERSION FINAL
-		
 		model.addAttribute("campagnas", clienteService.findAllCampagnas());
 		return "campagnaConsulta";
 	}
 
 	@GetMapping("/campagnaNueva")
 	public String campagnaNueva(Model model) {
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		model.addAttribute("estados", clienteService.findAllEstados());
 		Campagna campagna = new Campagna();
 		model.addAttribute("campagna", campagna);
@@ -48,7 +41,7 @@ public class CampagnaController {
 	
 	@GetMapping("/campagnaNueva/{idCampagna}")
 	public String CampagnaEdita (@PathVariable("idCampagna") Long idCampagna, Model model) {
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		model.addAttribute("estados", clienteService.findAllEstados());
 		Campagna campagna = null;
 		if (idCampagna > 0) {
@@ -80,7 +73,7 @@ public class CampagnaController {
 		Campagna campagna = new Campagna();
 		campagna.setCliente(cliente);
 		model.addAttribute("campagna", campagna);
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		model.addAttribute("estados", clienteService.findAllEstados());
 		return "campagnaNuevaCliente";
 	}
@@ -113,7 +106,7 @@ public class CampagnaController {
 			else { 
 				return "redirect:/verCliente/{idCliente}";
 				}
-			model.addAttribute("clientees", clienteService.findAllClientees());
+			model.addAttribute("clientes", clienteService.findAllClientes());
 			model.addAttribute("estados", clienteService.findAllEstados());
 			model.addAttribute("campagna", campagna);
 			return "campagnaNuevaCliente";	

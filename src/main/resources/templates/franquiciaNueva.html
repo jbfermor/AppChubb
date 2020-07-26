@@ -50,7 +50,7 @@
 							<label for="clienteFranquicia">Cliente</label> <select
 								th:field="*{cliente.idCliente}" class="form-control">
 								<option th:value="''" th:text="Select"></option>
-								<option th:each="cliente:${clientees}"
+								<option th:each="cliente:${clientes}"
 									th:text="${cliente.nombreCliente}"
 									th:value="${cliente.idCliente}">
 								</option>

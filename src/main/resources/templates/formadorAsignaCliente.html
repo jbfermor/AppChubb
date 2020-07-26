@@ -41,7 +41,7 @@
 						<div class="col-4 mt-2">
 							<select id="clienteFormador" class="form-control"
 								th:field="*{idCliente}">
-								<option th:each="cliente:${clientees}"
+								<option th:each="cliente:${clientes}"
 									th:text="${cliente.nombreCliente}"
 									th:value="${cliente.idCliente}"></option>
 							</select>

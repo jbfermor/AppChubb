@@ -37,7 +37,7 @@
 		</div>
 		<div class="row mt-2">
 			<div class="col-12 mt-2">
-				<div th:if="${#lists.isEmpty(clienteesId)}"
+				<div th:if="${#lists.isEmpty(clientesId)}"
 					th:text="${'No hay asignado ningún cliente'}"
 					class="alert alert-danger"></div>
 				<div th:if="${#lists.isEmpty(zonasId)}"
@@ -79,9 +79,9 @@
 			<ul class="nav nav-tabs mt-2" id="formadorTab" role="tablist">
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="clienteesFormador-tab" data-toggle="tab"
-					href="#clienteesFormador" role="tab"
-					aria-controls="clienteesFormador" aria-selected="false">Clientees</a></li>
+					id="clientesFormador-tab" data-toggle="tab"
+					href="#clientesFormador" role="tab"
+					aria-controls="clientesFormador" aria-selected="false">Clientes</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
 					id="zonasFormador-tab" data-toggle="tab" href="#zonasFormador"
@@ -107,8 +107,8 @@
 			<div class="tab-content" id="formadorTabContent">
 
 				<!-- TAB-PROVEEDORES -->
-				<div class="tab-pane fade show active" id="clienteesFormador"
-					role="tabpanel" aria-labelledby="clienteesFormador-tab">
+				<div class="tab-pane fade show active" id="clientesFormador"
+					role="tabpanel" aria-labelledby="clientesFormador-tab">
 					<form th:action="@{/formadorVer/} + ${formador.idFormador}"
 						th:object="${cliente}" th:method="POST">
 						<div class="form-row mt-2">
@@ -116,7 +116,7 @@
 							<div class="col-4 mt-2">
 								<select id="clienteFormador" class="form-control"
 									th:field="*{idCliente}">
-									<option th:each="cliente:${clientees}"
+									<option th:each="cliente:${clientes}"
 										th:text="${cliente.nombreCliente}"
 										th:value="${cliente.idCliente}"></option>
 								</select>
@@ -138,7 +138,7 @@
 									</tr>
 								</thead>
 								<tbody class="tbody-light align-items-center">
-									<tr th:each="cliente : ${clienteesId}">
+									<tr th:each="cliente : ${clientesId}">
 										<td th:text="${cliente.nombreCliente}"></td>
 										<td><a class="badge badge-danger"
 											th:href="@{/formadorEliminarCliente/} + ${idFormador} + '/' + ${cliente.idCliente}"

@@ -27,7 +27,7 @@ public class FranquiciaController {
 
 	@GetMapping("/franquiciaNueva")
 	public String franquiciaNueva(Model model) {
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		Franquicia franquicia = new Franquicia();
 		model.addAttribute("franquicia", franquicia);
 		return "/franquiciaNueva";
@@ -41,7 +41,7 @@ public class FranquiciaController {
 	
 	@GetMapping("/franquiciaNueva/{idFranquicia}")
 	public String franquiciaEdita (@PathVariable("idFranquicia") Long idFranquicia, Model model) {
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		Franquicia franquicia = null;
 		if (idFranquicia > 0) {
 			franquicia = clienteService.findOneFranquicia(idFranquicia); 
@@ -72,7 +72,7 @@ public class FranquiciaController {
 		Franquicia franquicia = new Franquicia();
 		franquicia.setCliente(cliente);
 		model.addAttribute("franquicia", franquicia);
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		return "/franquiciaNuevaCliente";
 	}
 
@@ -105,7 +105,7 @@ public class FranquiciaController {
 			else { 
 				return "redirect:/verCliente/{idCliente}";
 				}
-			model.addAttribute("clientees", clienteService.findAllClientees());
+			model.addAttribute("clientes", clienteService.findAllClientes());
 			model.addAttribute("franquicia", franquicia);
 			return "/franquiciaNuevaCliente";	
 		}

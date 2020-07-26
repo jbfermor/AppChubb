@@ -4,7 +4,7 @@
 <head>
 <meta charset="utf-8" />
 
-<title>Clientees</title>
+<title>Clientes</title>
 
 <!-- CSS Bootstrap -->
 <link rel="stylesheet"
@@ -42,7 +42,7 @@
 						</tr>
 					</thead>
 					<tbody class="tbody-light align-items-center">
-						<tr th:each="cliente : ${clientees}">
+						<tr th:each="cliente : ${clientes}">
 							<td th:text="${cliente.idCliente}"></td>
 							<td th:text="${cliente.nombreCliente}"></td>
 							<td><a th:href = "@{/clienteVer/} + ${cliente.idCliente}"

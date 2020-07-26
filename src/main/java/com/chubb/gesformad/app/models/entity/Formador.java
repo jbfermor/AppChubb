@@ -90,10 +90,10 @@ public class Formador implements Serializable {
 	
 	@ManyToMany (fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
-			name = "formadores_clientees",
+			name = "formadores_clientes",
 			joinColumns = @JoinColumn(name = "id_formador"),
 			inverseJoinColumns = @JoinColumn(name = "id_cliente"))
-	private List <Cliente> clientees;
+	private List <Cliente> clientes;
 	
 	@ManyToMany (fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
@@ -111,7 +111,7 @@ public class Formador implements Serializable {
 			String ap2Formador, String direccionFormador, int cpFormador, String localidadFormador,
 			String provinciaFormador, String tel1Formador, String tel2Formador, String mail1Formador,
 			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, List<Zona> zonas, Rol rol,
-			List<Formacion> formaciones, List<Comercial> comerciales, List<Cliente> clientees) {
+			List<Formacion> formaciones, List<Comercial> comerciales, List<Cliente> clientes) {
 		this.idFormador = idFormador;
 		this.nifFormador = nifFormador;
 		this.passFormador = passFormador;
@@ -132,7 +132,7 @@ public class Formador implements Serializable {
 		this.rol = rol;
 		this.formaciones = formaciones;
 		this.comerciales = comerciales;
-		this.clientees = clientees;
+		this.clientes = clientes;
 	}
 
 
@@ -327,13 +327,13 @@ public class Formador implements Serializable {
 	}
 
 
-	public List<Cliente> getClientees() {
-		return clientees;
+	public List<Cliente> getClientes() {
+		return clientes;
 	}
 
 
-	public void setClientees(List<Cliente> clientees) {
-		this.clientees = clientees;
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public List<Zona> getZonas() {

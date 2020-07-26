@@ -70,7 +70,7 @@ public class FormadorServiceImpl implements IFormadorService {
 	
 	@Override
 	@Transactional
-	public List<Cliente> findAllClientees() {
+	public List<Cliente> findAllClientes() {
 		return (List<Cliente>) clienteDao.findAll();
 	}
 	

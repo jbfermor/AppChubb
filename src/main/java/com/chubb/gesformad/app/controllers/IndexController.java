@@ -20,7 +20,7 @@ public class IndexController {
 		
 	@GetMapping({"/index", "", "/"})
 	public String index (Model model) {
-		List <Cliente> clientees = formadorService.findAllClientees();
+		List <Cliente> clientes = formadorService.findAllClientes();
 		List <Formador> formadores = formadorService.findAllFormadores();
 		List <Rol> roles = formadorService.findAllRoles();
 			if (roles.isEmpty()){
@@ -32,16 +32,16 @@ public class IndexController {
 			
 		int segInicio = 0;
 		
-		if (clientees.size() > 0 && formadores.isEmpty()) {
+		if (clientes.size() > 0 && formadores.isEmpty()) {
 			segInicio = 1;
 		}
 		
-		if (clientees.size() > 0 && formadores.size() > 0) {
+		if (clientes.size() > 0 && formadores.size() > 0) {
 			segInicio = 2;
 		}
 
 		model.addAttribute("segInicio", segInicio);
-		model.addAttribute("clientees", clientees);
+		model.addAttribute("clientes", clientes);
 		model.addAttribute("formadores", formadores);
 		return "index";
 	}

@@ -13,7 +13,7 @@ import com.chubb.gesformad.app.models.entity.Zona;
 
 public interface IClienteService {
 
-	public List <Cliente> findAllClientees();
+	public List <Cliente> findAllClientes();
 	
 	public void saveCliente (Cliente cliente);
 	

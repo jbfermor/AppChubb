@@ -44,7 +44,7 @@ public class ZonaController {
 	@GetMapping("/zonaNueva")
 	public String zonaNueva (Model model) {
 		Zona zona = new Zona();
-		model.addAttribute("clientees", clienteService.findAllClientees());
+		model.addAttribute("clientes", clienteService.findAllClientes());
 		model.addAttribute("zona", zona);
 		return "/zonaNueva";
 	}

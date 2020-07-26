@@ -156,7 +156,7 @@
 					<div class="container mt-3">
 						<div class="row">
 							<div class="col-12">
-								<form th:action="@{/formador/} + ${formador.idFormador}"
+								<form th:action="@{/formador/} + ${formador.idFormador} + '/zona'"
 									th:object="${zona}" th:method="POST">
 									<div class="form-row mt-2">
 
@@ -184,7 +184,7 @@
 										</tr>
 									</thead>
 									<tbody class="tbody-light align-items-center">
-										<tr th:each="zona : ${zonasId}">
+										<tr th:each="zona : ${zonasAsignadas}">
 											<td th:text="${zona.nombreZona}"></td>
 											<td><a class="nav-link badge badge-warning"
 												th:href="@{/zonaNuevaFormador/} + ${zona.idZona} + ${'/'} + ${formador.idFormador}">Editar</a></td>

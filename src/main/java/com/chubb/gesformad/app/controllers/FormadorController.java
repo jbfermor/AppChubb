@@ -92,9 +92,6 @@ public class FormadorController {
 		return "redirect:/index";
 	}
 	
-	//PROVEEDOR
-	
-	
 	
 	//VER
 	
@@ -105,7 +102,6 @@ public class FormadorController {
 		
 		Cliente cliente = new Cliente();
 		Zona zona = new Zona();
-
 
 		
 		//LISTA DE PROVEEDORES
@@ -124,17 +120,33 @@ public class FormadorController {
 		
 		//LISTA DE ZONAS
 		List <Zona> listaZonasId = new ArrayList <Zona>();
-		List <Zona> listaZonasProv = new ArrayList <Zona>();
+		List <Zona> listaZonasCli = new ArrayList <Zona>();
+		
 		
 		for (Cliente i : listaClientesId) {
-			listaZonasProv = i.getZonas();
-			for (Zona j : listaZonasProv) {
+			listaZonasCli = i.getZonas();
+			for (Zona j : listaZonasCli) {
 				listaZonasId.add(j);
 			}
 		}
 		
+			//ZONAS ASIGNADAS
+		List <Zona> listaZonasSelec = new ArrayList <Zona>();
+		for (Zona k : listaZonasCli) {
+			for(Formador l : k.getFormadores()) {
+				if (l.getIdFormador() == idFormador) {
+					listaZonasSelec.add(k);
+				}
+			}
+		}
 		
+		
+		model.addAttribute("zona", zona);
+		model.addAttribute("zonasAsignadas", listaZonasSelec);				
 		model.addAttribute("zonasId", listaZonasId);
+		
+			//zonas 
+		
 		/*
 		//LISTA DE CAMPAÑAS
 		List <Campagna> listaCampagnas = clienteService.findAllCampagnas();
@@ -217,14 +229,40 @@ public class FormadorController {
 			else{
 				return "redirect:/index";
 			}
-				Long id = cliente.getIdCliente();
-				Cliente clienteListo = formadorService.findOneCliente(id);
+				//asignación cliente
+				Long idCl = cliente.getIdCliente();
+				Cliente clienteListo = formadorService.findOneCliente(idCl);
 				if (formador.getClientes().contains(clienteListo) == false) {
 					formador.getClientes().add(clienteListo);
 					formadorService.saveFormador(formador);
 				}
+				
 		model.addAttribute("formador", formador);
 		return "redirect:/formadorVer/" + idFormador;
+	
+	}
+	
+	@PostMapping("/formadorVer/{idFormador}/zona")
+	public String formadorGuardaAsignacionZona (@PathVariable("idFormador") Long idFormador, Zona zona, Model model) {		
+		Formador formador = null;
+		
+			if (idFormador != null) {
+				 formador = formadorService.findOneFormador(idFormador);
+			}
+			else{
+				return "redirect:/index";
+			}
+				//asignación zona
+				Long idZn = zona.getIdZona();
+				Zona zonaLista = formadorService.findOneZona(idZn);
+				if (formador.getZonas().contains(zonaLista) == false) {
+					formador.getZonas().add(zonaLista);
+					formadorService.saveFormador(formador);
+				}
+				
+		model.addAttribute("formador", formador);
+		return "redirect:/formadorVer/" + idFormador;
+	
 	}
 	
 	//ELIMINAR PROVEEDOR DE LA LISTA EN FORMADORES

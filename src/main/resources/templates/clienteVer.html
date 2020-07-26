@@ -54,7 +54,7 @@
 		<div class="row mt-2">
 			<div class="col-4 mt-2">
 				<a th:href="@{/index}" class="btn btn-success">Volver a Inicio</a>
-			</div>					
+			</div>
 		</div>
 
 		<div class="row mt-2">
@@ -62,10 +62,10 @@
 				<h5>Datos del cliente</h5>
 			</div>
 			<div class="col-12 mt-2">
-			<a class="btn btn-warning rounded"
-				th:href="@{/clienteNuevo/} + ${cliente.idCliente}">Editar</a>
-			<a class="btn btn-danger rounded"
-				th:href="@{/clienteEliminar/} + ${cliente.idCliente}"}>Eliminar</a>
+				<a class="btn btn-warning rounded"
+					th:href="@{/clienteNuevo/} + ${cliente.idCliente}">Editar</a> <a
+					class="btn btn-danger rounded"
+					th:href="@{/clienteEliminar/} + ${cliente.idCliente}"}>Eliminar</a>
 			</div>
 		</div>
 
@@ -79,9 +79,8 @@
 					aria-selected="true">Zonas</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="campagnaCliente-tab" data-toggle="tab"
-					href="#campagnaCliente" role="tab"
-					aria-controls="campagnaCliente" aria-selected="false">Campañas</a></li>
+					id="campagnaCliente-tab" data-toggle="tab" href="#campagnaCliente"
+					role="tab" aria-controls="campagnaCliente" aria-selected="false">Campañas</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
 					id="franquiciaCliente-tab" data-toggle="tab"
@@ -93,9 +92,8 @@
 					role="tab" aria-controls="tiendaCliente" aria-selected="false">Tiendas</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
-					id="formadorCliente-tab" data-toggle="tab"
-					href="#formadorCliente" role="tab"
-					aria-controls="formadorCliente" aria-selected="false">Formadores</a></li>
+					id="formadorCliente-tab" data-toggle="tab" href="#formadorCliente"
+					role="tab" aria-controls="formadorCliente" aria-selected="false">Formadores</a></li>
 
 				<li class="nav-item" role="presentation"><a class="nav-link"
 					id="formacionCliente-tab" data-toggle="tab"
@@ -228,14 +226,14 @@
 
 					<div class="container mt-3">
 						<div class="row">
-						<div class="col-12">
-							<div class="alert alert-danger" id="errorNoHayFranquicia" 
-							th:if="${#lists.isEmpty(franquiciasId)}"
-							th:text="${'Debes crear una Franquicia antes que una Tienda'}"></div>
-							<div class="alert alert-danger" id="errorNoHayZona" 
-							th:if="${#lists.isEmpty(listaZonasId)}"
-							th:text="${'Debes crear una Zona antes que una Tienda'}"></div>
-						</div>
+							<div class="col-12">
+								<div class="alert alert-danger" id="errorNoHayFranquicia"
+									th:if="${#lists.isEmpty(franquiciasId)}"
+									th:text="${'Debes crear una Franquicia antes que una Tienda'}"></div>
+								<div class="alert alert-danger" id="errorNoHayZona"
+									th:if="${#lists.isEmpty(listaZonasId)}"
+									th:text="${'Debes crear una Zona antes que una Tienda'}"></div>
+							</div>
 							<div class="col-12">
 								<a th:href="@{/tiendaNuevaCliente/} + ${idCliente}"
 									th:if="${#lists.size(franquiciasId) > 0} and ${#lists.size(listaZonasId) > 0}"
@@ -278,28 +276,28 @@
 				<div class="tab-pane fade" id="formadorCliente" role="tabpanel"
 					aria-labelledby="formadorCliente-tab">
 
-					<div th:fragment="formadorConsulta" class="container mt-3">
-					<div class="row mt-2">
-						<div class="col-4 mt-2">
-							<form
-								th:action="@{/clienteVer/} + ${cliente.idCliente}"
-								th:object="${formador}" th:method="POST">
-
-								<select id="clienteFormador" class="form-control"
-									th:field="*{idFormador}">
-									<option th:each="formador:${formadores}"
-										th:text="${formador.nombreFormador} + ' ' + ${formador.ap1Formador} + ' ' + ${formador.ap2Formador}"
-										th:value="${formador.idFormador}"></option>
-								</select>
-						</div>
-
-						<div class="col-4 mt-2">
-							<input type="submit" class="btn btn-success" value="Asignar">
-						</div>
-						</form>
-					</div>
+					<div class="container mt-3">
+					
 						<div class="row mt-2">
+							<div class="col-4 mt-2">
+								<form th:action="@{/clienteVer/} + ${cliente.idCliente}"
+									th:object="${formador}" th:method="POST">
 
+									<select id="clienteFormador" class="form-control"
+										th:field="*{idFormador}">
+										<option th:each="formador:${formadores}"
+											th:text="${formador.nombreFormador} + ' ' + ${formador.ap1Formador} + ' ' + ${formador.ap2Formador}"
+											th:value="${formador.idFormador}"></option>
+									</select>
+
+									<div class="col-4 mt-2">
+										<input type="submit" class="btn btn-success" value="Asignar">
+									</div>
+								</form>
+							</div>
+						</div>
+						
+						<div class="row mt-2">
 							<div class="col-12 mt-2">
 								<table class="table table-striped table-sm">
 									<thead class="thead-dark">
@@ -340,8 +338,8 @@
 					<div th:fragment="formacionConsulta" class="container mt-3">
 						<div class="row">
 							<div class="col-12">
-								<a th:href="@{/formacionNuevaCliente/} + ${idCliente}" class="btn btn-success">Añadir
-									Formación</a>
+								<a th:href="@{/formacionNuevaCliente/} + ${idCliente}"
+									class="btn btn-success">Añadir Formación</a>
 							</div>
 							<div class="col-12 mt-2">
 								<table class="table table-striped table-sm">

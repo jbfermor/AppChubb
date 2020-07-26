@@ -86,9 +86,7 @@ public class ClienteController {
 		
 		@GetMapping("clienteVer/{idCliente}")
 		public String verCliente (@PathVariable("idCliente") Long idCliente, Model model) {
-			
-			
-			
+						
 			//LISTA DE ZONAS
 			List <Zona> listaZonas = clienteService.findAllZonas();
 			List <Zona> listaZonasId = new ArrayList<Zona>();
@@ -101,7 +99,7 @@ public class ClienteController {
 			
 			//LISTA DE CAMPAÑAS
 			List <Campagna> listaCampagnas = clienteService.findAllCampagnas();
-				//Si es la primera vez que accede a un porveedor, se cargarán algunos datos por defecto
+				//Si es la primera vez que accede a un cliente, se cargarán algunos datos por defecto
 				if (listaCampagnas.isEmpty()) {
 					EstadoCampagna activo = new EstadoCampagna((long) 1, "Activo");
 					EstadoCampagna inactivo = new EstadoCampagna((long) 2, "Inactivo");

@@ -46,6 +46,9 @@ public class Formacion implements Serializable {
 	@ManyToMany(mappedBy = "formaciones")
 	private List <Comercial> comerciales;
 	
+	@ManyToMany(mappedBy = "formaciones")
+	private List <Visita> visitas;
+	
 	@ManyToMany ( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 			name = "formador_formacion",

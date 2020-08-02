@@ -73,8 +73,22 @@ public class Visita implements Serializable {
 	private Tienda tienda;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "nif_formador")
+	@JoinColumn(name = "id_formador")
 	private Formador formador;
+	
+	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			name = "visita_formacion",
+			joinColumns = @JoinColumn(name = "id_visita"), 
+			inverseJoinColumns = @JoinColumn(name = "id_formacion"))
+	private List <Formacion> formaciones;
+	
+	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			name = "visita_comercial",
+			joinColumns = @JoinColumn(name = "id_visita"), 
+			inverseJoinColumns = @JoinColumn(name = "id_comercial"))
+	private List <Comercial> comerciales;
 	
 	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
@@ -82,6 +96,5 @@ public class Visita implements Serializable {
 			joinColumns = @JoinColumn(name = "id_visita"), 
 			inverseJoinColumns = @JoinColumn(name = "id_incidencia"))
 	private List <Incidencia> incidenciasVisita;
-	
 	
 }

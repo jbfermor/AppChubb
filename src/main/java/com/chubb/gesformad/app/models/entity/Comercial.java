@@ -51,4 +51,10 @@ public class Comercial implements Serializable {
 			joinColumns = @JoinColumn(name = "id_comercial"),
 			inverseJoinColumns = @JoinColumn(name = "nif_formador"))
 	private List <Formador> formadores;
+	
+	
+	@ManyToMany (mappedBy = "comerciales")
+	private List <Visita> visitas;
 }
+
+

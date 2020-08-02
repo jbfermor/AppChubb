@@ -219,7 +219,7 @@ public class FormadorController {
 		
 	}
 
-	@PostMapping("/formadorVer/{idFormador}")
+	@PostMapping("/asignaClienteFormador/{idFormador}")
 	public String formadorGuardaAsignacionCliente (@PathVariable("idFormador") Long idFormador, Cliente cliente, Model model) {		
 		Formador formador = null;
 		
@@ -242,7 +242,7 @@ public class FormadorController {
 	
 	}
 	
-	@PostMapping("/formadorVer/{idFormador}/zona")
+	@PostMapping("/asignaZonaFormador/{idFormador}")
 	public String formadorGuardaAsignacionZona (@PathVariable("idFormador") Long idFormador, Zona zona, Model model) {		
 		Formador formador = null;
 		

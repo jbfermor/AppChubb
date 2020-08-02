@@ -37,12 +37,12 @@ public class Campagna implements Serializable {
 	
 	@Column(name = "d_inicio_campaña")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dInicioCampagna;
 	
 	@Column(name = "d_fin_campaña")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date dFinCampagna;
 	
 	//FOREIGN

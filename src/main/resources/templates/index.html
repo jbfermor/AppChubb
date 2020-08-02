@@ -47,11 +47,11 @@
 				<h3>Clientes</h3>
 			</div>
 			<div class="col-12 mt-2">
-				<a th:href="@{/clienteNuevo}" class="btn btn-success">Añadir
+				<a th:href="@{clienteNuevo/}" class="btn btn-success">Añadir
 					Cliente</a>
 			</div>
 			<div th:each="cliente:${clientes}" class="col-3 mt-2">
-				<a th:href="@{/clienteVer/} + ${cliente.idCliente}"
+				<a th:href="@{clienteVer/} + ${cliente.idCliente}"
 					th:text="${cliente.nombreCliente}"
 					class="btn btn-info rounded text-center mx-auto d-block mb-4"></a>
 			</div>

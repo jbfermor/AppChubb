@@ -63,7 +63,7 @@ public class ClienteController {
 			return "redirect:/index";		
 		}
 		
-		@GetMapping("clienteNuevo/{idCliente}")
+		@GetMapping("/clienteNuevo/{idCliente}")
 		public String editaCliente (@PathVariable("idCliente") Long idCliente, Model model) {
 			
 			Cliente cliente = null;
@@ -84,7 +84,7 @@ public class ClienteController {
 		}
 		
 		
-		@GetMapping("clienteVer/{idCliente}")
+		@GetMapping("/clienteVer/{idCliente}")
 		public String verCliente (@PathVariable("idCliente") Long idCliente, Model model) {
 						
 			//LISTA DE ZONAS

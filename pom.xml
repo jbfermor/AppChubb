@@ -85,8 +85,8 @@
 			</exclusions>
 		</dependency>
 		<!--DEPNDENCIAS HEROKU -->
-
-		<!--DEPNDENCIAS SECURITY -->
+<!--
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
@@ -95,8 +95,8 @@
 			<groupId>org.thymeleaf.extras</groupId>
 			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
 		</dependency>
-		<!--DEPNDENCIAS SECURITY -->
-
+		 
+-->
 	</dependencies>
 
 	<build>

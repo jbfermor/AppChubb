@@ -44,27 +44,31 @@ public class Formacion implements Serializable {
 	private Campagna campagna;
 	
 	@ManyToMany(mappedBy = "formaciones")
+	private List <Formador> formadores;
+	
+	@ManyToMany(mappedBy = "formaciones")
 	private List <Comercial> comerciales;
 	
 	@ManyToMany(mappedBy = "formaciones")
 	private List <Visita> visitas;
-	
-	@ManyToMany ( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(
-			name = "formador_formacion",
-			joinColumns = @JoinColumn(name = "id_formacion"),
-			inverseJoinColumns = @JoinColumn(name = "nif_formador"))
-	private List <Formador> formadores;
+
 	
 	//CONSTRUCTORES
 	
 	public Formacion() {}
 
-	public Formacion(Long idFormacion, String nombreFormacion) {
+	public Formacion(Long idFormacion, String nombreFormacion, Cliente cliente, Campagna campagna,
+			List<Formador> formadores, List<Comercial> comerciales, List<Visita> visitas) {
 		this.idFormacion = idFormacion;
 		this.nombreFormacion = nombreFormacion;
+		this.cliente = cliente;
+		this.campagna = campagna;
+		this.formadores = formadores;
+		this.comerciales = comerciales;
+		this.visitas = visitas;
 	}
-
+	
+	
 	
 	//GETTERS, SETTERS
 	
@@ -84,20 +88,20 @@ public class Formacion implements Serializable {
 		this.nombreFormacion = nombreFormacion;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+	}
+
 	public Campagna getCampagna() {
 		return campagna;
 	}
 
 	public void setCampagna(Campagna campagna) {
 		this.campagna = campagna;
-	}
-
-	public List<Comercial> getComerciales() {
-		return comerciales;
-	}
-
-	public void setComerciales(List<Comercial> comerciales) {
-		this.comerciales = comerciales;
 	}
 
 	public List<Formador> getFormadores() {
@@ -108,14 +112,21 @@ public class Formacion implements Serializable {
 		this.formadores = formadores;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public List<Comercial> getComerciales() {
+		return comerciales;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setComerciales(List<Comercial> comerciales) {
+		this.comerciales = comerciales;
 	}
 
+	public List<Visita> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visita> visitas) {
+		this.visitas = visitas;
+	}
 
 
 }

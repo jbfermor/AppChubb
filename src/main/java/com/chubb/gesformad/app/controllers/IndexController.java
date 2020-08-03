@@ -20,16 +20,17 @@ public class IndexController {
 		
 	@GetMapping({"/index", "", "/"})
 	public String index (Model model) {
+		
 		List <Cliente> clientes = formadorService.findAllClientes();
 		List <Formador> formadores = formadorService.findAllFormadores();
 		List <Rol> roles = formadorService.findAllRoles();
-			if (roles.isEmpty()){
-				Rol admin = new Rol((long)1, "admin");
-				Rol formador = new Rol((long)2, "formador");
-				formadorService.saveRol(admin);
-				formadorService.saveRol(formador);
-			}
-			
+		if (roles.isEmpty()){
+			Rol admin = new Rol((long)1, "admin");
+			Rol formador = new Rol((long)2, "formador");
+			formadorService.saveRol(admin);
+			formadorService.saveRol(formador);
+		}
+	
 		int segInicio = 0;
 		
 		if (clientes.size() > 0 && formadores.isEmpty()) {

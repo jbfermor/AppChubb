@@ -82,11 +82,12 @@ public class Formador implements Serializable {
 	@JoinColumn(name = "id_rol")
 	Rol rol;
 	
-	@ManyToMany (mappedBy = "formadores")
+	@ManyToMany ( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@JoinTable(
+			name = "formadores_formaciones",
+			joinColumns = @JoinColumn(name = "id_formador"),
+			inverseJoinColumns = @JoinColumn(name = "id_formacion"))
 	private List <Formacion> formaciones;
-	
-	@ManyToMany (mappedBy = "formadores")
-	private List <Comercial> comerciales;
 	
 	@ManyToMany (fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
@@ -107,11 +108,14 @@ public class Formador implements Serializable {
 	
 	public Formador() {}
 
+
+
+
 	public Formador(Long idFormador, String nifFormador, String passFormador, String nombreFormador, String ap1Formador,
 			String ap2Formador, String direccionFormador, int cpFormador, String localidadFormador,
 			String provinciaFormador, String tel1Formador, String tel2Formador, String mail1Formador,
-			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, List<Zona> zonas, Rol rol,
-			List<Formacion> formaciones, List<Comercial> comerciales, List<Cliente> clientes) {
+			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, Rol rol,
+			List<Formacion> formaciones, List<Cliente> clientes, List<Zona> zonas) {
 		this.idFormador = idFormador;
 		this.nifFormador = nifFormador;
 		this.passFormador = passFormador;
@@ -128,13 +132,11 @@ public class Formador implements Serializable {
 		this.mail2Formador = mail2Formador;
 		this.cuentaBancariaFormador = cuentaBancariaFormador;
 		this.visitas = visitas;
-		this.zonas = zonas;
 		this.rol = rol;
 		this.formaciones = formaciones;
-		this.comerciales = comerciales;
 		this.clientes = clientes;
+		this.zonas = zonas;
 	}
-
 
 
 	//GETTERS, SETTERS
@@ -151,186 +153,141 @@ public class Formador implements Serializable {
 		return nifFormador;
 	}
 
-
 	public void setNifFormador(String nifFormador) {
 		this.nifFormador = nifFormador;
 	}
-
 
 	public String getPassFormador() {
 		return passFormador;
 	}
 
-
 	public void setPassFormador(String passFormador) {
 		this.passFormador = passFormador;
 	}
-
 
 	public String getNombreFormador() {
 		return nombreFormador;
 	}
 
-
 	public void setNombreFormador(String nombreFormador) {
 		this.nombreFormador = nombreFormador;
 	}
-
 
 	public String getAp1Formador() {
 		return ap1Formador;
 	}
 
-
 	public void setAp1Formador(String ap1Formador) {
 		this.ap1Formador = ap1Formador;
 	}
-
 
 	public String getAp2Formador() {
 		return ap2Formador;
 	}
 
-
 	public void setAp2Formador(String ap2Formador) {
 		this.ap2Formador = ap2Formador;
 	}
-
 
 	public String getDireccionFormador() {
 		return direccionFormador;
 	}
 
-
 	public void setDireccionFormador(String direccionFormador) {
 		this.direccionFormador = direccionFormador;
 	}
-
 
 	public int getCpFormador() {
 		return cpFormador;
 	}
 
-
 	public void setCpFormador(int cpFormador) {
 		this.cpFormador = cpFormador;
 	}
-
 
 	public String getLocalidadFormador() {
 		return localidadFormador;
 	}
 
-
 	public void setLocalidadFormador(String localidadFormador) {
 		this.localidadFormador = localidadFormador;
 	}
-
 
 	public String getProvinciaFormador() {
 		return provinciaFormador;
 	}
 
-
 	public void setProvinciaFormador(String provinciaFormador) {
 		this.provinciaFormador = provinciaFormador;
 	}
-
 
 	public String getTel1Formador() {
 		return tel1Formador;
 	}
 
-
 	public void setTel1Formador(String tel1Formador) {
 		this.tel1Formador = tel1Formador;
 	}
-
 
 	public String getTel2Formador() {
 		return tel2Formador;
 	}
 
-
 	public void setTel2Formador(String tel2Formador) {
 		this.tel2Formador = tel2Formador;
 	}
-
 
 	public String getMail1Formador() {
 		return mail1Formador;
 	}
 
-
 	public void setMail1Formador(String mail1Formador) {
 		this.mail1Formador = mail1Formador;
 	}
-
 
 	public String getMail2Formador() {
 		return mail2Formador;
 	}
 
-
 	public void setMail2Formador(String mail2Formador) {
 		this.mail2Formador = mail2Formador;
 	}
-
-
-	public List<Visita> getVisitas() {
-		return visitas;
-	}
-
-
-	public void setVisitas(List<Visita> visitas) {
-		this.visitas = visitas;
-	}
-
-
-	public List<Formacion> getFormaciones() {
-		return formaciones;
-	}
-
-
-	public void setFormaciones(List<Formacion> formaciones) {
-		this.formaciones = formaciones;
-	}
-
-
-	public List<Comercial> getComerciales() {
-		return comerciales;
-	}
-
-
-	public void setComerciales(List<Comercial> comerciales) {
-		this.comerciales = comerciales;
-	}
-
 
 	public String getCuentaBancariaFormador() {
 		return cuentaBancariaFormador;
 	}
 
-
 	public void setCuentaBancariaFormador(String cuentaBancariaFormador) {
 		this.cuentaBancariaFormador = cuentaBancariaFormador;
 	}
 
+	public List<Visita> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visita> visitas) {
+		this.visitas = visitas;
+	}
 
 	public Rol getRol() {
 		return rol;
 	}
 
-
 	public void setRol(Rol rol) {
 		this.rol = rol;
 	}
 
+	public List<Formacion> getFormaciones() {
+		return formaciones;
+	}
+
+	public void setFormaciones(List<Formacion> formaciones) {
+		this.formaciones = formaciones;
+	}
 
 	public List<Cliente> getClientes() {
 		return clientes;
 	}
-
 
 	public void setClientes(List<Cliente> clientes) {
 		this.clientes = clientes;
@@ -343,9 +300,6 @@ public class Formador implements Serializable {
 	public void setZonas(List<Zona> zonas) {
 		this.zonas = zonas;
 	}
-	
-	
-	
-	
-	
+
+
 }

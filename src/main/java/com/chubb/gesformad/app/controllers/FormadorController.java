@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
-import com.chubb.gesformad.app.models.entity.Franquicia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
-import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Zona;
 import com.chubb.gesformad.app.models.services.IFormadorService;
 
@@ -102,6 +99,7 @@ public class FormadorController {
 		
 		Cliente cliente = new Cliente();
 		Zona zona = new Zona();
+		Formacion formacion = new Formacion();
 
 		
 		//LISTA DE PROVEEDORES
@@ -132,7 +130,7 @@ public class FormadorController {
 		
 			//ZONAS ASIGNADAS
 		List <Zona> listaZonasSelec = new ArrayList <Zona>();
-		for (Zona k : listaZonasCli) {
+		for (Zona k : listaZonasId) {
 			for(Formador l : k.getFormadores()) {
 				if (l.getIdFormador() == idFormador) {
 					listaZonasSelec.add(k);
@@ -145,60 +143,37 @@ public class FormadorController {
 		model.addAttribute("zonasAsignadas", listaZonasSelec);				
 		model.addAttribute("zonasId", listaZonasId);
 		
-			//zonas 
-		
-		/*
-		//LISTA DE CAMPAÑAS
-		List <Campagna> listaCampagnas = clienteService.findAllCampagnas();
-		List <Campagna> listaCampagnasId = new ArrayList<Campagna>();
-		for (Campagna i:listaCampagnas) {
-			if (i.getCliente().getIdCliente() == idCliente) {
-				listaCampagnasId.add(i);
-			}
-		}
-		model.addAttribute("campagnasId", listaCampagnasId);
-		
-		//LISTA DE FRANQUICIAS
-		List <Franquicia> listaFranquicias = clienteService.findAllFranquicias();
-		List <Franquicia> listaFranquiciasId = new ArrayList<Franquicia>();
-		for (Franquicia i:listaFranquicias) {
-			if (i.getCliente().getIdCliente() == idCliente) {
-				listaFranquiciasId.add(i);
-			}
-		}
-		model.addAttribute("franquiciasId", listaFranquiciasId);
-		
-		//LISTA DE TIENDAS
-		List <Tienda> listaTiendas = clienteService.findAllTiendas();
-		List <Tienda> listaTiendasId = new ArrayList<Tienda>();
-		for (Tienda i:listaTiendas) {
-			if (i.getCliente().getIdCliente() == idCliente) {
-				listaTiendasId.add(i);
-			}
-		}
-		model.addAttribute("tiendasId", listaTiendasId);
-		
-		//LISTA DE FORMADORES
-		List <Formador> listaFormadores = clienteService.findAllFormadores();
-		List <Formador> listaFormadoresId = new ArrayList<Formador>();
-		for (Formador i:listaFormadores) {
-			for (Cliente j:i.getClientes())
-				if (j.getIdCliente() == idCliente) {
-					listaFormadoresId.add(i);
-			}
-		}
-		model.addAttribute("formadoresId", listaFormadoresId);
-		
+			//ZONAS ASIGNADAS 
+		//LISTA DE ZONAS
+	
 		//LISTA DE FORMACIONES
-		List <Formacion> listaFormaciones = clienteService.findAllFormaciones();
-		List <Formacion> listaFormacionesId = new ArrayList<Formacion>();
-		for (Formacion i:listaFormaciones) {
-			if (i.getCliente().getIdCliente() == idCliente) {
-				listaFormacionesId.add(i);
+		List <Formacion> listaFormacionesId = new ArrayList <Formacion>();
+		List <Formacion> listaFormacionesCli = new ArrayList <Formacion>();
+		
+		for (Cliente i : listaClientesId) {
+			listaFormacionesCli = i.getFormaciones();
+			for (Formacion j : listaFormacionesCli) {
+				listaFormacionesId.add(j);
 			}
 		}
-		model.addAttribute("formacionesId", listaFormacionesId);
-		*/
+			//FORMACIONES ASIGNADAS
+
+				List <Formacion> listaFormacionesSelec = new ArrayList <Formacion>();
+				for (Formacion k : listaFormacionesId) {
+					for (Formador l : k.getFormadores()) {
+						if(l.getIdFormador() == idFormador) {
+							listaFormacionesSelec.add(k);
+						}
+					}
+				}
+
+				model.addAttribute("formacion", formacion);
+				model.addAttribute("formacionesAsignadas", listaFormacionesSelec);
+				model.addAttribute("formacionesId", listaFormacionesId);
+			//FORMACIONES ASIGNADAS
+		//LISTA DE FORMACIONES
+		
+
 		
 		//RESTO
 		
@@ -262,7 +237,29 @@ public class FormadorController {
 				
 		model.addAttribute("formador", formador);
 		return "redirect:/formadorVer/" + idFormador;
+	}
 	
+	@PostMapping("/asignaFormacionFormador/{idFormador}")
+	public String formadorGuardaAsignacionFormacion (@PathVariable("idFormador") Long idFormador, Formacion formacion, Model model) {		
+		Formador formador = null;
+		
+			if (idFormador != null) {
+				 formador = formadorService.findOneFormador(idFormador);
+			}
+			else{
+				return "redirect:/index";
+			}
+				//asignación formacion
+				Long idFn = formacion.getIdFormacion();
+				Formacion formacionLista = formadorService.findOneFormacion(idFn);
+				if (formador.getFormaciones().contains(formacionLista) == false) {
+					formador.getFormaciones().add(formacionLista);
+					formadorService.saveFormador(formador);
+				}
+		
+		
+		model.addAttribute("formador", formador);
+		return "redirect:/formadorVer/" + idFormador;
 	}
 	
 	//ELIMINAR PROVEEDOR DE LA LISTA EN FORMADORES

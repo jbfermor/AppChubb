@@ -307,7 +307,7 @@
 											<th>Apellido</th>
 											<th>Teléfono</th>
 											<th>Mail</th>
-											<th colspan="2">Acciones</th>
+											<th>Acciones</th>
 										</tr>
 									</thead>
 									<tbody class="tbody-light align-items-center">
@@ -317,10 +317,8 @@
 											<td th:text="${formador.ap1Formador}"></td>
 											<td th:text="${formador.tel1Formador}"></td>
 											<td th:text="${formador.mail1Formador}"></td>
-											<td><a class="nav-link badge badge-warning"
-												th:href="@{/formadorNuevo/} + ${formador.idFormador}">Editar</a></td>
 											<td><a class="nav-link badge badge-danger"
-												th:href="@{/clienteEliminarFormador/} + ${cliente.idCliente} + '/' + ${formador.idFormador}">Eliminar</a></td>
+												th:href="@{/clienteEliminarFormador/} + ${cliente.idCliente} + '/' + ${formador.idFormador}">Desasignar</a></td>
 										</tr>
 									</tbody>
 								</table>

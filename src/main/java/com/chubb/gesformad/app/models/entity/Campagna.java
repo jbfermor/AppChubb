@@ -118,6 +118,15 @@ public class Campagna implements Serializable {
 	public void setEstadoCampagna(EstadoCampagna estadoCampagna) {
 		this.estadoCampagna = estadoCampagna;
 	}
+
+	public List<Formacion> getFormaciones() {
+		return formaciones;
+	}
+
+	public void setFormaciones(List<Formacion> formaciones) {
+		this.formaciones = formaciones;
+	}
+	
 	
 	
 }

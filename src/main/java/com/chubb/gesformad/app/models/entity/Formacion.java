@@ -39,8 +39,8 @@ public class Formacion implements Serializable {
 	@JoinColumn(name = "id_cliente", nullable = true)
 	private Cliente cliente;
 	
-	@ManyToOne(fetch = FetchType.LAZY, optional = false)
-	@JoinColumn(name = "id_campagna", nullable = false)
+	@ManyToOne(fetch = FetchType.LAZY, optional = true)
+	@JoinColumn(name = "id_campagna", nullable = true)
 	private Campagna campagna;
 	
 	@ManyToMany(mappedBy = "formaciones")

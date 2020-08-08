@@ -156,12 +156,13 @@ public class ClienteController {
 			//LISTA DE FORMACIONES
 			List <Formacion> listaFormaciones = clienteService.findAllFormaciones();
 			List <Formacion> listaFormacionesId = new ArrayList<Formacion>();
-			for (Formacion i:listaFormaciones) {
-				if (i.getCliente().getIdCliente() == idCliente) {
-					listaFormacionesId.add(i);
+				for (Formacion i:listaFormaciones) {
+					if (i.getCampagna().getCliente().getIdCliente()== idCliente) {
+						listaFormacionesId.add(i);
+					}
 				}
-			}
-			model.addAttribute("formacionesId", listaFormacionesId);
+				model.addAttribute("formacionesId", listaFormacionesId);
+
 			
 			//RESTO
 			Cliente cliente = null;

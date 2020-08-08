@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -148,21 +149,25 @@ public class FormadorController {
 	
 		//LISTA DE FORMACIONES
 		List <Formacion> listaFormacionesId = new ArrayList <Formacion>();
+		List <Campagna> listaCampagnas = new ArrayList <Campagna>();
 		List <Formacion> listaFormacionesCli = new ArrayList <Formacion>();
 		
 		for (Cliente i : listaClientesId) {
-			listaFormacionesCli = i.getFormaciones();
-			for (Formacion j : listaFormacionesCli) {
-				listaFormacionesId.add(j);
+			listaCampagnas = i.getCampagnas();
+			for (Campagna j : listaCampagnas) {
+				listaFormacionesCli = j.getFormaciones();
+					for (Formacion k : listaFormacionesCli) {
+						listaFormacionesId.add(k);
+					}
 			}
 		}
 			//FORMACIONES ASIGNADAS
 
 				List <Formacion> listaFormacionesSelec = new ArrayList <Formacion>();
-				for (Formacion k : listaFormacionesId) {
-					for (Formador l : k.getFormadores()) {
-						if(l.getIdFormador() == idFormador) {
-							listaFormacionesSelec.add(k);
+				for (Formacion l : listaFormacionesId) {
+					for (Formador m : l.getFormadores()) {
+						if(m.getIdFormador() == idFormador) {
+							listaFormacionesSelec.add(l);
 						}
 					}
 				}
@@ -171,6 +176,7 @@ public class FormadorController {
 				model.addAttribute("formacionesAsignadas", listaFormacionesSelec);
 				model.addAttribute("formacionesId", listaFormacionesId);
 			//FORMACIONES ASIGNADAS
+				
 		//LISTA DE FORMACIONES
 		
 
@@ -188,6 +194,7 @@ public class FormadorController {
 		
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("zona", zona);
+		model.addAttribute("formacion", formacion);
 		model.addAttribute("formador", formador);
 		
 		return "/formadorVer";
@@ -250,9 +257,22 @@ public class FormadorController {
 				return "redirect:/index";
 			}
 				//asignación formacion
-				Long idFn = formacion.getIdFormacion();
-				Formacion formacionLista = formadorService.findOneFormacion(idFn);
-				if (formador.getFormaciones().contains(formacionLista) == false) {
+			Long idFn = formacion.getIdFormacion();
+			Formacion formacionLista = formadorService.findOneFormacion(idFn);
+			
+			Campagna cFormacion = formacion.getCampagna();
+			Formador iFormador = formadorService.findOneFormador(idFormador);
+			List <Cliente> clientesFormador = iFormador.getClientes();
+			List <Campagna> campagnasFormador = new ArrayList<Campagna>();
+			List <Campagna> campagnasCliente = new ArrayList<Campagna>();
+				for (Cliente i:clientesFormador) {
+					campagnasCliente = i.getCampagnas();
+					for (Campagna j : campagnasCliente) {
+						campagnasFormador.add(j);
+					}
+				}
+			
+				if (campagnasFormador.contains(cFormacion)) {
 					formador.getFormaciones().add(formacionLista);
 					formadorService.saveFormador(formador);
 				}

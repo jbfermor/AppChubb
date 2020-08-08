@@ -82,7 +82,7 @@ public class Formador implements Serializable {
 	@JoinColumn(name = "id_rol")
 	Rol rol;
 	
-	@ManyToMany ( cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany (fetch = FetchType.LAZY,  cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 			name = "formadores_formaciones",
 			joinColumns = @JoinColumn(name = "id_formador"),
@@ -107,9 +107,6 @@ public class Formador implements Serializable {
 	//CONSTRUCTORES
 	
 	public Formador() {}
-
-
-
 
 	public Formador(Long idFormador, String nifFormador, String passFormador, String nombreFormador, String ap1Formador,
 			String ap2Formador, String direccionFormador, int cpFormador, String localidadFormador,
@@ -277,11 +274,11 @@ public class Formador implements Serializable {
 		this.rol = rol;
 	}
 
-	public List<Formacion> getFormaciones() {
+	public List <Formacion> getFormaciones() {
 		return formaciones;
 	}
 
-	public void setFormaciones(List<Formacion> formaciones) {
+	public void setFormaciones(List <Formacion> formaciones) {
 		this.formaciones = formaciones;
 	}
 

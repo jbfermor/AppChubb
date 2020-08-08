@@ -37,7 +37,7 @@ public class ClienteController {
 		public String clienteInicialNuevo (Model model) {
 			Cliente cliente = new Cliente();
 			model.addAttribute("cliente", cliente);
-			return "clienteInicial";
+			return "/clienteInicial";
 		}
 		
 		@PostMapping ("/clienteInicial")

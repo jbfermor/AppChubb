@@ -183,7 +183,7 @@
 										<tr th:each="zona : ${zonasAsignadas}">
 											<td th:text="${zona.nombreZona}"></td>
 											<td><a class="nav-link badge badge-danger"
-												th:href="@{/eliminarZonaFormador/} + ${zona.idZona}">Eliminar</a></td>
+												th:href="@{/formadorEliminarZona/} + ${formador.idFormador} + '/' + ${zona.idZona}">Eliminar</a></td>
 										</tr>
 									</tbody>
 								</table>
@@ -234,7 +234,7 @@
 										<tr th:each="formacion:${formacionesAsignadas}">
 											<td th:text="${formacion.nombreFormacion}"></td>
 											<td><a class="nav-link badge badge-danger"
-												th:href="@{/eliminaFormacion/} + ${formacion.idFormacion}"
+												th:href="@{/formadorEliminarFormacion/} + ${formador.idFormador} + '/' + ${formacion.idFormacion}"
 												th:if="${formacion.idFormacion}">Eliminar</a></td>
 										</tr>
 									</tbody>

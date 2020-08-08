@@ -248,8 +248,8 @@ public class FormadorController {
 	
 	@PostMapping("/asignaFormacionFormador/{idFormador}")
 	public String formadorGuardaAsignacionFormacion (@PathVariable("idFormador") Long idFormador, Formacion formacion, Model model) {		
-		Formador formador = null;
 		
+		Formador formador = null;
 			if (idFormador != null) {
 				 formador = formadorService.findOneFormador(idFormador);
 			}
@@ -257,27 +257,14 @@ public class FormadorController {
 				return "redirect:/index";
 			}
 				//asignación formacion
-			Long idFn = formacion.getIdFormacion();
-			Formacion formacionLista = formadorService.findOneFormacion(idFn);
 			
-			Campagna cFormacion = formacion.getCampagna();
-			Formador iFormador = formadorService.findOneFormador(idFormador);
-			List <Cliente> clientesFormador = iFormador.getClientes();
-			List <Campagna> campagnasFormador = new ArrayList<Campagna>();
-			List <Campagna> campagnasCliente = new ArrayList<Campagna>();
-				for (Cliente i:clientesFormador) {
-					campagnasCliente = i.getCampagnas();
-					for (Campagna j : campagnasCliente) {
-						campagnasFormador.add(j);
-					}
-				}
+			Long idFmc = formacion.getIdFormacion();
+			Formacion formacionLista = formadorService.findOneFormacion(idFmc);
+			if (formador.getFormaciones().contains(formacionLista) == false) {
+				formador.getFormaciones().add(formacionLista);
+				formadorService.saveFormador(formador);
+			}
 			
-				if (campagnasFormador.contains(cFormacion)) {
-					formador.getFormaciones().add(formacionLista);
-					formadorService.saveFormador(formador);
-				}
-		
-		
 		model.addAttribute("formador", formador);
 		return "redirect:/formadorVer/" + idFormador;
 	}
@@ -298,6 +285,40 @@ public class FormadorController {
 		formadorService.saveFormador(formador);
 		return "redirect:/formadorVer/" + idFormador;			
 	}
+	
+	//ELIMINAR ZONA DE LA LISTA EN FORMADORES
+		@GetMapping("/formadorEliminarZona/{idFormador}/{idZona}")
+		public String eliminarZona(@PathVariable("idFormador") Long idFormador, @PathVariable("idZona") Long idZona, Model model) {
+			Zona zona = formadorService.findOneZona(idZona);
+			Formador formador = formadorService.findOneFormador(idFormador);
+			Zona provX = null;
+			for (Zona i : formador.getZonas()) {
+				if (zona.getIdZona() == i.getIdZona()){
+					provX = i;
+				}
+			}
+			
+			formador.getZonas().remove(provX);
+			formadorService.saveFormador(formador);
+			return "redirect:/formadorVer/" + idFormador;			
+		}
+		
+		//ELIMINAR FORMACION DE LA LISTA EN FORMADORES
+		@GetMapping("/formadorEliminarFormacion/{idFormador}/{idFormacion}")
+		public String eliminarFormacion(@PathVariable("idFormador") Long idFormador, @PathVariable("idFormacion") Long idFormacion, Model model) {
+			Formacion formacion = formadorService.findOneFormacion(idFormacion);
+			Formador formador = formadorService.findOneFormador(idFormador);
+			Formacion provX = null;
+			for (Formacion i : formador.getFormaciones()) {
+				if (formacion.getIdFormacion() == i.getIdFormacion()){
+					provX = i;
+				}
+			}
+			
+			formador.getFormaciones().remove(provX);
+			formadorService.saveFormador(formador);
+			return "redirect:/formadorVer/" + idFormador;			
+		}
 	
 
 }

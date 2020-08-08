@@ -56,7 +56,7 @@ public class Formacion implements Serializable {
 	//CONSTRUCTORES
 	
 	public Formacion() {}
-
+	
 	public Formacion(Long idFormacion, String nombreFormacion, Cliente cliente, Campagna campagna,
 			List<Formador> formadores, List<Comercial> comerciales, List<Visita> visitas) {
 		this.idFormacion = idFormacion;

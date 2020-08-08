@@ -112,15 +112,13 @@ public class FormadorServiceImpl implements IFormadorService {
 	@Override
 	@Transactional
 	public List<Formacion> findAllFormaciones() {
-		// TODO Auto-generated method stub
-		return null;
+		return (List<Formacion>) formacionDao.findAll();
 	}
 
 	@Override
 	@Transactional
 	public Formacion findOneFormacion(Long idFormacion) {
-		// TODO Auto-generated method stub
-		return null;
+		return formacionDao.findById(idFormacion).orElse(null);
 	}
 	
 	

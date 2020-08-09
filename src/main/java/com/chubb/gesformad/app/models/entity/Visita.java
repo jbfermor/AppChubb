@@ -59,8 +59,28 @@ public class Visita implements Serializable {
 	@DateTimeFormat(pattern = "h:mm a")
 	private Date horaFinVisita;
 	
+	@Column(name = "tiempo_visita")
+	@Temporal(TemporalType.TIME)
+	@DateTimeFormat(pattern = "h:mm a")
+	private Date tiempoVisita;
+	
 	@Column(name = "num_comerciales_formados_visita")
 	private int numComercialesFormados;
+	
+	@Column(name = "num_comerciales_formacion_1")
+	private int numComercialesFormacion1;
+	
+	@Column(name = "num_comerciales_formacion_2")
+	private int numComercialesFormacion2;
+	
+	@Column(name = "num_comerciales_formacion_3")
+	private int numComercialesFormacion3;
+	
+	@Column(name = "num_comerciales_formacion_4")
+	private int numComercialesFormacion4;
+	
+	@Column(name = "num_comerciales_formacion_5")
+	private int numComercialesFormacion5;
 	
 	@Column(name = "observaciones_visita")
 	private String observacionesVisita;

@@ -11,6 +11,7 @@ import com.chubb.gesformad.app.models.dao.IEstadoCampagnaDao;
 import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
 import com.chubb.gesformad.app.models.dao.IFranquiciaDao;
+import com.chubb.gesformad.app.models.dao.IIncidenciaDao;
 import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.ITiendaDao;
 import com.chubb.gesformad.app.models.dao.IZonaDao;
@@ -19,6 +20,7 @@ import com.chubb.gesformad.app.models.entity.EstadoCampagna;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
+import com.chubb.gesformad.app.models.entity.Incidencia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -49,6 +51,9 @@ public class ClienteServiceImpl implements IClienteService {
 	
 	@Autowired
 	private IFormacionDao formacionDao;
+	
+	@Autowired
+	private IIncidenciaDao incidenciaDao;
 	
 	@Override
 	@Transactional
@@ -207,8 +212,6 @@ public class ClienteServiceImpl implements IClienteService {
 	
 	//FORMADORES
 	
-	
-	
 	@Override
 	@Transactional
 	public List<Formador> findAllFormadores() {
@@ -229,8 +232,6 @@ public class ClienteServiceImpl implements IClienteService {
 				}
 	
 	//FORMACIONES
-	
-	
 	
 	@Override
 	@Transactional
@@ -257,4 +258,31 @@ public class ClienteServiceImpl implements IClienteService {
 		return formacionDao.findById(idFormacion).orElse(null);
 	}
 	
+	
+	//INCIDENCIAS TIENDA
+	
+	@Override
+	@Transactional
+	public List<Incidencia> findAllIncidencias() {
+		return (List<Incidencia>) incidenciaDao.findAll();
+	}
+	
+	@Override
+	@Transactional
+	public Incidencia findOneIncidencia(Long idIncidencia) {
+		return incidenciaDao.findById(idIncidencia).orElse(null);
+	}
+	
+	@Override
+	@Transactional
+	public void saveIncidencia(Incidencia incidencia) {
+		incidenciaDao.save(incidencia);
+	}
+	
+	@Override
+	@Transactional
+	public void deleteIncidencia(Long idIncidencia) {
+		Incidencia incidencia = incidenciaDao.findById(idIncidencia).orElse(null);
+		incidenciaDao.delete(incidencia);
+	}
 }

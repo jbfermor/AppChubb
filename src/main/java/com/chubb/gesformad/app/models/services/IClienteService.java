@@ -7,6 +7,7 @@ import com.chubb.gesformad.app.models.entity.EstadoCampagna;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
+import com.chubb.gesformad.app.models.entity.Incidencia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -94,4 +95,15 @@ public interface IClienteService {
 	public List<Formacion> findAllFormaciones();
 	
 	public Formacion findOneFormacion (Long idFormacion);
+	
+	
+	//INCIDENCIAS DE TIENDA
+	
+	public void saveIncidencia (Incidencia incidencia);
+	
+	public void deleteIncidencia (Long idIncidencia);
+	
+	public Incidencia findOneIncidencia (Long idIncidencia);
+	
+	public List <Incidencia> findAllIncidencias();
 }

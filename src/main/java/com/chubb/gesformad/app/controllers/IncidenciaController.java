@@ -8,23 +8,23 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Incidencia;
-import com.chubb.gesformad.app.models.services.ITiendaService;
+import com.chubb.gesformad.app.models.services.IClienteService;
 
 @Controller
 public class IncidenciaController {
 
 		@Autowired
-		private ITiendaService tiendaService;
+		private IClienteService clienteService;
 		
 		@GetMapping ("/incidenciaConsulta")
 		public String incidenciaConsulta (Model model) {
 			Incidencia tCerrada = new Incidencia((long) 1, "Cerrada");
 			Incidencia tAfluencia = new Incidencia((long) 2, "Exceso afluencia");
 			Incidencia tEntrada = new Incidencia((long) 3, "Entrada denegada");
-			tiendaService.saveIncidencia(tCerrada);
-			tiendaService.saveIncidencia(tAfluencia);
-			tiendaService.saveIncidencia(tEntrada);
-			model.addAttribute("incidencias",tiendaService.findAllIncidencias());
+			clienteService.saveIncidencia(tCerrada);
+			clienteService.saveIncidencia(tAfluencia);
+			clienteService.saveIncidencia(tEntrada);
+			model.addAttribute("incidencias",clienteService.findAllIncidencias());
 			return "incidenciaConsulta";
 		}
 		
@@ -37,7 +37,7 @@ public class IncidenciaController {
 		
 		@PostMapping ("/incidenciaNueva")
 		public String creaIncidencia (Incidencia incidencia, Model model) {
-			tiendaService.saveIncidencia(incidencia);
+			clienteService.saveIncidencia(incidencia);
 			model.addAttribute("incidencia", incidencia);
 			return "redirect:/incidenciaConsulta";		
 		}
@@ -47,7 +47,7 @@ public class IncidenciaController {
 			
 			Incidencia incidencia = null;
 			if (idIncidencia > 0) {
-				incidencia = tiendaService.findOneIncidencia(idIncidencia);
+				incidencia = clienteService.findOneIncidencia(idIncidencia);
 			}
 			else {
 				return "redirect:/incidenciaConsulta";	
@@ -58,7 +58,7 @@ public class IncidenciaController {
 		
 		@GetMapping("/eliminarincidencia/{idIncidencia}")
 		public String eliminarIncidencia(@PathVariable("idIncidencia")Long idIncidencia, Model model) {
-			tiendaService.deleteIncidencia(idIncidencia);
+			clienteService.deleteIncidencia(idIncidencia);
 			return "redirect:/incidenciaConsulta";			
 		}
 	

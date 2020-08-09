@@ -27,7 +27,8 @@ public class ClienteController {
 		private IClienteService clienteService;
 		
 		@GetMapping ("/clienteConsulta")
-		public String cliente (Model model) {model.addAttribute("zonas", clienteService.findAllZonas());
+		public String cliente (Model model) {
+		model.addAttribute("zonas", clienteService.findAllZonas());
 		model.addAttribute("clientes", clienteService.findAllClientes());
 			return "clienteConsulta";
 		}

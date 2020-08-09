@@ -11,6 +11,7 @@
 	</parent>
 	<groupId>com.chubb.gesformad.app</groupId>
 	<artifactId>AppChubbRelease</artifactId>
+	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>AppChubb</name>
 	<description>Aplicación de gestión de formadores</description>
@@ -84,7 +85,7 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-		<!--DEPNDENCIAS HEROKU -->
+		<!--DEPNDENCIAS SECURITY -->
 <!--
 		
 		<dependency>

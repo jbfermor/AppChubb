@@ -31,7 +31,9 @@
 	<div th:replace="/plantillaNavs::navAdmin"></div>
 	<div class="container mt-3">
 		<div class="row mt-2">
-
+			<div class="col-12 mt-2">
+				<h4>Visitas</h4>
+			</div>
 			<div class="col-6 mt-2">
 				<table class="table table-striped table-sm">
 					<thead class="thead-dark">
@@ -43,11 +45,11 @@
 						</tr>
 					</thead>
 					<tbody class="tbody-light align-items-center">
-						<tr th:each="cliente : ${clientes}">
-							<td th:text="${cliente.idCliente}"></td>
-							<td th:text="${cliente.nombreCliente}"></td>
-							<td th:text="${cliente.nombreCliente}"></td>
-							<td th:text="${cliente.nombreCliente}"></td>		
+						<tr th:each="visita : ${visitas}">
+							<td th:text="${visita.idVisita}"></td>
+							<td th:text="${visita.fechaVisita}"></td>
+							<td th:text="${visita.formador.nombreFormador}"></td>
+							<td th:text="${visita.tienda.nombreTienda}"></td>		
 						</tr>
 					</tbody>
 				</table>

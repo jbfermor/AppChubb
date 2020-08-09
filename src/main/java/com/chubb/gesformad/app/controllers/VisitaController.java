@@ -6,17 +6,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.chubb.gesformad.app.models.services.IClienteService;
-import com.chubb.gesformad.app.models.services.IVisitaService;
 
 @Controller
 public class VisitaController {
 	
 	@Autowired
-	private IVisitaService visitaService;
+	private IClienteService clienteService;
 	
 	@GetMapping ("/visitaConsulta")
 	public String visitaConsulta (Model model) {
-		//model.addAttribute("visitas", visitaService.findAllVisitas());
+		model.addAttribute("visitas", clienteService.findAllVisitas());
 		return "visitaConsulta";
 	}
 	

@@ -14,6 +14,7 @@ import com.chubb.gesformad.app.models.dao.IFranquiciaDao;
 import com.chubb.gesformad.app.models.dao.IIncidenciaDao;
 import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.ITiendaDao;
+import com.chubb.gesformad.app.models.dao.IVisitaDao;
 import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.EstadoCampagna;
@@ -23,6 +24,7 @@ import com.chubb.gesformad.app.models.entity.Franquicia;
 import com.chubb.gesformad.app.models.entity.Incidencia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
+import com.chubb.gesformad.app.models.entity.Visita;
 import com.chubb.gesformad.app.models.entity.Zona;
 
 @Service
@@ -54,6 +56,9 @@ public class ClienteServiceImpl implements IClienteService {
 	
 	@Autowired
 	private IIncidenciaDao incidenciaDao;
+	
+	@Autowired
+	private IVisitaDao visitaDao;
 	
 	@Override
 	@Transactional
@@ -285,4 +290,31 @@ public class ClienteServiceImpl implements IClienteService {
 		Incidencia incidencia = incidenciaDao.findById(idIncidencia).orElse(null);
 		incidenciaDao.delete(incidencia);
 	}
+	
+	//VISITAS
+
+	@Override
+	@Transactional
+	public List<Visita> findAllVisitas() {
+		return (List<Visita>) visitaDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Visita findOneVisitaId(Long idVisita) {
+		return visitaDao.findById(idVisita).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public void saveVisita(Visita visita) {
+		visitaDao.save(visita);
+	}
+
+	@Override
+	@Transactional
+	public void deleteVisita(Long idVisita) {
+		visitaDao.deleteById(idVisita);	
+	}
+
 }

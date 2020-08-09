@@ -10,7 +10,7 @@ import com.chubb.gesformad.app.models.entity.Visita;
 public class VisitaServiceImpl implements IVisitaService {
 	
 	@Autowired
-	IVisitaDao visitaDao;
+	private IVisitaDao visitaDao;
 
 	@Override
 	public List<Visita> findAllVisitas() {

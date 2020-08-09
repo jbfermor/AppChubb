@@ -10,6 +10,7 @@ import com.chubb.gesformad.app.models.entity.Franquicia;
 import com.chubb.gesformad.app.models.entity.Incidencia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
+import com.chubb.gesformad.app.models.entity.Visita;
 import com.chubb.gesformad.app.models.entity.Zona;
 
 public interface IClienteService {
@@ -106,4 +107,14 @@ public interface IClienteService {
 	public Incidencia findOneIncidencia (Long idIncidencia);
 	
 	public List <Incidencia> findAllIncidencias();
+	
+	//VISITAS
+	
+	public List <Visita> findAllVisitas();
+	
+	public Visita findOneVisitaId(Long idVisita);
+	
+	public void saveVisita(Visita visita);
+	
+	public void deleteVisita(Long idVisita);
 }

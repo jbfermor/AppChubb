@@ -28,9 +28,12 @@
 </head>
 
 <body>
-	<div th:replace="../static/plantillas/plantillasWeb::navAdmin"></div>
+	<div th:replace="plantillaNavs::navAdmin"></div>
 	<div th:fragment="estadoCampganaConsulta" class="container mt-3">
 		<div class="row">
+		<div class="col-12 mt-2">
+				<h4>Estados de Campaña</h4>
+			</div>
 		<div class="col-12">
 			<a th:href="@{/estadoCampagnaNuevo}" class="btn btn-success">Añadir Estado de Campaña</a>
 			<a th:href="@{/campagnaConsulta}" class="btn btn-success">Volver a Campaña</a>

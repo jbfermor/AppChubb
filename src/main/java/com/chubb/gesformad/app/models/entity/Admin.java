@@ -45,7 +45,6 @@ public class Admin implements Serializable {
 	public Admin() {}
 
 	public Admin(String nifAdmin, String passAdmin, String nombreAdmin, String telAdmin, String mailAdmin) {
-		super();
 		this.nifAdmin = nifAdmin;
 		this.passAdmin = passAdmin;
 		this.nombreAdmin = nombreAdmin;

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
@@ -41,12 +42,15 @@ public class FormadorController {
 		Formador formador = new Formador();
 		Rol rol = formadorService.findOneRol((long)2);
 		formador.setRol(rol);
+		model.addAttribute("provincias", formadorService.findAllProvincias());
 		model.addAttribute("formador", formador);
-		return "/formadorInicial";
+		return "formadorInicial";
 	}
 	
 	@PostMapping("/formadorInicial")
-	public String creaFormdorInicial (Formador formador, Model model) {
+	public String creaFormdorInicial (Formador formador, Provincia provincia, Model model) {
+		Provincia provinciaLista = formadorService.findOneProvincia(provincia.getIdProvincia());
+		formador.setProvinciaFormador(provinciaLista.getNombreProvincia());
 		formadorService.saveFormador(formador);
 		model.addAttribute("formador", formador);
 		return "redirect:/index";
@@ -60,6 +64,7 @@ public class FormadorController {
 		Formador formador = new Formador();
 		Rol rol = formadorService.findOneRol((long)2);
 		formador.setRol(rol);
+		model.addAttribute("provincias", formadorService.findAllProvincias());
 		model.addAttribute("formador", formador);
 		return "/formadorNuevo";
 	}

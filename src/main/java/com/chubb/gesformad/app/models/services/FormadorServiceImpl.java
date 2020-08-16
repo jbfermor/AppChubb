@@ -9,12 +9,14 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chubb.gesformad.app.models.dao.IComercialDao;
 import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
+import com.chubb.gesformad.app.models.dao.IProvinciaDao;
 import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.IRolDao;
 import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Comercial;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -39,6 +41,9 @@ public class FormadorServiceImpl implements IFormadorService {
 	
 	@Autowired
 	IZonaDao zonaDao;
+	
+	@Autowired
+	IProvinciaDao provinciaDao;
 
 	@Override
 	@Transactional
@@ -155,6 +160,25 @@ public class FormadorServiceImpl implements IFormadorService {
 	@Transactional
 	public void saveRol(Rol rol) {
 		rolDao.save(rol);
+	}
+	
+	//PROVINCIAS
+	
+	@Override
+	@Transactional
+	public List<Provincia> findAllProvincias() {
+		return (List<Provincia>) provinciaDao.findAll();
+	}
+
+	@Override
+	public Provincia findOneProvincia(Long idProvincia) {
+		return provinciaDao.findById(idProvincia).orElse(null);
+	}
+	
+	@Override
+	@Transactional
+	public void saveProvincia(Provincia provincia) {
+		provinciaDao.save(provincia);
 	}
 
 }

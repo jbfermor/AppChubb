@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+
+<head>
+<meta charset="utf-8" />
+
+<title>Franquicia Nueva</title>
+
+<!-- CSS Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+	integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+	crossorigin="anonymous">
+
+<!-- JS Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+	integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+	integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+	crossorigin="anonymous"></script>
+<script
+	src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+	integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+	crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+	<div th:replace="plantillaNavs::navAdmin"></div>
+	<div class="row">
+		<div class="col-12">
+			<div class="col-12"></div>
+			<div class="col-12">
+				<form class="form" th:action="@{/visitaNuevaCliente}"
+					th:object="${visita}" method="POST">
+					
+					<div class="form-group row mt-2">
+						<div class="col-2 mt-2">
+							<label for="formadorVisita">Formador</label>
+							<select th:field="*{formador.idFormador}" class="form-control" id="selectFormadorVisita">
+								<option th:each="formador:${formadores}"
+									th:text="${formador.nombreFormador} + ' ' + ${formador.ap1Formador} + ' ' + ${formador.ap2Formador}"
+									th:value="${formador.idFormador}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group row mt-2">	
+						<div class="col-2 mt-2">
+							<label for="formacionVisita">Formacion</label>
+							<select th:field="*{formaciones}" class="form-control" id="selectFormacionVisita">
+								<option th:each="formacion:${formaciones}"
+									th:text="${formacion.nombreFormacion}"
+									th:value="${formacion.idFormacion}"></option>
+							</select>
+						</div>
+					</div>
+					
+					<div class="form-group row mt-2">
+						<div class="col-1 mt-2">
+							<label for="idVisita">Id</label> <input readonly type="text"
+								th:field="*{idVisita}" class="form-control "
+								id="idFranquicia" />
+						</div>
+						<div class="col-2 mt-2">
+							<label for="fechaPrevVisita">Fecha de visita prevista</label> <input type="date"
+								th:field="*{fechaEstimadaVisita}" class="form-control"
+								id="fechaEstimadaVisita"/>
+						</div>
+						<div class="col-2 mt-2">
+							<label for="horaPrevVisita">Hora de visita prevista</label> <input type="time"
+								th:field="*{horaInicioEstimadaVisita}" class="form-control"
+								id="horaInicioEstimadaVisita" />
+						</div>
+					</div>
+						
+					<div class="form-group row mt-2">
+						<div class="col-3 mt-2">
+							<label for="zonasTiendaVisita">Zona</label>
+							<select th:field="*{tienda}" class="form-control" id="selectTiendaVisita">
+								<option th:each="zona:${zonas}"
+									th:text="${zona.nombreZona}"
+									th:value="${zona.idZona}"></option>
+							</select>
+						</div>
+						<div class="col-3 mt-2">
+							<label for="provinciaTiendaVisita">Provincia</label>
+							<select th:field="*{tienda}" class="form-control" id="selectTiendaVisita">
+								<option th:each="provincia:${provincias}"
+									th:text="${tienda.}"
+									th:value="${zona.idZona}"></option>
+							</select>
+						</div>
+						<div class="col-5 mt-2">
+							<label for="tiendaVisita">Tienda</label>
+							<select th:field="*{tienda}" class="form-control" id="selectTiendaVisita">
+								<option th:each="tienda:${tiendas}"
+									th:text="${tienda.nombreTienda}"
+									th:value="${tienda.idTienda}"></option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group row mt-2">
+						<div class="col-2 mt-2">
+							<input type="submit" value="Guardar" class="btn btn-info" />
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

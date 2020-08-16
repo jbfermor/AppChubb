@@ -79,6 +79,10 @@ public class Formador implements Serializable {
 	private List <Visita> visitas;
 	
 	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_provincia")
+	Provincia provincia;
+	
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_rol")
 	Rol rol;
 	
@@ -296,6 +300,14 @@ public class Formador implements Serializable {
 
 	public void setZonas(List<Zona> zonas) {
 		this.zonas = zonas;
+	}
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
 	}
 
 

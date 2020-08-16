@@ -47,6 +47,9 @@ public class Cliente implements Serializable {
 	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 	private List <Formacion> formaciones;
 	
+	@OneToMany (mappedBy = "cliente", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List <Visita> visitas;
+	
 	@ManyToMany (mappedBy = "clientes")
 	private List <Formador> formadores;
 	
@@ -136,6 +139,14 @@ public class Cliente implements Serializable {
 
 	public void setFormaciones(List<Formacion> formaciones) {
 		this.formaciones = formaciones;
+	}
+
+	public List<Visita> getVisitas() {
+		return visitas;
+	}
+
+	public void setVisitas(List<Visita> visitas) {
+		this.visitas = visitas;
 	}
 
 	

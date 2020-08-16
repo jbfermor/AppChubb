@@ -29,7 +29,7 @@ public class TiendaController {
 	}
 	
 	
-	//DESDE PROVEEDOR
+	//DESDE CLIENTE
 	@GetMapping("/tiendaEditaCliente/{idTienda}/{idCliente}")
 	public String editaTiendaCliente(@PathVariable("idCliente") Long idCliente, @PathVariable("idTienda") Long idTienda, Model model) {
 		

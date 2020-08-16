@@ -115,7 +115,7 @@ public class Formador implements Serializable {
 	public Formador(Long idFormador, String nifFormador, String passFormador, String nombreFormador, String ap1Formador,
 			String ap2Formador, String direccionFormador, int cpFormador, String localidadFormador,
 			String provinciaFormador, String tel1Formador, String tel2Formador, String mail1Formador,
-			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, Rol rol,
+			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, Provincia provincia, Rol rol,
 			List<Formacion> formaciones, List<Cliente> clientes, List<Zona> zonas) {
 		this.idFormador = idFormador;
 		this.nifFormador = nifFormador;
@@ -133,6 +133,7 @@ public class Formador implements Serializable {
 		this.mail2Formador = mail2Formador;
 		this.cuentaBancariaFormador = cuentaBancariaFormador;
 		this.visitas = visitas;
+		this.provincia = provincia;
 		this.rol = rol;
 		this.formaciones = formaciones;
 		this.clientes = clientes;
@@ -212,14 +213,6 @@ public class Formador implements Serializable {
 
 	public void setLocalidadFormador(String localidadFormador) {
 		this.localidadFormador = localidadFormador;
-	}
-
-	public String getProvinciaFormador() {
-		return provinciaFormador;
-	}
-
-	public void setProvinciaFormador(String provinciaFormador) {
-		this.provinciaFormador = provinciaFormador;
 	}
 
 	public String getTel1Formador() {

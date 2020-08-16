@@ -45,9 +45,6 @@ public class Tienda implements Serializable{
 	@Column(name = "localidad_tienda")
 	private String localidadTienda;
 	
-	@Column(name = "provincia_tienda")
-	private String provinciaTienda;
-	
 	@Column(name = "tel_tienda")
 	private int telTienda;
 	
@@ -63,6 +60,10 @@ public class Tienda implements Serializable{
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name="id_zona", nullable = false)
 	private Zona zona;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name="id_provincia", nullable = false)
+	private Provincia provincia;
 	
 	@ManyToOne(fetch = FetchType.LAZY, optional = false)
 	@JoinColumn(name = "id_franquicia", nullable = false)
@@ -81,23 +82,35 @@ public class Tienda implements Serializable{
 	public Tienda() {}
 
 
-	public Tienda(Long idTienda, String nombreTienda, String direccionTienda, int telTienda, String mailTienda,
-			int cpTienda, String localidadTienda, String provinciaTienda, int numComercialesFormadosTienda) {
+
+	public Tienda(Long idTienda, String nombreTienda, String codigoTienda, String direccionTienda, int cpTienda,
+			String localidadTienda, int telTienda, String mailTienda, List<Visita> visitas, Zona zona,
+			Provincia provincia, Franquicia franquicia, Cliente cliente, List<Comercial> comercialTienda) {
 		this.idTienda = idTienda;
 		this.nombreTienda = nombreTienda;
+		this.codigoTienda = codigoTienda;
 		this.direccionTienda = direccionTienda;
-		this.telTienda = telTienda;
-		this.mailTienda = mailTienda;
 		this.cpTienda = cpTienda;
 		this.localidadTienda = localidadTienda;
-		this.provinciaTienda = provinciaTienda;
+		this.telTienda = telTienda;
+		this.mailTienda = mailTienda;
+		this.visitas = visitas;
+		this.zona = zona;
+		this.provincia = provincia;
+		this.franquicia = franquicia;
+		this.cliente = cliente;
+		this.comercialTienda = comercialTienda;
 	}
+
 
 	// SETTER Y GETTERS
 	
+	
+
 	public Long getIdTienda() {
 		return idTienda;
 	}
+
 
 
 	public void setIdTienda(Long idTienda) {
@@ -105,9 +118,11 @@ public class Tienda implements Serializable{
 	}
 
 
+
 	public String getNombreTienda() {
 		return nombreTienda;
 	}
+
 
 
 	public void setNombreTienda(String nombreTienda) {
@@ -115,68 +130,11 @@ public class Tienda implements Serializable{
 	}
 
 
-	public String getDireccionTienda() {
-		return direccionTienda;
-	}
-
-
-	public void setDireccionTienda(String direccionTienda) {
-		this.direccionTienda = direccionTienda;
-	}
-
-
-	public int getTelTienda() {
-		return telTienda;
-	}
-
-
-	public void setTelTienda(int telTienda) {
-		this.telTienda = telTienda;
-	}
-
-
-	public String getMailTienda() {
-		return mailTienda;
-	}
-
-
-	public void setMailTienda(String mailTienda) {
-		this.mailTienda = mailTienda;
-	}
-
-
-	public int getCpTienda() {
-		return cpTienda;
-	}
-
-
-	public void setCpTienda(int cpTienda) {
-		this.cpTienda = cpTienda;
-	}
-
-
-	public String getLocalidadTienda() {
-		return localidadTienda;
-	}
-
-
-	public void setLocalidadTienda(String localidadTienda) {
-		this.localidadTienda = localidadTienda;
-	}
-
-
-	public String getProvinciaTienda() {
-		return provinciaTienda;
-	}
-
-
-	public void setProvinciaTienda(String provinciaTienda) {
-		this.provinciaTienda = provinciaTienda;
-	}
 
 	public String getCodigoTienda() {
 		return codigoTienda;
 	}
+
 
 
 	public void setCodigoTienda(String codigoTienda) {
@@ -184,24 +142,65 @@ public class Tienda implements Serializable{
 	}
 
 
-	public List<Comercial> getComercialTienda() {
-		return comercialTienda;
+
+	public String getDireccionTienda() {
+		return direccionTienda;
 	}
 
 
-	public void setComercialTienda(List<Comercial> comercialTienda) {
-		this.comercialTienda = comercialTienda;
+
+	public void setDireccionTienda(String direccionTienda) {
+		this.direccionTienda = direccionTienda;
 	}
 
 
-	public List<Comercial> getComercialFormadoTienda() {
-		return comercialTienda;
+
+	public int getCpTienda() {
+		return cpTienda;
 	}
 
 
-	public void setComercialFormadoTienda(List<Comercial> comercialTienda) {
-		this.comercialTienda = comercialTienda;
+
+	public void setCpTienda(int cpTienda) {
+		this.cpTienda = cpTienda;
 	}
+
+
+
+	public String getLocalidadTienda() {
+		return localidadTienda;
+	}
+
+
+
+	public void setLocalidadTienda(String localidadTienda) {
+		this.localidadTienda = localidadTienda;
+	}
+
+
+
+	public int getTelTienda() {
+		return telTienda;
+	}
+
+
+
+	public void setTelTienda(int telTienda) {
+		this.telTienda = telTienda;
+	}
+
+
+
+	public String getMailTienda() {
+		return mailTienda;
+	}
+
+
+
+	public void setMailTienda(String mailTienda) {
+		this.mailTienda = mailTienda;
+	}
+
 
 
 	public List<Visita> getVisitas() {
@@ -209,9 +208,11 @@ public class Tienda implements Serializable{
 	}
 
 
+
 	public void setVisitas(List<Visita> visitas) {
 		this.visitas = visitas;
 	}
+
 
 
 	public Zona getZona() {
@@ -219,9 +220,23 @@ public class Tienda implements Serializable{
 	}
 
 
+
 	public void setZona(Zona zona) {
 		this.zona = zona;
 	}
+
+
+
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+
 
 
 	public Franquicia getFranquicia() {
@@ -229,9 +244,11 @@ public class Tienda implements Serializable{
 	}
 
 
+
 	public void setFranquicia(Franquicia franquicia) {
 		this.franquicia = franquicia;
 	}
+
 
 
 	public Cliente getCliente() {
@@ -239,10 +256,23 @@ public class Tienda implements Serializable{
 	}
 
 
+
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
-	
-	
-	
+
+
+
+	public List<Comercial> getComercialTienda() {
+		return comercialTienda;
+	}
+
+
+
+	public void setComercialTienda(List<Comercial> comercialTienda) {
+		this.comercialTienda = comercialTienda;
+	}
+
+
+
 }

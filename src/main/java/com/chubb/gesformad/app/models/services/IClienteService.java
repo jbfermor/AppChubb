@@ -8,6 +8,7 @@ import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
 import com.chubb.gesformad.app.models.entity.Incidencia;
+import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Visita;
@@ -117,4 +118,12 @@ public interface IClienteService {
 	public void saveVisita(Visita visita);
 	
 	public void deleteVisita(Long idVisita);
+	
+	//PROVINCIAS
+	
+	public List <Provincia> findAllProvincias();
+	
+	public Provincia findOneProvincia (Long idProvincia);
+	
+	public void saveProvincia (Provincia provincia);
 }

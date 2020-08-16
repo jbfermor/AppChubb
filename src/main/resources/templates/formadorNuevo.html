@@ -34,8 +34,10 @@
 		<div class="col-12 mt-2 ml-3" th:fragment="editaFormador">
 			<form class="form" th:action="@{/formadorNuevo}"
 				th:object="${formador}" method="POST">
+				
 				<input type="hidden" th:field="*{rol.idRol}" th:id="idRol">
 				<input type="hidden" th:field="*{idFormador}" th:id="idFormador">
+				
 				<div class="form-group row">
 					<div class="col-2">
 						<label for="nifFormador">NIF</label> <input type="text"
@@ -79,11 +81,11 @@
 							id="localidadFormador" />
 					</div>
 					<div class="col-2">
-						<label for="provinciaFormador">Provincia</label> 
-						<select th:field="*{provincia}" class="form-control" id="provinciaFormador">
+						<label for="provinciaFormador">Provincia</label>
+						<select th:field="*{provincia.idProvincia}" class="form-control" id="provinciaFormador">
 								<option th:each="provincia:${provincias}"
 									th:text="${provincia.nombreProvincia}"
-									th:value="${provincia.nombreProvincia}">
+									th:value="${provincia.idProvincia}">
 								</option>
 						</select>
 					</div>

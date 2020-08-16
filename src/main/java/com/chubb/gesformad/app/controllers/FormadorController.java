@@ -48,9 +48,7 @@ public class FormadorController {
 	}
 	
 	@PostMapping("/formadorInicial")
-	public String creaFormdorInicial (Formador formador, Provincia provincia, Model model) {
-		Provincia provinciaLista = formadorService.findOneProvincia(provincia.getIdProvincia());
-		formador.setProvinciaFormador(provinciaLista.getNombreProvincia());
+	public String creaFormdorInicial (Formador formador, Model model) {
 		formadorService.saveFormador(formador);
 		model.addAttribute("formador", formador);
 		return "redirect:/index";
@@ -66,7 +64,7 @@ public class FormadorController {
 		formador.setRol(rol);
 		model.addAttribute("provincias", formadorService.findAllProvincias());
 		model.addAttribute("formador", formador);
-		return "/formadorNuevo";
+		return "formadorNuevo";
 	}
 	
 	@PostMapping("/formadorNuevo")
@@ -144,7 +142,6 @@ public class FormadorController {
 			}
 		}
 		
-		
 		model.addAttribute("zona", zona);
 		model.addAttribute("zonasAsignadas", listaZonasSelec);				
 		model.addAttribute("zonasId", listaZonasId);
@@ -196,7 +193,7 @@ public class FormadorController {
 			return "redirect:/formadorVer/" + idFormador;	
 		}
 		
-		
+		model.addAttribute("provincias", formadorService.findAllProvincias());
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("zona", zona);
 		model.addAttribute("formacion", formacion);

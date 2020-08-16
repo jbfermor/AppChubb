@@ -79,9 +79,13 @@
 							id="localidadFormador" />
 					</div>
 					<div class="col-2">
-						<label for="provinciaFormador">Provincia</label> <input
-							type="text" th:field="*{provinciaFormador}" class="form-control "
-							id="provinciaFormador" />
+						<label for="provinciaFormador">Provincia</label>
+						<select th:field="*{provincia.idProvincia}" class="form-control" id="provinciaFormador">
+								<option th:each="provincia:${provincias}"
+									th:text="${provincia.nombreProvincia}"
+									th:value="${provincia.idProvincia}">
+								</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group row">

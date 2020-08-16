@@ -12,6 +12,7 @@ import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
 import com.chubb.gesformad.app.models.dao.IFranquiciaDao;
 import com.chubb.gesformad.app.models.dao.IIncidenciaDao;
+import com.chubb.gesformad.app.models.dao.IProvinciaDao;
 import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.ITiendaDao;
 import com.chubb.gesformad.app.models.dao.IVisitaDao;
@@ -22,6 +23,7 @@ import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
 import com.chubb.gesformad.app.models.entity.Franquicia;
 import com.chubb.gesformad.app.models.entity.Incidencia;
+import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Visita;
@@ -59,6 +61,9 @@ public class ClienteServiceImpl implements IClienteService {
 	
 	@Autowired
 	private IVisitaDao visitaDao;
+	
+	@Autowired
+	private IProvinciaDao provinciaDao;
 	
 	@Override
 	@Transactional
@@ -316,5 +321,24 @@ public class ClienteServiceImpl implements IClienteService {
 	public void deleteVisita(Long idVisita) {
 		visitaDao.deleteById(idVisita);	
 	}
+	
+	//PROVINCIAS
+	
+		@Override
+		@Transactional
+		public List<Provincia> findAllProvincias() {
+			return (List<Provincia>) provinciaDao.findAll();
+		}
+
+		@Override
+		public Provincia findOneProvincia(Long idProvincia) {
+			return provinciaDao.findById(idProvincia).orElse(null);
+		}
+		
+		@Override
+		@Transactional
+		public void saveProvincia(Provincia provincia) {
+			provinciaDao.save(provincia);
+		}
 
 }

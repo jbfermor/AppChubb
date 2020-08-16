@@ -28,18 +28,25 @@ public class Provincia {
 	@OneToMany(mappedBy = "provincia" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
 	private List <Formador> formadores;
 	
+	@OneToMany(mappedBy = "provincia" , fetch = FetchType.LAZY, cascade = CascadeType.ALL )
+	private List <Tienda> tiendas;
+	
 	
 	//CONSTRUCTORES
 	public Provincia () {}
 
-	public Provincia(Long idProvincia, String nombreProvincia) {
+	public Provincia(Long idProvincia, String nombreProvincia, List<Formador> formadores, List<Tienda> tiendas) {
 		this.idProvincia = idProvincia;
 		this.nombreProvincia = nombreProvincia;
+		this.formadores = formadores;
+		this.tiendas = tiendas;
 	}
 
-	
-	
+
 	//GETTERS Y SETTERS
+
+
+	
 	public Long getIdProvincia() {
 		return idProvincia;
 	}
@@ -55,6 +62,23 @@ public class Provincia {
 	public void setNombreProvincia(String nombreProvincia) {
 		this.nombreProvincia = nombreProvincia;
 	}
-	
+
+	public List<Formador> getFormadores() {
+		return formadores;
+	}
+
+	public void setFormadores(List<Formador> formadores) {
+		this.formadores = formadores;
+	}
+
+	public List<Tienda> getTiendas() {
+		return tiendas;
+	}
+
+	public void setTiendas(List<Tienda> tiendas) {
+		this.tiendas = tiendas;
+	}
+
+
 
 }

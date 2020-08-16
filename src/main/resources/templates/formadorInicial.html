@@ -80,7 +80,7 @@
 					</div>
 					<div class="col-2">
 						<label for="provinciaFormador">Provincia</label>
-						<select th:field="*{provincia}" class="form-control" id="provinciaFormador">
+						<select th:field="*{provincia.idProvincia}" class="form-control" id="provinciaFormador">
 								<option th:each="provincia:${provincias}"
 									th:text="${provincia.nombreProvincia}"
 									th:value="${provincia.idProvincia}">

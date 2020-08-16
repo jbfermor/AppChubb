@@ -30,62 +30,9 @@ public class TiendaController {
 	
 	
 	//DESDE CLIENTE
-	@GetMapping("/tiendaEditaCliente/{idTienda}/{idCliente}")
-	public String editaTiendaCliente(@PathVariable("idCliente") Long idCliente, @PathVariable("idTienda") Long idTienda, Model model) {
-		
-		Tienda tienda = null;
-		if (idCliente > 0) {
-			tienda = clienteService.findOneTienda(idTienda);
-		}
-		else {
-			return "redirect:/tiendaConsulta";
-		}
-		
-		
-		List <Franquicia> listaFranquiciasP = new ArrayList <Franquicia>();
-		List <Franquicia> franquiciasP = new ArrayList <Franquicia>();
-		List <Zona> listaZonasP = new ArrayList <Zona>();
-		List <Zona> zonasP = new ArrayList <Zona>();
-		
-		franquiciasP = clienteService.findAllFranquicias();
-		zonasP = clienteService.findAllZonas();
-		
-		for(Franquicia i : franquiciasP) {
-			if(i.getCliente().getIdCliente() == idCliente) {
-				listaFranquiciasP.add(i);
-			}
-		}
-		
-		for(Zona i : zonasP) {
-			if(i.getCliente().getIdCliente() == idCliente) {
-				listaZonasP.add(i);
-			}
-		}
-		
-		model.addAttribute("listaFranquiciasP", listaFranquiciasP);
-		model.addAttribute("listaZonasP", listaZonasP);
-		model.addAttribute("tienda", tienda);
-		return "/tiendaEditaCliente";
-	}
-	
-	@PostMapping("tiendaEditaCliente")
-	public String editaTienda (Tienda tienda, Model model) {
-		clienteService.saveTienda(tienda);
-		model.addAttribute("tienda", tienda);
-		return "redirect:/tiendaConsulta/";
-	}
-	
-	
-	@PostMapping("tiendaNuevaCliente")
-	public String creaTienda (Tienda tienda, Model model) {
-		clienteService.saveTienda(tienda);
-		long id = tienda.getCliente().getIdCliente();
-		model.addAttribute("tienda", tienda);
-		return "redirect:/clienteVer/" + id;
-	}
 	
 	@GetMapping("/tiendaNuevaCliente/{idCliente}")
-	public String nuevaTienda(@PathVariable("idCliente") Long idCliente, Model model) {
+	public String nuevaTiendaCliente(@PathVariable("idCliente") Long idCliente, Model model) {
 		
 		Cliente cliente = null;
 		if (idCliente > 0) {
@@ -100,28 +47,42 @@ public class TiendaController {
 		
 		List <Franquicia> listaFranquiciasP = new ArrayList <Franquicia>();
 		List <Franquicia> franquiciasP = new ArrayList <Franquicia>();
-		List <Zona> listaZonasP = new ArrayList <Zona>();
-		List <Zona> zonasP = new ArrayList <Zona>();
-		
 		franquiciasP = clienteService.findAllFranquicias();
-		zonasP = clienteService.findAllZonas();
-		
 		for(Franquicia i : franquiciasP) {
 			if(i.getCliente().getIdCliente() == idCliente) {
 				listaFranquiciasP.add(i);
 			}
 		}
 		
+		
+		List <Zona> listaZonasP = new ArrayList <Zona>();
+		List <Zona> zonasP = new ArrayList <Zona>();
+		zonasP = clienteService.findAllZonas();
 		for(Zona i : zonasP) {
 			if(i.getCliente().getIdCliente() == idCliente) {
 				listaZonasP.add(i);
 			}
 		}
 		
+		model.addAttribute("provincias", clienteService.findAllProvincias());
 		model.addAttribute("listaFranquiciasP", listaFranquiciasP);
 		model.addAttribute("listaZonasP", listaZonasP);
 		model.addAttribute("tienda", tienda);
-		return "/tiendaNuevaCliente";
+		return "tiendaNuevaCliente" ; 
+	}
+	
+	
+	@PostMapping("/tiendaNuevaCliente")
+	public String creaTienda (Tienda tienda, Model model) {
+		clienteService.saveTienda(tienda);
+		model.addAttribute("tienda", tienda);
+		return "redirect:/index";
+	}
+	
+	@GetMapping ("/eliminarTiendaCliente/{idCliente}/{idTienda}")
+	public String eliminarTienda (@PathVariable("idCliente") Long idCliente, @PathVariable("idTienda") Long idTienda, Model model) {
+		clienteService.deleteTienda(idTienda);
+		return "redirect:/verCliente/" + idCliente;
 	}
 	
 	
@@ -137,6 +98,8 @@ public class TiendaController {
 			}
 		Tienda tienda = new Tienda();
 		tienda.setFranquicia(franquicia);
+		
+		model.addAttribute("provincias", clienteService.findAllProvincias());
 		model.addAttribute("zonas", clienteService.findAllZonas());
 		model.addAttribute("tienda", tienda);
 		model.addAttribute("nombreFranquicia", franquicia.getNombreFranquicia());
@@ -150,16 +113,14 @@ public class TiendaController {
 		return "redirect:/franquiciaConsulta";
 	}
 	
-	@GetMapping ("/eliminarTienda/{idTienda}")
-	public String eliminarTienda (@PathVariable("idTienda") Long idTienda, Model model) {
-		clienteService.deleteTienda(idTienda);
-		return "redirect:/tiendaConsulta";
-	}
-	
+
 	@GetMapping("/tiendaVer/{idTienda}")
 	public String verTienda (@PathVariable("idTienda") Long idTienda, Model model) {
 		Tienda tienda = clienteService.findOneTienda(idTienda);
 		model.addAttribute("tienda", tienda);
 		return "/tiendaVer";
 	}
+	
+	
+	
 }

@@ -105,15 +105,18 @@ public class TiendaController {
 		model.addAttribute("provincias", clienteService.findAllProvincias());
 		model.addAttribute("zonas", clienteService.findAllZonas());
 		model.addAttribute("tienda", tienda);
-		model.addAttribute("nombreFranquicia", tienda.getFranquicia().getNombreFranquicia());
+		model.addAttribute("nombreFranquicia", tienda.getCliente().getIdCliente());
+		model.addAttribute("cliente", tienda.getCliente().getIdCliente());
 		
 		return "tiendaNuevaFranquicia";
 	}
 	
 	@PostMapping ("/tiendaNuevaFranquicia")
 	public String creaTiendaFranquicia (Tienda tienda, Model model) {
-		clienteService.saveTienda(tienda);
-		model.addAttribute("tienda", tienda);
+
+						clienteService.saveTienda(tienda);
+						model.addAttribute("tienda", tienda);	
+
 		return "redirect:/franquiciaConsulta";
 	}
 	

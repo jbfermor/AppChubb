@@ -28,7 +28,7 @@
 </head>
 
 <body>
-	<div th:replace="../static/plantillas/plantillasWeb::navAdmin"></div>
+	<div th:replace="plantillaNavs::navAdmin"></div>
 	<div class="row">
 		<div class="col-12">
 			<div class="col-12"></div>
@@ -49,7 +49,6 @@
 						<div class="col-2">
 							<label for="clienteFranquicia">Cliente</label> <select
 								th:field="*{cliente.idCliente}" class="form-control">
-								<option th:value="''" th:text="Select"></option>
 								<option th:each="cliente:${clientes}"
 									th:text="${cliente.nombreCliente}"
 									th:value="${cliente.idCliente}">

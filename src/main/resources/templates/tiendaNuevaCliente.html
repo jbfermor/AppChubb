@@ -35,7 +35,7 @@
 				<h4 th:text = "'Tienda Nueva de ' + ${tienda.cliente.nombreCliente}"></h4>
 			</div>
 			<div class="col-12">
-				<form class="form" th:action="@{/tiendaNuevaCliente/} + ${idCliente}" th:object="${tienda}"
+				<form class="form" th:action="@{/tiendaNuevaCliente}" th:object="${tienda}"
 					method="POST">
 					<div class="form-group row">
 						<div class="col-1">

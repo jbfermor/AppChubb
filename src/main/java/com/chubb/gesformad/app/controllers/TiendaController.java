@@ -53,8 +53,7 @@ public class TiendaController {
 				listaFranquiciasP.add(i);
 			}
 		}
-		
-		
+			
 		List <Zona> listaZonasP = new ArrayList <Zona>();
 		List <Zona> zonasP = new ArrayList <Zona>();
 		zonasP = clienteService.findAllZonas();
@@ -68,7 +67,7 @@ public class TiendaController {
 		model.addAttribute("listaFranquiciasP", listaFranquiciasP);
 		model.addAttribute("listaZonasP", listaZonasP);
 		model.addAttribute("tienda", tienda);
-		return "tiendaNuevaCliente" ; 
+		return "tiendaNuevaCliente"; 
 	}
 	
 	
@@ -76,8 +75,10 @@ public class TiendaController {
 	public String creaTienda (Tienda tienda, Model model) {
 		clienteService.saveTienda(tienda);
 		model.addAttribute("tienda", tienda);
-		return "redirect:/index";
+		Long id = tienda.getCliente().getIdCliente();
+		return "redirect:/clienteVer/" + id;
 	}
+	
 	
 	@GetMapping ("/eliminarTiendaCliente/{idCliente}/{idTienda}")
 	public String eliminarTienda (@PathVariable("idCliente") Long idCliente, @PathVariable("idTienda") Long idTienda, Model model) {
@@ -98,12 +99,15 @@ public class TiendaController {
 			}
 		Tienda tienda = new Tienda();
 		tienda.setFranquicia(franquicia);
+		Cliente cliente = franquicia.getCliente();
+		tienda.setCliente(cliente);
 		
 		model.addAttribute("provincias", clienteService.findAllProvincias());
 		model.addAttribute("zonas", clienteService.findAllZonas());
 		model.addAttribute("tienda", tienda);
-		model.addAttribute("nombreFranquicia", franquicia.getNombreFranquicia());
-		return "/tiendaNuevaFranquicia";
+		model.addAttribute("nombreFranquicia", tienda.getFranquicia().getNombreFranquicia());
+		
+		return "tiendaNuevaFranquicia";
 	}
 	
 	@PostMapping ("/tiendaNuevaFranquicia")

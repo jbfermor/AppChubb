@@ -32,7 +32,8 @@ public class CampagnaController {
 		return "campagnaNueva";
 	}
 	
-	@PostMapping ("/campagnaNueva") public String campagnaCrea (Campagna campagna, Model model) {
+	@PostMapping ("/campagnaNueva") 
+	public String campagnaCrea (Campagna campagna, Model model) {
 		clienteService.saveCampagna(campagna);
 		model.addAttribute("campagna", campagna); 
 		return "redirect:/campagnaConsulta"; 
@@ -77,7 +78,8 @@ public class CampagnaController {
 		return "campagnaNuevaCliente";
 	}
 
-	@PostMapping ("/campagnaNuevaCliente") public String campagnaCreaEnCliente (Campagna campagna, Model model) {
+	@PostMapping ("/campagnaNuevaCliente") 
+	public String campagnaCreaEnCliente (Campagna campagna, Model model) {
 		clienteService.saveCampagna(campagna);
 		model.addAttribute("campagna", campagna); 
 		long id = campagna.getCliente().getIdCliente();

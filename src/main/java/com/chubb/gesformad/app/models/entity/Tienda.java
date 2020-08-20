@@ -81,8 +81,6 @@ public class Tienda implements Serializable{
 	
 	public Tienda() {}
 
-
-
 	public Tienda(Long idTienda, String nombreTienda, String codigoTienda, String direccionTienda, int cpTienda,
 			String localidadTienda, int telTienda, String mailTienda, List<Visita> visitas, Zona zona,
 			Provincia provincia, Franquicia franquicia, Cliente cliente, List<Comercial> comercialTienda) {
@@ -105,169 +103,113 @@ public class Tienda implements Serializable{
 
 	// SETTER Y GETTERS
 	
-	
-
 	public Long getIdTienda() {
 		return idTienda;
 	}
-
-
 
 	public void setIdTienda(Long idTienda) {
 		this.idTienda = idTienda;
 	}
 
-
-
 	public String getNombreTienda() {
 		return nombreTienda;
 	}
-
-
 
 	public void setNombreTienda(String nombreTienda) {
 		this.nombreTienda = nombreTienda;
 	}
 
-
-
 	public String getCodigoTienda() {
 		return codigoTienda;
 	}
-
-
 
 	public void setCodigoTienda(String codigoTienda) {
 		this.codigoTienda = codigoTienda;
 	}
 
-
-
 	public String getDireccionTienda() {
 		return direccionTienda;
 	}
-
-
 
 	public void setDireccionTienda(String direccionTienda) {
 		this.direccionTienda = direccionTienda;
 	}
 
-
-
 	public int getCpTienda() {
 		return cpTienda;
 	}
-
-
 
 	public void setCpTienda(int cpTienda) {
 		this.cpTienda = cpTienda;
 	}
 
-
-
 	public String getLocalidadTienda() {
 		return localidadTienda;
 	}
-
-
 
 	public void setLocalidadTienda(String localidadTienda) {
 		this.localidadTienda = localidadTienda;
 	}
 
-
-
 	public int getTelTienda() {
 		return telTienda;
 	}
-
-
 
 	public void setTelTienda(int telTienda) {
 		this.telTienda = telTienda;
 	}
 
-
-
 	public String getMailTienda() {
 		return mailTienda;
 	}
-
-
 
 	public void setMailTienda(String mailTienda) {
 		this.mailTienda = mailTienda;
 	}
 
-
-
 	public List<Visita> getVisitas() {
 		return visitas;
 	}
-
-
 
 	public void setVisitas(List<Visita> visitas) {
 		this.visitas = visitas;
 	}
 
-
-
 	public Zona getZona() {
 		return zona;
 	}
-
-
 
 	public void setZona(Zona zona) {
 		this.zona = zona;
 	}
 
-
-
 	public Provincia getProvincia() {
 		return provincia;
 	}
 
-
-
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
-
-
-
+	
 	public Franquicia getFranquicia() {
 		return franquicia;
 	}
-
-
 
 	public void setFranquicia(Franquicia franquicia) {
 		this.franquicia = franquicia;
 	}
 
-
-
 	public Cliente getCliente() {
 		return cliente;
 	}
-
-
 
 	public void setCliente(Cliente cliente) {
 		this.cliente = cliente;
 	}
 
-
-
 	public List<Comercial> getComercialTienda() {
 		return comercialTienda;
 	}
-
-
 
 	public void setComercialTienda(List<Comercial> comercialTienda) {
 		this.comercialTienda = comercialTienda;

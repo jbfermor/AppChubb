@@ -12,6 +12,7 @@ import java.util.*;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Tienda;
 import com.chubb.gesformad.app.models.entity.Visita;
 import com.chubb.gesformad.app.models.entity.Zona;
@@ -56,10 +57,10 @@ public class VisitaController {
 		}
 		
 		//provincias
-		List <String> provinciasTiendaVisita = new ArrayList <String>();
+		List <Provincia> provinciasTiendaVisita = new ArrayList <Provincia>();
 		for(Tienda i : listaTiendasCliente) {
-			if (provinciasTiendaVisita.contains(i.getProvinciaTienda()) == false) {
-				provinciasTiendaVisita.add(i.getProvinciaTienda());
+			if (provinciasTiendaVisita.contains(i.getProvincia()) == false) {
+				provinciasTiendaVisita.add(i.getProvincia());
 			}
 		}
 		

@@ -41,6 +41,11 @@ public class Provincia {
 		this.formadores = formadores;
 		this.tiendas = tiendas;
 	}
+	
+	public Provincia (Long idProvincia, String nombreProvincia) {
+		this.idProvincia = idProvincia;
+		this.nombreProvincia = nombreProvincia;
+	}
 
 
 	//GETTERS Y SETTERS

@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.chubb.gesformad.app.models.dao.IComercialDao;
 import com.chubb.gesformad.app.models.dao.IFormacionDao;
 import com.chubb.gesformad.app.models.dao.IFormadorDao;
+import com.chubb.gesformad.app.models.dao.ILocalidadDao;
 import com.chubb.gesformad.app.models.dao.IProvinciaDao;
 import com.chubb.gesformad.app.models.dao.IClienteDao;
 import com.chubb.gesformad.app.models.dao.IRolDao;
@@ -16,6 +17,7 @@ import com.chubb.gesformad.app.models.dao.IZonaDao;
 import com.chubb.gesformad.app.models.entity.Comercial;
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Localidad;
 import com.chubb.gesformad.app.models.entity.Provincia;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
@@ -44,6 +46,10 @@ public class FormadorServiceImpl implements IFormadorService {
 	
 	@Autowired
 	IProvinciaDao provinciaDao;
+	
+	@Autowired
+	ILocalidadDao localidadDao;
+	
 
 	@Override
 	@Transactional
@@ -180,5 +186,39 @@ public class FormadorServiceImpl implements IFormadorService {
 	public void saveProvincia(Provincia provincia) {
 		provinciaDao.save(provincia);
 	}
+	
+	@Override
+	@Transactional
+	public void saveAllProvincias(List<Provincia> provincias) {
+		provinciaDao.saveAll(provincias);
+	}
+	
+	//LOCALIDADES
+
+	@Override
+	@Transactional
+	public List<Localidad> findAllLocalidades() {
+		return (List<Localidad>) localidadDao.findAll();
+	}
+
+	@Override
+	@Transactional
+	public Localidad findOneLocalidad(Long idLocalidad) {
+		return localidadDao.findById(idLocalidad).orElse(null);
+	}
+
+	@Override
+	@Transactional
+	public void saveLocalidad(Localidad localidad) {
+		localidadDao.save(localidad);	
+	}
+
+	@Override
+	@Transactional
+	public void saveAllLocalidades(List<Localidad> localidades) {
+		localidadDao.saveAll(localidades);	
+	}
+
+		
 
 }

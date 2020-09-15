@@ -101,6 +101,14 @@ public class Visita implements Serializable {
 	@JoinColumn(name = "id_formador")
 	private Formador formador;
 	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "id_provincia")
+	private Provincia provincia;
+	
+	@ManyToOne(fetch = FetchType.LAZY, optional = false)
+	@JoinColumn(name = "id_localidad")
+	private Localidad localidad;
+	
 	@ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(
 			name = "visita_formacion",

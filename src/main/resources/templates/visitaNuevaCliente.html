@@ -89,8 +89,16 @@
 							<label for="provinciaTiendaVisita">Provincia</label>
 							<select th:field="*{tienda}" class="form-control" id="selectTiendaVisita">
 								<option th:each="provincia:${provincias}"
-									th:text="${tienda.}"
-									th:value="${zona.idZona}"></option>
+									th:text="${provincia.nombreProvincia}"
+									th:value="${provincia.idProvincia}"></option>
+							</select>
+						</div>
+						<div class="col-3 mt-2">
+							<label for="localidadTiendaVisita">Localidad</label>
+							<select th:field="*{tienda}" class="form-control" id="selectLocalidadVisita">
+								<option th:each="provincia:${provincias}"
+									th:text="${provincia.nombreProvincia}"
+									th:value="${provincia.idProvincia}"></option>
 							</select>
 						</div>
 						<div class="col-5 mt-2">

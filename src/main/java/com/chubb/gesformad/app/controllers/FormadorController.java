@@ -4,15 +4,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.chubb.gesformad.app.models.entity.Formacion;
 import com.chubb.gesformad.app.models.entity.Formador;
+import com.chubb.gesformad.app.models.entity.Localidad;
+import com.chubb.gesformad.app.models.entity.LocalidadElegida;
 import com.chubb.gesformad.app.models.entity.Provincia;
+import com.chubb.gesformad.app.models.entity.ProvinciaElegida;
+//import com.chubb.gesformad.app.models.entity.ProvinciaEscogida;
 import com.chubb.gesformad.app.models.entity.Campagna;
 import com.chubb.gesformad.app.models.entity.Cliente;
 import com.chubb.gesformad.app.models.entity.Rol;
@@ -43,8 +52,22 @@ public class FormadorController {
 		Rol rol = formadorService.findOneRol((long)2);
 		formador.setRol(rol);
 		model.addAttribute("provincias", formadorService.findAllProvincias());
+		model.addAttribute("localidades", formadorService.findAllLocalidades());
 		model.addAttribute("formador", formador);
 		return "formadorInicial";
+	}
+	
+	
+	@RequestMapping(value = "/cargaLocal", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List <LocalidadElegida> localidades (@RequestBody ProvinciaElegida provinciaElegida) {
+		List <Localidad> todoLocalidades = formadorService.findAllLocalidades();
+		List <LocalidadElegida> localidades = new ArrayList();
+		for (Localidad i : todoLocalidades) {
+			if(i.getProvincia().getIdProvincia() == provinciaElegida.getIdProvincia()) {
+				localidades.add(new LocalidadElegida(i.getIdLocalidad(),i.getNombreLocalidad()));
+			}
+		}
+		return localidades;
 	}
 	
 	@PostMapping("/formadorInicial")

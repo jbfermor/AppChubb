@@ -52,12 +52,6 @@ public class Formador implements Serializable {
 	@Column(name = "cp_formador")
 	private int cpFormador;
 	
-	@Column(name = "localidad_formador")
-	private String localidadFormador;
-	
-	@Column(name = "provincia_formador")
-	private String provinciaFormador;
-	
 	@Column(name = "tel1_formador")
 	private String tel1Formador;
 	
@@ -81,6 +75,10 @@ public class Formador implements Serializable {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_provincia")
 	Provincia provincia;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "id_localidad")
+	Localidad localidad;
 	
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "id_rol")
@@ -112,11 +110,12 @@ public class Formador implements Serializable {
 	
 	public Formador() {}
 
+
 	public Formador(Long idFormador, String nifFormador, String passFormador, String nombreFormador, String ap1Formador,
-			String ap2Formador, String direccionFormador, int cpFormador, String localidadFormador,
-			String provinciaFormador, String tel1Formador, String tel2Formador, String mail1Formador,
-			String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas, Provincia provincia, Rol rol,
-			List<Formacion> formaciones, List<Cliente> clientes, List<Zona> zonas) {
+			String ap2Formador, String direccionFormador, int cpFormador, String tel1Formador, String tel2Formador,
+			String mail1Formador, String mail2Formador, String cuentaBancariaFormador, List<Visita> visitas,
+			Provincia provincia, Localidad localidad, Rol rol, List<Formacion> formaciones, List<Cliente> clientes,
+			List<Zona> zonas) {
 		this.idFormador = idFormador;
 		this.nifFormador = nifFormador;
 		this.passFormador = passFormador;
@@ -125,8 +124,6 @@ public class Formador implements Serializable {
 		this.ap2Formador = ap2Formador;
 		this.direccionFormador = direccionFormador;
 		this.cpFormador = cpFormador;
-		this.localidadFormador = localidadFormador;
-		this.provinciaFormador = provinciaFormador;
 		this.tel1Formador = tel1Formador;
 		this.tel2Formador = tel2Formador;
 		this.mail1Formador = mail1Formador;
@@ -134,174 +131,214 @@ public class Formador implements Serializable {
 		this.cuentaBancariaFormador = cuentaBancariaFormador;
 		this.visitas = visitas;
 		this.provincia = provincia;
+		this.localidad = localidad;
 		this.rol = rol;
 		this.formaciones = formaciones;
 		this.clientes = clientes;
 		this.zonas = zonas;
 	}
 
-
-	//GETTERS, SETTERS
+//GETTERS Y SETTERS
 	
 	public Long getIdFormador() {
 		return idFormador;
 	}
 
+
 	public void setIdFormador(Long idFormador) {
 		this.idFormador = idFormador;
 	}
+
 
 	public String getNifFormador() {
 		return nifFormador;
 	}
 
+
 	public void setNifFormador(String nifFormador) {
 		this.nifFormador = nifFormador;
 	}
+
 
 	public String getPassFormador() {
 		return passFormador;
 	}
 
+
 	public void setPassFormador(String passFormador) {
 		this.passFormador = passFormador;
 	}
+
 
 	public String getNombreFormador() {
 		return nombreFormador;
 	}
 
+
 	public void setNombreFormador(String nombreFormador) {
 		this.nombreFormador = nombreFormador;
 	}
+
 
 	public String getAp1Formador() {
 		return ap1Formador;
 	}
 
+
 	public void setAp1Formador(String ap1Formador) {
 		this.ap1Formador = ap1Formador;
 	}
+
 
 	public String getAp2Formador() {
 		return ap2Formador;
 	}
 
+
 	public void setAp2Formador(String ap2Formador) {
 		this.ap2Formador = ap2Formador;
 	}
+
 
 	public String getDireccionFormador() {
 		return direccionFormador;
 	}
 
+
 	public void setDireccionFormador(String direccionFormador) {
 		this.direccionFormador = direccionFormador;
 	}
+
 
 	public int getCpFormador() {
 		return cpFormador;
 	}
 
+
 	public void setCpFormador(int cpFormador) {
 		this.cpFormador = cpFormador;
 	}
 
-	public String getLocalidadFormador() {
-		return localidadFormador;
-	}
-
-	public void setLocalidadFormador(String localidadFormador) {
-		this.localidadFormador = localidadFormador;
-	}
 
 	public String getTel1Formador() {
 		return tel1Formador;
 	}
 
+
 	public void setTel1Formador(String tel1Formador) {
 		this.tel1Formador = tel1Formador;
 	}
+
 
 	public String getTel2Formador() {
 		return tel2Formador;
 	}
 
+
 	public void setTel2Formador(String tel2Formador) {
 		this.tel2Formador = tel2Formador;
 	}
+
 
 	public String getMail1Formador() {
 		return mail1Formador;
 	}
 
+
 	public void setMail1Formador(String mail1Formador) {
 		this.mail1Formador = mail1Formador;
 	}
+
 
 	public String getMail2Formador() {
 		return mail2Formador;
 	}
 
+
 	public void setMail2Formador(String mail2Formador) {
 		this.mail2Formador = mail2Formador;
 	}
+
 
 	public String getCuentaBancariaFormador() {
 		return cuentaBancariaFormador;
 	}
 
+
 	public void setCuentaBancariaFormador(String cuentaBancariaFormador) {
 		this.cuentaBancariaFormador = cuentaBancariaFormador;
 	}
+
 
 	public List<Visita> getVisitas() {
 		return visitas;
 	}
 
+
 	public void setVisitas(List<Visita> visitas) {
 		this.visitas = visitas;
 	}
 
-	public Rol getRol() {
-		return rol;
-	}
-
-	public void setRol(Rol rol) {
-		this.rol = rol;
-	}
-
-	public List <Formacion> getFormaciones() {
-		return formaciones;
-	}
-
-	public void setFormaciones(List <Formacion> formaciones) {
-		this.formaciones = formaciones;
-	}
-
-	public List<Cliente> getClientes() {
-		return clientes;
-	}
-
-	public void setClientes(List<Cliente> clientes) {
-		this.clientes = clientes;
-	}
-
-	public List<Zona> getZonas() {
-		return zonas;
-	}
-
-	public void setZonas(List<Zona> zonas) {
-		this.zonas = zonas;
-	}
 
 	public Provincia getProvincia() {
 		return provincia;
 	}
 
+
 	public void setProvincia(Provincia provincia) {
 		this.provincia = provincia;
 	}
 
+
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+
+
+	public Rol getRol() {
+		return rol;
+	}
+
+
+	public void setRol(Rol rol) {
+		this.rol = rol;
+	}
+
+
+	public List<Formacion> getFormaciones() {
+		return formaciones;
+	}
+
+
+	public void setFormaciones(List<Formacion> formaciones) {
+		this.formaciones = formaciones;
+	}
+
+
+	public List<Cliente> getClientes() {
+		return clientes;
+	}
+
+
+	public void setClientes(List<Cliente> clientes) {
+		this.clientes = clientes;
+	}
+
+
+	public List<Zona> getZonas() {
+		return zonas;
+	}
+
+
+	public void setZonas(List<Zona> zonas) {
+		this.zonas = zonas;
+	}
+
+	
 
 }

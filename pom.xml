@@ -18,6 +18,7 @@
 
 	<properties>
 		<java.version>14</java.version>
+		<jackson.version>2.6.3</jackson.version>
 	</properties>
 
 	<dependencies>
@@ -25,7 +26,7 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
@@ -62,16 +63,21 @@
 			</exclusions>
 		</dependency>
 
-		<!--DEPNDENCIAS CSV -->
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.2</version>
+		</dependency>
+
+		<!--DEPENDENCIAS CSV -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-csv</artifactId>
 			<version>1.8</version>
 		</dependency>
-		<!--DEPNDENCIAS CSV -->
+		<!--DEPENDENCIAS CSV -->
 
-		<!--DEPNDENCIAS HEROKU -->
-
+		<!--DEPENDENCIAS HEROKU -->
 		<!-- In-Memory database used for local development & testing -->
 		<dependency>
 			<groupId>com.h2database</groupId>
@@ -91,8 +97,22 @@
 			<artifactId>postgresql</artifactId>
 			<version>42.2.2</version>
 		</dependency>
-
 		<!--DEPNDENCIAS HEROKU -->
+
+		<!-- DEPENDENCIAS JACKSON -->
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+		</dependency>
+		<!-- DEPENDENCIAS JACKSON -->
 
 		<!--DEPNDENCIAS SECURITY -->
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-starter-security</artifactId> 

@@ -57,7 +57,7 @@
 							<td th:text="${tienda.zona.nombreZona}"></td>
 							<td th:text="${tienda.franquicia.nombreFranquicia}"></td>
 							<td><a class="nav-link badge badge-warning"
-								th:href="@{/tiendaEditaCliente/} + ${tienda.idTienda} + '/' + ${tienda.franquicia.cliente.idCliente}">Editar</a></td>
+								th:href="@{/tiendaNuevaCliente/} + ${tienda.idTienda} + '/' + ${tienda.cliente.idCliente}">Editar</a></td>
 							<td><a class="nav-link badge badge-danger"
 								th:href="@{/eliminarTienda/} + ${tienda.idTienda}">Eliminar</a></td>
 							<td><a class="nav-link badge badge-info"

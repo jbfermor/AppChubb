@@ -35,9 +35,7 @@ public class VisitaController {
 		
 		Cliente clienteListo = clienteService.findOneCliente(idCliente);
 		Visita visita = new Visita();
-		List <Visita> listaVisitasCliente = new ArrayList <Visita>();
-		
-		listaVisitasCliente = clienteListo.getVisitas();
+		List <Visita> listaVisitasCliente = clienteListo.getVisitas();
 		
 		//formadores
 		List <Formador> listaFormadoresCliente = clienteListo.getFormadores();

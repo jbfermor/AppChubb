@@ -1,6 +1,8 @@
 package com.chubb.gesformad.app.models.entity;
 
 import java.io.Serializable;
+import java.sql.Time;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -20,6 +22,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 
 @Entity
 @Table(name = "visita")
@@ -37,33 +40,25 @@ public class Visita implements Serializable {
 	
 	@Column(name = "fecha_estimada_visita")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaEstimadaVisita;
 	
 	@Column(name = "hora_inicio_estimada_visita")
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "h:mm a")
-	private Date horaInicioEstimadaVisita;
+	private LocalTime horaInicioEstimadaVisita;
 	
 	@Column(name = "fecha_visita")
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date fechaVisita;
 	
 	@Column(name = "hora_inicio_visita")
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "h:mm a")
-	private Date horaInicioVisita;
+	private Time horaInicioVisita;
 	
 	@Column(name = "hora_fin_visita")
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "h:mm a")
-	private Date horaFinVisita;
+	private Time horaFinVisita;
 	
 	@Column(name = "tiempo_visita")
-	@Temporal(TemporalType.TIME)
-	@DateTimeFormat(pattern = "h:mm a")
-	private Date tiempoVisita;
+	private Time tiempoVisita;
 	
 	@Column(name = "num_comerciales_formados_visita")
 	private int numComercialesFormados;
@@ -133,13 +128,13 @@ public class Visita implements Serializable {
 	//CONSTRUCTORES
 
 	public Visita() {}
-	
-	public Visita(Long idVisita, Date fechaEstimadaVisita, Date horaInicioEstimadaVisita, Date fechaVisita,
-			Date horaInicioVisita, Date horaFinVisita, Date tiempoVisita, int numComercialesFormados,
+
+	public Visita(Long idVisita, Date fechaEstimadaVisita, LocalTime horaInicioEstimadaVisita, Date fechaVisita,
+			Time horaInicioVisita, Time horaFinVisita, Time tiempoVisita, int numComercialesFormados,
 			int numComercialesFormacion1, int numComercialesFormacion2, int numComercialesFormacion3,
 			int numComercialesFormacion4, int numComercialesFormacion5, String observacionesVisita, Cliente cliente,
-			Tienda tienda, Formador formador, List<Formacion> formaciones, List<Comercial> comerciales,
-			List<Incidencia> incidenciasVisita) {
+			Tienda tienda, Formador formador, Provincia provincia, Localidad localidad, List<Formacion> formaciones,
+			List<Comercial> comerciales, List<Incidencia> incidenciasVisita) {
 		this.idVisita = idVisita;
 		this.fechaEstimadaVisita = fechaEstimadaVisita;
 		this.horaInicioEstimadaVisita = horaInicioEstimadaVisita;
@@ -157,14 +152,27 @@ public class Visita implements Serializable {
 		this.cliente = cliente;
 		this.tienda = tienda;
 		this.formador = formador;
+		this.provincia = provincia;
+		this.localidad = localidad;
 		this.formaciones = formaciones;
 		this.comerciales = comerciales;
 		this.incidenciasVisita = incidenciasVisita;
 	}
-
-
-
-	//SETTER Y GETTERS
+	
+// VER ARREGLO ELEMENTOS PARA GUARADAR VISITA (DATE, HORA, FORMACION, TIENDA)
+	public Visita(Long idVisita, Date fechaEstimadaVisita, LocalTime horaInicioEstimadaVisita, Tienda tienda,
+			Formador formador, Provincia provincia, Localidad localidad, List<Formacion> formaciones) {
+		this.idVisita = idVisita;
+		this.fechaEstimadaVisita = fechaEstimadaVisita;
+		this.horaInicioEstimadaVisita = horaInicioEstimadaVisita;
+		this.tienda = tienda;
+		this.formador = formador;
+		this.provincia = provincia;
+		this.localidad = localidad;
+		this.formaciones = formaciones;
+	}
+	
+	//GETTERS Y SETTERS
 
 	public Long getIdVisita() {
 		return idVisita;
@@ -182,11 +190,11 @@ public class Visita implements Serializable {
 		this.fechaEstimadaVisita = fechaEstimadaVisita;
 	}
 
-	public Date getHoraInicioEstimadaVisita() {
+	public LocalTime getHoraInicioEstimadaVisita() {
 		return horaInicioEstimadaVisita;
 	}
 
-	public void setHoraInicioEstimadaVisita(Date horaInicioEstimadaVisita) {
+	public void setHoraInicioEstimadaVisita(LocalTime horaInicioEstimadaVisita) {
 		this.horaInicioEstimadaVisita = horaInicioEstimadaVisita;
 	}
 
@@ -202,7 +210,7 @@ public class Visita implements Serializable {
 		return horaInicioVisita;
 	}
 
-	public void setHoraInicioVisita(Date horaInicioVisita) {
+	public void setHoraInicioVisita(Time horaInicioVisita) {
 		this.horaInicioVisita = horaInicioVisita;
 	}
 
@@ -210,7 +218,7 @@ public class Visita implements Serializable {
 		return horaFinVisita;
 	}
 
-	public void setHoraFinVisita(Date horaFinVisita) {
+	public void setHoraFinVisita(Time horaFinVisita) {
 		this.horaFinVisita = horaFinVisita;
 	}
 
@@ -218,7 +226,7 @@ public class Visita implements Serializable {
 		return tiempoVisita;
 	}
 
-	public void setTiempoVisita(Date tiempoVisita) {
+	public void setTiempoVisita(Time tiempoVisita) {
 		this.tiempoVisita = tiempoVisita;
 	}
 
@@ -302,6 +310,22 @@ public class Visita implements Serializable {
 		this.formador = formador;
 	}
 
+	public Provincia getProvincia() {
+		return provincia;
+	}
+
+	public void setProvincia(Provincia provincia) {
+		this.provincia = provincia;
+	}
+
+	public Localidad getLocalidad() {
+		return localidad;
+	}
+
+	public void setLocalidad(Localidad localidad) {
+		this.localidad = localidad;
+	}
+
 	public List<Formacion> getFormaciones() {
 		return formaciones;
 	}
@@ -326,10 +350,7 @@ public class Visita implements Serializable {
 		this.incidenciasVisita = incidenciasVisita;
 	}
 	
-	
-	
 
-	
 	
 	
 }
